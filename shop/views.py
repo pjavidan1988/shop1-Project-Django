@@ -1,8 +1,9 @@
 from django.shortcuts import render
-
+from . import models
 
 def index(request):
-    return render(request, 'index.html')
+    product_list = models.Product.objects.all()
+    return render(request, 'index.html', {'product_list': product_list})
 
 
 def checkout(request):
@@ -13,5 +14,5 @@ def shop(request):
     return render(request, 'shop.html')
 
 
-def single_product(request):
-    return render(request, 'single-product.html')
+def product(request):
+    return render(request, 'product.html')
