@@ -190,7 +190,7 @@
                             <div class="pro-tab-menu pro-tab-menu-2 text-right">
                                 <!-- Nav tabs -->
                                 <ul class="">
-                                    <li class="active"><a href="#popular-product" data-toggle="tab">محصولات محبوب </a>
+                                    <li class="active"><a href="#popular-product" data-toggle="tab">محصولات </a>
                                     </li>
                                     <li><a href="#new-arrival" data-toggle="tab">محصولات جدید</a></li>
                                     <li><a href="#best-seller" data-toggle="tab">پرفروشترین ها</a></li>
@@ -202,8 +202,8 @@
                     <div class="product-tab">
                         <!-- Tab panes -->
                         <div class="tab-content">
-                            <!-- popular-product start -->
-                            <div class="tab-pane active" id="popular-product">
+                            <!-- product start -->
+                            <div class="tab-pane active" id="product">
                                 <div class="row">
                                     {% for product in product_list %}
                                         <!-- product-item start -->
@@ -244,11 +244,11 @@
                                     {% endfor %}
                                 </div>
                             </div>
-                            <!-- popular-product end -->
+                            <!-- product end -->
                             <!-- new-arrival start -->
                             <div class="tab-pane" id="new-arrival">
                                 <div class="row">
-                                    {% for product in new_product %}
+                                    {% for product in latest_product %}
                                         <!-- product-item start -->
                                         <div class="col-md-3 col-sm-4 col-xs-12">
                                             <div class="product-item product-item-2">
@@ -848,6 +848,7 @@
                     </div>
                 </div>
             </div>
+
             <!-- PRODUCT TAB SECTION END -->
 
             <!-- BANNER-SECTION START -->
@@ -932,19 +933,20 @@
                     <div class="featured-product">
                         <div class="row active-featured-product slick-arrow-2">
                             <!-- product-item start -->
+                            {% for product in latest_product %}
                             <div class="col-xs-12">
                                 <div class="product-item product-item-2">
                                     <div class="product-img">
                                         <a href="product.html">
-                                            <img src="{% static 'img/product-2/1.jpg' %}" alt="">
+                                            <img src="{{ product.image.url }}" alt="">
                                         </a>
                                     </div>
                                     <div class="product-info">
                                         <h6 class="product-title">
-                                            <a href="product.html">نام محصول نمایشی</a>
+                                            <a href="product.html">{{ product.name }}</a>
                                         </h6>
-                                        <h6 class="brand-name">سامسونگ</h6>
-                                        <h3 class="pro-price">869,000 تومان</h3>
+                                        <h6 class="brand-name">{{ product.model_name }}</h6>
+                                        <h3 class="pro-price">{{ product.price }} {{ product.Monetary_unit }}</h3>
                                     </div>
                                     <ul class="action-button">
                                         <li>
@@ -963,138 +965,7 @@
                                     </ul>
                                 </div>
                             </div>
-                            <!-- product-item end -->
-                            <!-- product-item start -->
-                            <div class="col-xs-12">
-                                <div class="product-item product-item-2">
-                                    <div class="product-img">
-                                        <a href="product.html">
-                                            <img src="{% static 'img/product-2/2.jpg' %}" alt="">
-                                        </a>
-                                    </div>
-                                    <div class="product-info">
-                                        <h6 class="product-title">
-                                            <a href="product.html">نام محصول نمایشی</a>
-                                        </h6>
-                                        <h6 class="brand-name">سامسونگ</h6>
-                                        <h3 class="pro-price">869,000 تومان</h3>
-                                    </div>
-                                    <ul class="action-button">
-                                        <li>
-                                            <a href="#" title="Wishlist"><i class="zmdi zmdi-favorite"></i></a>
-                                        </li>
-                                        <li>
-                                            <a href="#" data-toggle="modal" data-target="#productModal"
-                                               title="Quickview"><i class="zmdi zmdi-zoom-in"></i></a>
-                                        </li>
-                                        <li>
-                                            <a href="#" title="Compare"><i class="zmdi zmdi-refresh"></i></a>
-                                        </li>
-                                        <li>
-                                            <a href="#" title="Add to cart"><i class="zmdi zmdi-shopping-cart-plus"></i></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <!-- product-item end -->
-                            <!-- product-item start -->
-                            <div class="col-xs-12">
-                                <div class="product-item product-item-2">
-                                    <div class="product-img">
-                                        <a href="product.html">
-                                            <img src="{% static 'img/product-2/3.jpg' %}" alt="">
-                                        </a>
-                                    </div>
-                                    <div class="product-info">
-                                        <h6 class="product-title">
-                                            <a href="product.html">نام محصول نمایشی</a>
-                                        </h6>
-                                        <h6 class="brand-name">سامسونگ</h6>
-                                        <h3 class="pro-price">869,000 تومان</h3>
-                                    </div>
-                                    <ul class="action-button">
-                                        <li>
-                                            <a href="#" title="Wishlist"><i class="zmdi zmdi-favorite"></i></a>
-                                        </li>
-                                        <li>
-                                            <a href="#" data-toggle="modal" data-target="#productModal"
-                                               title="Quickview"><i class="zmdi zmdi-zoom-in"></i></a>
-                                        </li>
-                                        <li>
-                                            <a href="#" title="Compare"><i class="zmdi zmdi-refresh"></i></a>
-                                        </li>
-                                        <li>
-                                            <a href="#" title="Add to cart"><i class="zmdi zmdi-shopping-cart-plus"></i></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <!-- product-item end -->
-                            <!-- product-item start -->
-                            <div class="col-xs-12">
-                                <div class="product-item product-item-2">
-                                    <div class="product-img">
-                                        <a href="product.html">
-                                            <img src="{% static 'img/product-2/4.jpg' %}" alt="">
-                                        </a>
-                                    </div>
-                                    <div class="product-info">
-                                        <h6 class="product-title">
-                                            <a href="product.html">نام محصول نمایشی</a>
-                                        </h6>
-                                        <h6 class="brand-name">سامسونگ</h6>
-                                        <h3 class="pro-price">869,000 تومان</h3>
-                                    </div>
-                                    <ul class="action-button">
-                                        <li>
-                                            <a href="#" title="Wishlist"><i class="zmdi zmdi-favorite"></i></a>
-                                        </li>
-                                        <li>
-                                            <a href="#" data-toggle="modal" data-target="#productModal"
-                                               title="Quickview"><i class="zmdi zmdi-zoom-in"></i></a>
-                                        </li>
-                                        <li>
-                                            <a href="#" title="Compare"><i class="zmdi zmdi-refresh"></i></a>
-                                        </li>
-                                        <li>
-                                            <a href="#" title="Add to cart"><i class="zmdi zmdi-shopping-cart-plus"></i></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <!-- product-item end -->
-                            <!-- product-item start -->
-                            <div class="col-xs-12">
-                                <div class="product-item product-item-2">
-                                    <div class="product-img">
-                                        <a href="product.html">
-                                            <img src="{% static 'img/product-2/3.jpg' %}" alt="">
-                                        </a>
-                                    </div>
-                                    <div class="product-info">
-                                        <h6 class="product-title">
-                                            <a href="product.html">نام محصول نمایشی</a>
-                                        </h6>
-                                        <h6 class="brand-name">سامسونگ</h6>
-                                        <h3 class="pro-price">869,000 تومان</h3>
-                                    </div>
-                                    <ul class="action-button">
-                                        <li>
-                                            <a href="#" title="Wishlist"><i class="zmdi zmdi-favorite"></i></a>
-                                        </li>
-                                        <li>
-                                            <a href="#" data-toggle="modal" data-target="#productModal"
-                                               title="Quickview"><i class="zmdi zmdi-zoom-in"></i></a>
-                                        </li>
-                                        <li>
-                                            <a href="#" title="Compare"><i class="zmdi zmdi-refresh"></i></a>
-                                        </li>
-                                        <li>
-                                            <a href="#" title="Add to cart"><i class="zmdi zmdi-shopping-cart-plus"></i></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
+                            {% endfor %}
                             <!-- product-item end -->
                         </div>
                     </div>
