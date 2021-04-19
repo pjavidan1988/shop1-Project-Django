@@ -1,4 +1,5 @@
 from django.contrib.auth.models import User
+from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 from django.urls import reverse
 from django.utils.safestring import mark_safe
@@ -15,10 +16,8 @@ class Product(models.Model):
     create_time = models.DateTimeField(auto_now_add=True)
     update_time = models.DateTimeField(auto_now=True)
     image = models.ImageField(upload_to='product/%Y/%m/%d', null=True, blank=True)
-    price = models.DecimalField(max_digits=10, decimal_places=0)
+    price = models.CharField(max_length=200)
     Monetary_unit = models.CharField(max_length=10, choices=MONETARY_CHOICES, default='تومان')
-
-
 
     class Meta:
         ordering = ('create_time',)
@@ -40,6 +39,13 @@ class Product(models.Model):
     def get_absolute_url(self):
         return reverse('shop:product', args=[self.id])
 
+
+class productImage(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='otherImage/%Y/%m/%d', null=True, blank=True)
+
+    def __str__(self):
+        return self.product.name
 
 
 class Order(models.Model):

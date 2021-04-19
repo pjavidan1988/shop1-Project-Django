@@ -1,6 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from . import models
-from .models import Product
+from .models import Product, productImage
 
 
 def index(request):
@@ -17,5 +17,6 @@ def shop(request):
     return render(request, 'shop.html')
 
 
-def product(request):
-    return render(request, 'product.html')
+def product(request, pk):
+    product_detail=get_object_or_404(Product, id=pk)
+    return render(request, 'product.html', {'product_detail':product_detail})

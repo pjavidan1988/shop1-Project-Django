@@ -171,38 +171,13 @@
                                     <!-- imgs-zoom-area start -->
                                     <div class="col-md-5 col-sm-5 col-xs-12">
                                         <div class="imgs-zoom-area">
-                                            <img id="zoom_03" src="{% static 'img/product/6.jpg'%}" data-zoom-image="{% static 'img/product/6-large.jpg'%}" alt="">
+                                            <img id="zoom_03" src="{{ product_detail.image.url }}" data-zoom-image="{{ product_detail.image.url }}" alt="">
                                             <div class="row">
                                                 <div class="col-xs-12">
                                                     <div id="gallery_01" class="carousel-btn slick-arrow-3 mt-30">
                                                         <div class="p-c">
-                                                            <a href="#" data-image="{% static 'img/product/2.jpg'%}" data-zoom-image="{% static 'img/product/2-large.jpg'%}">
-                                                                <img class="zoom_03" src="{% static 'img/product/2.jpg'%}" alt="">
-                                                            </a>
-                                                        </div>
-                                                        <div class="p-c">
-                                                            <a href="#" data-image="{% static 'img/product/3.jpg'%}" data-zoom-image="{% static 'img/product/3-large.jpg'%}">
-                                                                <img class="zoom_03" src="{% static 'img/product/3.jpg'%}" alt="">
-                                                            </a>
-                                                        </div>
-                                                        <div class="p-c">
-                                                            <a href="#" data-image="{% static 'img/product/4.jpg'%}" data-zoom-image="{% static 'img/product/4-large.jpg'%}">
-                                                                <img class="zoom_03" src="{% static 'img/product/4.jpg'%}" alt="">
-                                                            </a>
-                                                        </div>
-                                                        <div class="p-c">
-                                                            <a href="#" data-image="{% static 'img/product/5.jpg'%}" data-zoom-image="{% static 'img/product/5-large.jpg'%}">
-                                                                <img class="zoom_03" src="{% static 'img/product/5.jpg'%}" alt="">
-                                                            </a>
-                                                        </div>
-                                                        <div class="p-c">
-                                                            <a href="#" data-image="{% static 'img/product/6.jpg'%}" data-zoom-image="{% static 'img/product/6-large.jpg'%}">
-                                                                <img class="zoom_03" src="{% static 'img/product/6.jpg'%}" alt="">
-                                                            </a>
-                                                        </div>
-                                                        <div class="p-c">
-                                                            <a href="#" data-image="{% static 'img/product/7.jpg'%}" data-zoom-image="{% static 'img/product/7-large.jpg'%}">
-                                                                <img class="zoom_03" src="{% static 'img/product/7.jpg'%}" alt="">
+                                                            <a href="#" data-image="{{ photos.image.url }}" data-zoom-image="{{ photos.image.url }}">
+                                                                <img class="zoom_03" src="{{ photos.image.url }}" alt="">
                                                             </a>
                                                         </div>
                                                     </div>
@@ -214,8 +189,8 @@
                                     <!-- single-product-info start -->
                                     <div class="col-md-7 col-sm-7 col-xs-12">
                                         <div class="single-product-info">
-                                            <h3 class="text-black-1">نام محصول نمایشی </h3>
-                                            <h6 class="brand-name-2">نام برند</h6>
+                                            <h3 class="text-black-1">{{ product_detail.name }}</h3>
+                                            <h6 class="brand-name-2">{{ product_detail.model_name}}</h6>
                                             <!--  hr -->
                                             <hr>
                                             <!-- single-pro-color-rating -->
@@ -271,7 +246,7 @@
                                             <!-- hr -->
                                             <hr>
                                             <!-- single-product-price -->
-                                            <h3 class="pro-price">قیمت: 869,000 تومان</h3>
+                                            <h3 class="pro-price">{{ product_detail.price }} {{ product_detail.Monetary_unit }}</h3>
                                             <!--  hr -->
                                             <hr>
 											<div>
@@ -296,8 +271,7 @@
 											</ul>
 											<div class="tab-content">
 												<div role="tabpanel" class="tab-pane active" id="description">
-													<p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان</p>
-													<p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز</p>
+													<p>{{ product_detail.description }}</p>
 												</div>
 												<div role="tabpanel" class="tab-pane" id="information">
 													<p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی</p>

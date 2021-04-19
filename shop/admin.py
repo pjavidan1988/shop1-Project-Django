@@ -2,11 +2,12 @@ from django.contrib import admin
 from . import models
 
 
+
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ('name', 'create_time','image_tag')
+    list_display = ('name', 'create_time', 'image_tag')
     list_filter = ['create_time']
     list_per_page = 5
-    search_fields = ['name','model_name']
+    search_fields = ['name', 'model_name']
 
 
 class OrderAdmin(admin.ModelAdmin):
@@ -26,6 +27,7 @@ class InvoiceAdmin(admin.ModelAdmin):
 
 
 admin.site.register(models.Product, ProductAdmin)
+admin.site.register(models.productImage)
 admin.site.register(models.Order, OrderAdmin)
 admin.site.register(models.OrderItem, OrderItemAdmin)
 admin.site.register(models.Invoice, InvoiceAdmin)
