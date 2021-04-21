@@ -211,7 +211,7 @@
                                             <div class="product-item product-item-2">
                                                 <div class="product-img">
                                                     <a href="product.html">
-                                                        <img src="{{ product.image.url }}" alt="">
+                                                        <img src="{{ product.image.url|default_if_none:'#' }}" alt="">
                                                     </a>
                                                 </div>
                                                 <div class="product-info">
@@ -254,7 +254,7 @@
                                             <div class="product-item product-item-2">
                                                 <div class="product-img">
                                                     <a href="product.html">
-                                                        <img src="{{ product.image.url }}" alt="">
+                                                        <img src="{{ product.image.url}}" alt="">
                                                     </a>
                                                 </div>
                                                 <div class="product-info">
