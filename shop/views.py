@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from . import models
-from .models import Product, productImage
+from .models import Product
 
 
 def index(request):
