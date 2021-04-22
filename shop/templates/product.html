@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %} خانه {% endblock %}
+{% block title %} جزئیات محصول {% endblock %}
 {% block content %}
     <!-- Body main wrapper start -->
     <div class="wrapper">
@@ -180,8 +180,8 @@
                                                 <div class="col-xs-12">
                                                     <div id="gallery_01" class="carousel-btn slick-arrow-3 mt-30">
                                                         <div class="p-c">
-                                                            <a href="#" data-image="#"
-                                                               data-zoom-image="#">
+                                                            <a href="#" data-image="{{ product_detail.image.url }}"
+                                                               data-zoom-image="{{ product_detail.image.url }}">
                                                                 <img class="zoom_03"
                                                                      src="#"
                                                                      alt="">

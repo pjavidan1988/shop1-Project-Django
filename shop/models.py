@@ -81,3 +81,7 @@ class Transaction(models.Model):
 
     def __str__(self):
         return str(self.id)
+
+
+class Logo(models.Model):
+    logo = models.ImageField(upload_to='logo/%Y/%m/%d', null=True, blank=True)

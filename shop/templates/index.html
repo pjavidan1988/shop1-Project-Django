@@ -210,8 +210,8 @@
                                         <div class="col-md-3 col-sm-4 col-xs-12">
                                             <div class="product-item product-item-2">
                                                 <div class="product-img">
-                                                    <a href="product.html">
-                                                        <img src="{{ product.image.url|default_if_none:'#' }}" alt="">
+                                                    <a href="{{ product.get_absolute_url }}">
+                                                        <img src="{{ product.image.url }}" alt="">
                                                     </a>
                                                 </div>
                                                 <div class="product-info">
@@ -253,13 +253,13 @@
                                         <div class="col-md-3 col-sm-4 col-xs-12">
                                             <div class="product-item product-item-2">
                                                 <div class="product-img">
-                                                    <a href="product.html">
+                                                    <a href="{{ product.get_absolute_url }}">
                                                         <img src="{{ product.image.url}}" alt="">
                                                     </a>
                                                 </div>
                                                 <div class="product-info">
                                                     <h6 class="product-title">
-                                                        <a href="product.html">{{ product.name }}</a>
+                                                        <a href="{{ product.get_absolute_url }}">{{ product.name }}</a>
                                                     </h6>
                                                     <h6 class="brand-name">{{ product.model_name }}</h6>
                                                     <h3 class="pro-price">{{ product.price }} {{ product.Monetary_unit }}</h3>

@@ -85,11 +85,13 @@
                 <div class="row">
                     <!-- logo -->
                     <div class="col-md-2 col-sm-6 col-xs-12">
+                        {% for logo_img in logo %}
                         <div class="logo">
                             <a href="index.html">
-                                <img src="{% static 'img/logo/logo.png' %}" alt="main logo">
+                                <img src="{{logo_img.logo.url}}" height="35" width="114"  alt="main logo">
                             </a>
                         </div>
+                        {% endfor %}
                     </div>
                     <!-- primary-menu -->
                     <div class="col-md-8 hidden-sm hidden-xs">

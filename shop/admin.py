@@ -27,6 +27,7 @@ class InvoiceAdmin(admin.ModelAdmin):
 
 
 admin.site.register(models.Product, ProductAdmin)
+admin.site.register(models.Logo)
 admin.site.register(models.Order, OrderAdmin)
 admin.site.register(models.OrderItem, OrderItemAdmin)
 admin.site.register(models.Invoice, InvoiceAdmin)
