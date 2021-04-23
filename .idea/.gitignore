@@ -2,7 +2,7 @@
 /shelf/
 /workspace.xml
 # Datasource local storage ignored files
-/../../../../../../../../:\Users\pjavi\Desktop\Doorsun-Magnet-Website-Project-Django\DoorSunShop\DoorSunShop\.idea/dataSources/
+/../../../../../../../:\Users\pjavi\Desktop\Shop Django\mysite\.idea/dataSources/
 /dataSources.local.xml
 # Editor-based HTTP Client requests
 /httpRequests/
