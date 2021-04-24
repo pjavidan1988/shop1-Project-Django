@@ -1,10 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Django test page</title>
-</head>
-<body>
-<h1>Hello Django</h1>
-</body>
-</html>
+{% extends 'homebase.html' %}
+
+{% block title %} خانه {% endblock %}
+{% block description %} خانه 2 {% endblock %}
+{% block keywords %} خانه 3 {% endblock %}
+
+
+{% block slider %} {% include 'slider.html' %} {% endblock %}
+{% block body %} {% include 'content.html' %}  {% endblock %}
+{% block quickview_product %} {% include 'quickview_product.html' %} {% endblock %}
+{% block style_customizer %} {% include 'style_customizer.html' %} {% endblock %}
+
+
