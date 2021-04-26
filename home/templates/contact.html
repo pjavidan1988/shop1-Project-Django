@@ -1,0 +1,103 @@
+{% extends 'homebase.html' %}
+{% load i18n %}
+{% block title %}  {{ setting.title }}  | تماس با ما {% endblock %}
+{% block description %} {{ setting.description }} {% endblock %}
+{% block keywords %} {{ setting.keywords }} {% endblock %}
+
+{% block sidebar %} {% include 'sidebar.html' %} {% endblock %}
+
+{% block body %}
+
+    <!-- BREADCRUMBS SETCTION START -->
+    <div class="breadcrumbs-section plr-200 mb-80">
+        <div class="breadcrumbs overlay-bg">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="breadcrumbs-inner">
+                            <h1 class="breadcrumbs-title">تماس</h1>
+                            <ul class="breadcrumb-list">
+                                <li><a href="/">خانه</a></li>
+                                <li>تماس</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- BREADCRUMBS SETCTION END -->
+
+    <!-- Start page content -->
+    <section id="page-content" class="page-wrapper">
+
+        <!-- ADDRESS SECTION START -->
+        <div class="address-section mb-80">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-4 col-xs-12">
+                        <div class="contact-address box-shadow">
+                            <i class="zmdi zmdi-pin"></i>
+                            <h6>{{ setting.address | safe }}</h6>
+                            <h6></h6>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 col-xs-12">
+                        <div class="contact-address box-shadow">
+                            <i class="zmdi zmdi-phone"></i>
+                            <h6><a class="ltr-text" href="tel:555-555-1212">{{ setting.phone }}</a></h6>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 col-xs-12">
+                        <div class="contact-address box-shadow">
+                            <i class="zmdi zmdi-email"></i>
+                            <h6>{{ setting.email }}</h6>
+                            <h6>{{ setting.smtpemail}}</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ADDRESS SECTION END -->
+
+
+        <!-- MESSAGE BOX SECTION START -->
+        <div class="message-box-section mt--50 mb-80">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="message-box box-shadow white-bg">
+                            <form id="contact-form" action="php/mail.php" method="post">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h4 class="blog-section-title border-left mb-30">در ارتباط باشید</h4>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="text" name="name" placeholder="نام شما">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="email" name="email" placeholder="ایمیل شما" dir="ltr">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="text" name="subject" placeholder="موضوع">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="text" name="phone" placeholder="شماره تلفن" dir="ltr">
+                                    </div>
+                                    <div class="col-md-12">
+                                        <textarea class="custom-textarea" name="message" placeholder="پیام"></textarea>
+                                        <button class="submit-btn-1 mt-30 btn-hover-1" type="submit">ثبت پیام</button>
+                                    </div>
+                                </div>
+                            </form>
+                            <p class="form-messege"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- MESSAGE BOX SECTION END -->
+    </section>
+    <!-- End page content -->
+
+{% endblock %}

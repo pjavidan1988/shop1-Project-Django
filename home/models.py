@@ -13,7 +13,7 @@ class Setting(models.Model):
     keywords = models.CharField(max_length=255)
     description = models.CharField(max_length=255)
     company = models.CharField(max_length=50)
-    address = models.CharField(blank=True, max_length=100)
+    address = RichTextUploadingField(blank=True)
     phone = models.CharField(blank=True, max_length=15)
     fax = models.CharField(blank=True, max_length=15)
     email = models.CharField(blank=True, max_length=50)
