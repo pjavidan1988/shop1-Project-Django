@@ -1,3 +1,4 @@
+from ckeditor_uploader.fields import RichTextUploadingField
 from django.db import models
 
 # Create your models here.
@@ -31,12 +32,12 @@ class Product(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     title = models.CharField(max_length=150)
     keywords = models.CharField(max_length=255)
-    description = models.TextField(max_length=255)
+    description = RichTextUploadingField()
     image = models.ImageField(upload_to='images/Product/%Y/%m/%d/', null=False)
     price = models.DecimalField(max_digits=12, decimal_places=2, default=0)
     amount = models.IntegerField(default=0)
     minAmount = models.IntegerField(default=3)
-    detail = models.TextField()
+    detail = RichTextUploadingField()
     slug = models.SlugField()
     status = models.CharField(max_length=10, choices=STATUS)
     create_at = models.DateTimeField(auto_now_add=True)
