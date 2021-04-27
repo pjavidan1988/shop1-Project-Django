@@ -52,7 +52,7 @@
                         <div class="contact-address box-shadow">
                             <i class="zmdi zmdi-email"></i>
                             <h6>{{ setting.email }}</h6>
-                            <h6>{{ setting.smtpemail}}</h6>
+                            <h6>{{ setting.smtpemail }}</h6>
                         </div>
                     </div>
                 </div>
@@ -67,29 +67,27 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="message-box box-shadow white-bg">
-                            <form id="contact-form" action="php/mail.php" method="post">
-                                <div class="row">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h4 class="blog-section-title border-left mb-30">در ارتباط باشید</h4>
+                                    {% if messages %}
+                                        {% for message in messages %}
+                                            <div class="alert alert-{{ message.tags }}" role="alert">
+                                                {{ message }}
+                                            </div>
+                                        {% endfor %}
+                                    {% endif %}
+                                </div>
+                                <form id="contact-form" action="" method="post">
                                     <div class="col-md-12">
-                                        <h4 class="blog-section-title border-left mb-30">در ارتباط باشید</h4>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <input type="text" name="name" placeholder="نام شما">
-                                    </div>
-                                    <div class="col-md-6">
-                                        <input type="email" name="email" placeholder="ایمیل شما" dir="ltr">
-                                    </div>
-                                    <div class="col-md-6">
-                                        <input type="text" name="subject" placeholder="موضوع">
-                                    </div>
-                                    <div class="col-md-6">
-                                        <input type="text" name="phone" placeholder="شماره تلفن" dir="ltr">
+                                        {% csrf_token %}
+                                        {{ form.as_p }}
                                     </div>
                                     <div class="col-md-12">
-                                        <textarea class="custom-textarea" name="message" placeholder="پیام"></textarea>
                                         <button class="submit-btn-1 mt-30 btn-hover-1" type="submit">ثبت پیام</button>
                                     </div>
-                                </div>
-                            </form>
+                                </form>
+                            </div>
                             <p class="form-messege"></p>
                         </div>
                     </div>
