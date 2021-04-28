@@ -7,7 +7,7 @@
             <div class="row">
                 <div class="col-sm-6 hidden-xs">
                     <div class="call-us">
-                        <p class="mb-0"><span class="ltr-text">(+88) 01234-567890</span></p>
+                        <p class="mb-0"><span class="ltr-text"><a href="#">درباره ما</a></span></p>
                     </div>
                 </div>
                 <div class="col-sm-6 col-xs-12">
@@ -31,6 +31,18 @@
                                     ورود
                                 </a>
                             </li>
+                            <li>
+                                <a href="/aboutus">
+                                    <i class="zmdi zmdi-phone"></i>
+                                    تماس با ما
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/contactus">
+                                    <i class="zmdi zmdi-info"></i>
+                                    درباره ما
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -46,364 +58,27 @@
                     <div class="col-md-2 col-sm-6 col-xs-12">
                         <div class="logo">
                             <a href="index.html">
-                                <img src="{%static ''%}img/logo/logo.png" alt="main logo">
+                                <img src="{% static '' %}img/logo/logo.png" alt="main logo">
                             </a>
                         </div>
                     </div>
                     <!-- primary-menu -->
                     <div class="col-md-8 hidden-sm hidden-xs">
                         <nav id="primary-menu">
+
                             <ul class="main-menu text-center">
-                                <li><a href="/">خانه</a>
-                                    <ul class="dropdwn">
-                                        <li>
-                                            <a href="index.html">خانه نسخه 1</a>
-                                        </li>
-                                        <li>
-                                            <a href="index-2.html">خانه نسخه 2</a>
-                                        </li>
-                                        <li>
-                                            <a href="index-3.html">خانه نسخه 3</a>
-                                        </li>
-                                        <li>
-                                            <a href="index-4.html">خانه 4 متن متحرک</a>
-                                        </li>
-                                        <li>
-                                            <a href="index-5.html">خانه 5 متن متحرک با لایه رویی</a>
-                                        </li>
-                                        <li>
-                                            <a href="index-6.html">خانه 6 طرح چارچوب</a>
-                                        </li>
-                                        <li>
-                                            <a href="index-7.html">خانه 7 رنگی</a>
-                                        </li>
-                                        <li>
-                                            <a href="index-8.html">خانه 8 طرح چارچوب 2</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="mega-parent"><a href="#">عناصر</a>
-                                    <div class="mega-menu-area clearfix">
-                                        <div class="mega-menu-link mega-menu-link-4  f-left">
-                                            <ul class="single-mega-item">
-                                                <li class="menu-title">عناصر 1</li>
+                                {% load mptt_tags %}
+                                {% recursetree category %}
+                                    <li><a href="/category/{{ node.id }}/{{ node.slug }}">{{ node.title }}</a>
+                                        {% if not node.is_leaf_node %}
+                                            <ul class="dropdwn">
                                                 <li>
-                                                    <a href="elements-header-1-sticky.html">سرصفحه 1 چسبان</a>
-                                                </li>
-                                                <li>
-                                                    <a href="elements-header-1-no-sticky.html">سرصفحه 1 غیر چسبان</a>
-                                                </li>
-                                                <li>
-                                                    <a href="elements-header-2-sticky.html">سرصفحه 2 چسبان</a>
-                                                </li>
-                                                <li>
-                                                    <a href="elements-header-2-no-sticky.html">سرصفحه 2 غیر چسبان</a>
-                                                </li>
-                                                <li>
-                                                    <a href="elements-footer-1.html">پاصفحه 1</a>
-                                                </li>
-                                                <li>
-                                                    <a href="elements-footer-2.html">پاصفحه 2</a>
-                                                </li>
-                                                <li>
-                                                    <a href="elements-footer-3.html">پاصفحه 3</a>
-                                                </li>
-                                                <li>
-                                                    <a href="elements-contact-form.html">فرم تماس پویا</a>
-                                                </li>
-                                                <li>
-                                                    <a href="elements-map.html">نقشه گوگل</a>
+                                                    <a href="index.html">{{ children }}</a>
                                                 </li>
                                             </ul>
-                                            <ul class="single-mega-item">
-                                                <li class="menu-title">عناصر 2</li>
-                                                <li>
-                                                    <a href="elements-featured-product-1.html">محصولات ویژه 1</a>
-                                                </li>
-                                                <li>
-                                                    <a href="elements-featured-product-2.html">محصولات ویژه 2</a>
-                                                </li>
-                                                <li>
-                                                    <a href="elements-product-tab-1.html">تب های محصولات 1</a>
-                                                </li>
-                                                <li>
-                                                    <a href="elements-product-tab-2.html">تب های محصولات 2</a>
-                                                </li>
-                                                <li>
-                                                    <a href="elements-up-comming-product-1.html">محصول به زودی 1</a>
-                                                </li>
-                                                <li>
-                                                    <a href="elements-up-comming-product-2.html">محصول به زودی 2</a>
-                                                </li>
-                                                <li>
-                                                    <a href="elements-single-product.html">جزئیات محصول</a>
-                                                </li>
-                                                <li>
-                                                    <a href="elements-sidebar-right.html">نوار کناری راست</a>
-                                                </li>
-                                                <li>
-                                                    <a href="elements-sidebar-left.html">نوار کناری چپ</a>
-                                                </li>
-                                            </ul>
-                                            <ul class="single-mega-item">
-                                                <li class="menu-title">عناصر 3</li>
-                                                <li>
-                                                    <a href="elements-section-title.html">عنوان بخش</a>
-                                                </li>
-                                                <li>
-                                                    <a href="elements-pagination.html">صفحه‌بندی</a>
-                                                </li>
-                                                <li>
-                                                    <a href="elements-banner.html">بنر</a>
-                                                </li>
-                                                <li>
-                                                    <a href="elements-brands.html">برند ها</a>
-                                                </li>
-                                                <li>
-                                                    <a href="elements-breadcrumbs.html">نوار ناوبری</a>
-                                                </li>
-                                                <li>
-                                                    <a href="elements-newsletter.html">خبرنامه</a>
-                                                </li>
-                                                <li>
-                                                    <a href="elements-team.html">تیم</a>
-                                                </li>
-                                                <li>
-                                                    <a href="elements-audio.html">صوت</a>
-                                                </li>
-                                                <li>
-                                                    <a href="elements-video.html">ویدئو</a>
-                                                </li>
-                                            </ul>
-                                            <ul class="single-mega-item">
-                                                <li class="menu-title">عناصر 4</li>
-                                                <li>
-                                                    <a href="elements-typography.html">تایپوگرافی</a>
-                                                </li>
-                                                <li>
-                                                    <a href="elements-buttons.html">دکمه ها</a>
-                                                </li>
-                                                <li>
-                                                    <a href="elements-call-to-action.html">نوار متنی</a>
-                                                </li>
-                                                <li>
-                                                    <a href="elements-accordion.html">باز و بسته شونده</a>
-                                                </li>
-                                                <li>
-                                                    <a href="elements-alerts.html">هشدارها</a>
-                                                </li>
-                                                <li>
-                                                    <a href="elements-progress-bars.html">نوار های پیشرفت</a>
-                                                </li>
-                                                <li>
-                                                    <a href="elements-tab.html">تب</a>
-                                                </li>
-                                                <li>
-                                                    <a href="elements-toggles.html">لیست باز شونده نوع 2</a>
-                                                </li>
-                                                <li>
-                                                    <a href="elements-toggles.html">لیست باز شونده نوع 2</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="mega-parent"><a href="shop.html">محصولات</a>
-                                    <div class="mega-menu-area clearfix">
-                                        <div class="mega-menu-link f-left">
-                                            <ul class="single-mega-item">
-                                                <li class="menu-title">گوشی هوشمند</li>
-                                                <li>
-                                                    <a href="#">همه گوشی ها</a>
-                                                </li>
-                                                <li>
-                                                    <a href="#">گوشی های هوشمند</a>
-                                                </li>
-                                                <li>
-                                                    <a href="#">گوشی های اندروید</a>
-                                                </li>
-                                                <li>
-                                                    <a href="#">گوشی های ویندوز</a>
-                                                </li>
-                                                <li>
-                                                    <a href="#">گوشی های دست دوم</a>
-                                                </li>
-                                                <li>
-                                                    <a href="#">لوازم جانبی گوشی</a>
-                                                </li>
-                                                <li>
-                                                    <a href="#">کیف و کاور</a>
-                                                </li>
-                                            </ul>
-                                            <ul class="single-mega-item">
-                                                <li class="menu-title">نوت بوک</li>
-                                                <li>
-                                                    <a href="">همه نوت بوک ها</a>
-                                                </li>
-                                                <li>
-                                                    <a href="">نوت بوک های هوشمند</a>
-                                                </li>
-                                                <li>
-                                                    <a href="">نوت بوک های اندروید</a>
-                                                </li>
-                                                <li>
-                                                    <a href="">نوت بوک های ویندوز</a>
-                                                </li>
-                                                <li>
-                                                    <a href="">نوت بوک های دست دوم</a>
-                                                </li>
-                                                <li>
-                                                    <a href="">لوازم جانبی نوت بوک</a>
-                                                </li>
-                                                <li>
-                                                    <a href="">کیف و کاور</a>
-                                                </li>
-                                            </ul>
-                                            <ul class="single-mega-item">
-                                                <li class="menu-title">تبلت ها</li>
-                                                <li>
-                                                    <a href="">همه تبلت ها</a>
-                                                </li>
-                                                <li>
-                                                    <a href="">تبلت های هوشمند</a>
-                                                </li>
-                                                <li>
-                                                    <a href="">تبلت های اندروید</a>
-                                                </li>
-                                                <li>
-                                                    <a href="">تبلت های ویندوز</a>
-                                                </li>
-                                                <li>
-                                                    <a href="">تبلت های دست دوم</a>
-                                                </li>
-                                                <li>
-                                                    <a href="">لوازم جانبی تبلت</a>
-                                                </li>
-                                                <li>
-                                                    <a href="">کیف و کاور</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <div class="mega-menu-photo f-left">
-                                            <a href="#">
-                                                <img src="{%static ''%}img/mega-menu/1.jpg" alt="mega menu image">
-                                            </a>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="mega-parent"><a href="#">صفحات</a>
-                                    <div class="mega-menu-area mega-menu-area-2 clearfix">
-                                        <div class="mega-menu-link mega-menu-link-2  f-left">
-                                            <ul class="single-mega-item">
-                                                <li class="menu-title">لیست صفحه</li>
-                                                <li>
-                                                    <a href="shop.html">فروشگاه</a>
-                                                </li>
-                                                <li>
-                                                    <a href="shop-right-sidebar.html">فروشگاه نوار کناری راست</a>
-                                                </li>
-                                                <li>
-                                                    <a href="shop-left-sidebar.html">فروشگاه نوار کناری چپ</a>
-                                                </li>
-                                                <li>
-                                                    <a href="shop-list.html">فروشگاه نمایش لیست</a>
-                                                </li>
-                                                <li>
-                                                    <a href="shop-list-left-sidebar.html">فروشگاه نمایش لیست نوار کناری
-                                                        چپ</a>
-                                                </li>
-                                                <li>
-                                                    <a href="single-product.html">جزئیات محصول</a>
-                                                </li>
-                                                <li>
-                                                    <a href="single-product-right-sidebar.html">جزئیات محصول نوار کناری
-                                                        راست</a>
-                                                </li>
-                                                <li>
-                                                    <a href="single-product-no-sidebar.html">جزئیات محصول بدون نوار
-                                                        کناری</a>
-                                                </li>
-                                            </ul>
-                                            <ul class="single-mega-item">
-                                                <li class="menu-title">لیست صفحه</li>
-                                                <li>
-                                                    <a href="cart.html">سبد خرید</a>
-                                                </li>
-                                                <li>
-                                                    <a href="wishlist.html">لیست علاقه‌مندی‌ها</a>
-                                                </li>
-                                                <li>
-                                                    <a href="checkout.html">پرداخت</a>
-                                                </li>
-                                                <li>
-                                                    <a href="order.html">سفارش</a>
-                                                </li>
-                                                <li>
-                                                    <a href="login.html">ورود</a>
-                                                </li>
-                                                <li>
-                                                    <a href="My-account.html">حساب کاربری</a>
-                                                </li>
-                                                <li>
-                                                    <a href="about.html">درباره ما</a>
-                                                </li>
-                                                <li>
-                                                    <a href="404.html">404</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li><a href="blog.html">بلاگ</a>
-                                    <ul class="dropdwn">
-                                        <li><a href="blog-right-sidebar.html">تکرار منوی باز شونده</a>
-                                            <ul class="dropdwn-repeat">
-                                                <li>
-                                                    <a href="blog.html">بلاگ</a>
-                                                </li>
-                                                <li>
-                                                    <a href="blog-right-sidebar.html">بلاگ نوار کناری راست</a>
-                                                </li>
-                                                <li>
-                                                    <a href="blog-left-sidebar.html">بلاگ نوار کناری چپ</a>
-                                                </li>
-                                                <li>
-                                                    <a href="blog-2.html">بلاگ طرح 2</a>
-                                                </li>
-                                                <li>
-                                                    <a href="blog-2-right-sidebar.html">بلاگ 2 نوار کناری راست</a>
-                                                </li>
-                                                <li>
-                                                    <a href="blog-2-left-sidebar.html">بلاگ 2 نوار کناری چپ</a>
-                                                </li>
-                                                <li>
-                                                    <a href="single-blog.html">جزئیات مطلب بلاگ</a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li>
-                                            <a href="blog.html">بلاگ</a>
-                                        </li>
-                                        <li>
-                                            <a href="blog-right-sidebar.html">بلاگ نوار کناری راست</a>
-                                        </li>
-                                        <li>
-                                            <a href="blog-left-sidebar.html">بلاگ نوار کناری چپ</a>
-                                        </li>
-                                        <li>
-                                            <a href="blog-2.html">بلاگ طرح 2</a>
-                                        </li>
-                                        <li>
-                                            <a href="blog-2-right-sidebar.html">بلاگ 2 نوار کناری راست</a>
-                                        </li>
-                                        <li>
-                                            <a href="blog-2-left-sidebar.html">بلاگ 2 نوار کناری چپ</a>
-                                        </li>
-                                        <li>
-                                            <a href="single-blog.html">جزئیات مطلب بلاگ</a>
-                                        </li>
-                                    </ul>
-                                </li>
+                                        {% endif %}
+                                    </li>
+                                {% endrecursetree %}
                                 <li>
                                     <a href="/aboutus">درباره ما</a>
                                 </li>
@@ -455,7 +130,7 @@
                                                 <div class="single-cart clearfix">
                                                     <div class="cart-img f-left">
                                                         <a href="#">
-                                                            <img src="{%static ''%}img/cart/1.jpg" alt="Cart Product">
+                                                            <img src="{% static '' %}img/cart/1.jpg" alt="Cart Product">
                                                         </a>
                                                         <div class="del-icon">
                                                             <a href="#">
@@ -482,7 +157,7 @@
                                                 <div class="single-cart clearfix">
                                                     <div class="cart-img f-left">
                                                         <a href="#">
-                                                            <img src="{%static ''%}img/cart/1.jpg" alt="Cart Product">
+                                                            <img src="{% static '' %}img/cart/1.jpg" alt="Cart Product">
                                                         </a>
                                                         <div class="del-icon">
                                                             <a href="#">

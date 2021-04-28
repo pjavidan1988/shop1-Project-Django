@@ -3,14 +3,16 @@ from django.db import models
 
 # Create your models here.
 from django.utils.safestring import mark_safe
+from mptt.fields import TreeForeignKey
+from mptt.models import MPTTModel
 
 
-class Category(models.Model):
+class Category(MPTTModel):
     STATUS = (
         ('True', 'True'),
         ('False', 'False'),
     )
-    parent = models.ForeignKey('self', blank=True, null=True, related_name='children', on_delete=models.CASCADE)
+    parent = TreeForeignKey('self', blank=True, null=True, related_name='children', on_delete=models.CASCADE)
     title = models.CharField(max_length=50)
     keywords = models.CharField(max_length=255)
     description = models.TextField(max_length=255)
@@ -22,6 +24,9 @@ class Category(models.Model):
 
     def __str__(self):
         return self.title
+
+    class MPTTMeta:
+        order_insertion_by = ['title']
 
 
 class Product(models.Model):
