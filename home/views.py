@@ -3,14 +3,15 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 
 # Create your views here.
+import product
 from home.models import Setting, ContactForm, ContactMessage
-from product.models import Category
+from product.models import Category, Product
 
 
 def index(request):
     setting = Setting.objects.get(pk=1)
     category = Category.objects.all()
-    context = {'setting': setting, 'category':category, }
+    context = {'setting': setting, 'category': category, }
     return render(request, 'index.html', context)
 
 
@@ -42,3 +43,8 @@ def contactus(request):
     form = ContactForm
     context = {'setting': setting, 'form': form, }
     return render(request, 'contact.html', context)
+
+
+def category_products(request, id, slug):
+    products = Product.objects.filter(category_id=id)
+    return HttpResponse(products)
