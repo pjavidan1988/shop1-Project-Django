@@ -1,73 +1,36 @@
 {% load static %}
-        <!-- START SLIDER AREA -->
-        <div class="slider-area  plr-185  mb-80">
-            <div class="container-fluid">
-                <div class="slider-content">
-                    <div class="row">
-                        <div class="active-slider-1 slick-arrow-1 slick-dots-1">
-                            <!-- layer-1 Start -->
-                            <div class="col-md-12">
-                                <div class="layer-1">
-                                    <div class="slider-img">
-                                        <img src="{% static ''%}img/slider/slider-1/1.jpg" alt="">
-                                    </div>
-                                    <div class="slider-info gray-bg">
-                                        <div class="slider-info-inner">
-                                            <h1 class="slider-title-1 text-uppercase text-black-1">گوشی هوشمند ضد آب</h1>
-                                            <div class="slider-brief text-black-2">
-                                                <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد.</p>
-                                            </div>
-                                            <a href="#" class="button extra-small button-black">
-                                                <span>هم اکنون بخرید</span>
-                                            </a>
+<!-- START SLIDER AREA -->
+<div class="slider-area  plr-185  mb-80">
+    <div class="container-fluid">
+        <div class="slider-content">
+            <div class="row">
+                <div class="active-slider-1 slick-arrow-1 slick-dots-1">
+                    {% for rs in products_slider %}
+                        <!-- layer-1 Start -->
+                        <div class="col-md-12">
+                            <div class="layer-1">
+                                <div class="slider-img">
+                                    <img src="{{ rs.image.url }}" alt="">
+                                </div>
+                                <div class="slider-info gray-bg">
+                                    <div class="slider-info-inner">
+                                        <h1 class="slider-title-1 text-uppercase text-black-1">{{ rs.title }}</h1>
+                                        <div class="slider-brief text-black-2">
+                                            <p> {{ rs.price }}  تومان</p>
                                         </div>
+                                        <a href="/product/{{ rs.id }}/{{ rs.slug }}"
+                                           class="button extra-small button-black">
+                                            <span>هم اکنون بخرید</span>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
-                            <!-- layer-1 end -->
-                            <!-- layer-1 Start -->
-                            <div class="col-md-12">
-                                <div class="layer-1">
-                                    <div class="slider-img">
-                                        <img src="{% static ''%}img/slider/slider-1/2.jpg" alt="">
-                                    </div>
-                                    <div class="slider-info gray-bg">
-                                        <div class="slider-info-inner">
-                                            <h1 class="slider-title-1 text-uppercase text-black-1">گوشی هوشمند ضد آب</h1>
-                                            <div class="slider-brief text-black-2">
-                                                <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد.</p>
-                                            </div>
-                                            <a href="#" class="button extra-small button-black">
-                                                <span>هم اکنون بخرید</span>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- layer-1 end -->
-                            <!-- layer-1 Start -->
-                            <div class="col-md-12">
-                                <div class="layer-1">
-                                    <div class="slider-img">
-                                        <img src="{% static ''%}img/slider/slider-1/1.jpg" alt="">
-                                    </div>
-                                    <div class="slider-info gray-bg">
-                                        <div class="slider-info-inner">
-                                            <h1 class="slider-title-1 text-uppercase text-black-1">گوشی هوشمند ضد آب</h1>
-                                            <div class="slider-brief text-black-2">
-                                                <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد.</p>
-                                            </div>
-                                            <a href="#" class="button extra-small button-black">
-                                                <span>هم اکنون بخرید</span>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- layer-1 end -->
                         </div>
-                    </div>
+                        <!-- layer-1 end -->
+                    {% endfor %}
                 </div>
             </div>
         </div>
-        <!-- END SLIDER AREA -->
+    </div>
+</div>
+<!-- END SLIDER AREA -->

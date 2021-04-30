@@ -51,7 +51,7 @@ class Product(models.Model):
     keywords = models.CharField(max_length=255)
     description = RichTextUploadingField()
     image = models.ImageField(upload_to='images/Product/%Y/%m/%d/', null=False)
-    price = models.DecimalField(max_digits=12, decimal_places=2, default=0)
+    price = models.DecimalField(max_digits=12, decimal_places=3, default=0)
     amount = models.IntegerField(default=0)
     minAmount = models.IntegerField(default=3)
     detail = RichTextUploadingField()

@@ -11,7 +11,8 @@ from product.models import Category, Product
 def index(request):
     setting = Setting.objects.get(pk=1)
     category = Category.objects.all()
-    context = {'setting': setting, 'category': category, }
+    products_slider = Product.objects.all().order_by('id')[:4]
+    context = {'setting': setting, 'category': category, 'products_slider': products_slider,}
     return render(request, 'index.html', context)
 
 
