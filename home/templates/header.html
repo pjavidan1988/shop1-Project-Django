@@ -224,114 +224,17 @@
                 <div class="mobile-menu">
                     <nav id="dropdown">
                         <ul>
-                            <li><a href="/">خانه</a>
-                                <ul>
-                                    <li>
-                                        <a href="index.html">خانه نسخه 1</a>
-                                    </li>
-                                    <li>
-                                        <a href="index-2.html">خانه نسخه 2</a>
-                                    </li>
-                                    <li>
-                                        <a href="index-3.html">خانه نسخه 3</a>
-                                    </li>
-                                    <li>
-                                        <a href="index-4.html">خانه 4 متن متحرک</a>
-                                    </li>
-                                    <li>
-                                        <a href="index-5.html">خانه 5 متن متحرک با لایه رویی</a>
-                                    </li>
-                                    <li>
-                                        <a href="index-6.html">خانه 6 طرح چارچوب</a>
-                                    </li>
-                                    <li>
-                                        <a href="index-7.html">خانه 7 رنگی</a>
-                                    </li>
-                                    <li>
-                                        <a href="index-8.html">خانه 8 طرح چارچوب 2</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="shop.html">محصولات</a>
-                            </li>
-                            <li><a href="#">صفحات</a>
-                                <ul>
-                                    <li>
-                                        <a href="shop.html">فروشگاه</a>
-                                    </li>
-                                    <li>
-                                        <a href="shop-right-sidebar.html">فروشگاه نوار کناری راست</a>
-                                    </li>
-                                    <li>
-                                        <a href="shop-left-sidebar.html">فروشگاه نوار کناری چپ</a>
-                                    </li>
-                                    <li>
-                                        <a href="shop-list.html">فروشگاه نمایش لیست</a>
-                                    </li>
-                                    <li>
-                                        <a href="shop-list-left-sidebar.html">فروشگاه نمایش لیست نوار کناری چپ</a>
-                                    </li>
-                                    <li>
-                                        <a href="single-product.html">جزئیات محصول</a>
-                                    </li>
-                                    <li>
-                                        <a href="single-product-right-sidebar.html">جزئیات محصول نوار کناری راست</a>
-                                    </li>
-                                    <li>
-                                        <a href="single-product-no-sidebar.html">جزئیات محصول بدون نوار کناری</a>
-                                    </li>
-                                    <li>
-                                        <a href="cart.html">سبد خرید</a>
-                                    </li>
-                                    <li>
-                                        <a href="wishlist.html">لیست علاقه‌مندی‌ها</a>
-                                    </li>
-                                    <li>
-                                        <a href="checkout.html">پرداخت</a>
-                                    </li>
-                                    <li>
-                                        <a href="order.html">سفارش</a>
-                                    </li>
-                                    <li>
-                                        <a href="login.html">ورود</a>
-                                    </li>
-                                    <li>
-                                        <a href="My-account.html">حساب کاربری</a>
-                                    </li>
-                                    <li>
-                                        <a href="about.html">درباره ما</a>
-                                    </li>
-                                    <li>
-                                        <a href="404.html">404</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li><a href="blog.html">بلاگ</a>
-                                <ul>
-                                    <li>
-                                        <a href="blog.html">بلاگ</a>
-                                    </li>
-                                    <li>
-                                        <a href="blog-right-sidebar.html">بلاگ نوار کناری راست</a>
-                                    </li>
-                                    <li>
-                                        <a href="blog-left-sidebar.html">بلاگ نوار کناری چپ</a>
-                                    </li>
-                                    <li>
-                                        <a href="blog-2.html">بلاگ طرح 2</a>
-                                    </li>
-                                    <li>
-                                        <a href="blog-2-right-sidebar.html">بلاگ 2 نوار کناری راست</a>
-                                    </li>
-                                    <li>
-                                        <a href="blog-2-left-sidebar.html">بلاگ 2 نوار کناری چپ</a>
-                                    </li>
-                                    <li>
-                                        <a href="single-blog.html">جزئیات مطلب بلاگ</a>
-                                    </li>
-                                </ul>
-                            </li>
+                            {% recursetree category %}
+                                <li><a href="/category/{{ node.id }}/{{ node.slug }}">{{ node.title }}</a>
+                                    {% if not node.is_leaf_node %}
+                                        <ul>
+                                            <li>
+                                                <a href="index.html">{{ children }}</a>
+                                            </li>
+                                        </ul>
+                                    {% endif %}
+                                </li>
+                            {% endrecursetree %}
                             <li>
                                 <a href="/aboutus">درباره ما</a>
                             </li>
