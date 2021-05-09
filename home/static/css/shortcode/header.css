@@ -84,7 +84,7 @@ NOTE: This is Header style file. All Header related style included in this file.
 	background: #ffffff none repeat scroll 100% 0;
 	-webkit-box-shadow: 0 1px 2px rgba(86, 86, 90, 0.5);
 	-moz-box-shadow: 0 1px 2px rgba(86, 86, 90, 0.5);
-	box-shadow: 0 1px 2px rgba(86, 86, 90, 0.5);
+	box-shadow: 0 0 5px rgba(86, 86, 90, 0.5);
 	right: 0;
 	padding: 15px 30px;
 	position: absolute;
@@ -109,14 +109,14 @@ NOTE: This is Header style file. All Header related style included in this file.
 	z-index: 2;
 }
 .dropdwn li {
-	display: block;
-	padding: 5px 0;
+	padding: 0 10px;
 }
 .dropdwn li a {
 	color: #666;
-	display: inline-block;
+	display: inline;
 	font-size: 14px;
 	line-height: 24px;
+
 }
 .main-menu li:hover .dropdwn {
 	-webkit-transform: scale(1);
