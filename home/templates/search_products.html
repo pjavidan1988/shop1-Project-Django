@@ -1,0 +1,96 @@
+{% extends 'homebase.html' %}
+{% block title %}  {{ query }}  | نتیجه {% endblock %}
+{% block description %} {{ setting.description }} {% endblock %}
+{% block keywords %} {{ setting.keywords }} {% endblock %}
+
+{% block sidebar %} {% include 'sidebar.html' %} {% endblock %}
+
+{% block body %}
+
+    <!-- BREADCRUMBS SETCTION START -->
+    <div class="breadcrumbs-section plr-200 mb-80">
+        <div class="breadcrumbs overlay-bg">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="breadcrumbs-inner">
+                            <h1 class="breadcrumbs-title">نتیجه جستجو</h1>
+                            <ul class="breadcrumb-list">
+                                <li><a href="/">خانه</a></li>
+                                <li>{{ query }}نتیجه جستجو</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- BREADCRUMBS SETCTION END -->
+
+    <!-- Start page content -->
+    <section id="page-content" class="page-wrapper">
+
+        <!-- SHOP SECTION START -->
+        <div class="shop-section mb-80">
+            <div class="container">
+                <div class="row">
+                    {% for rs in products %}
+                    <div class="col-md-10">
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <!-- wishlist start -->
+                            <div class="tab-pane active" id="wishlist">
+                                <div class="wishlist-content">
+                                    <form action="#">
+                                        <div class="table-content table-responsive mb-50">
+                                            <table class="text-center">
+                                                <thead>
+                                                <tr>
+                                                    <th class="product-thumbnail">محصول</th>
+                                                    <th class="product-price">قیمت</th>
+                                                    <th class="product-stock">وضعیت انبار</th>
+                                                    <th class="product-add-cart">افزودن به سبد</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <!-- tr -->
+                                                <tr>
+                                                    <td class="product-thumbnail">
+                                                        <div class="pro-thumbnail-img">
+                                                            <img src="{{ rs.image.url }}" alt="">
+                                                        </div>
+                                                        <div class="pro-thumbnail-info text-left">
+                                                            <h6 class="product-title-2">
+                                                                <a href="/product/{{ rs.id }}/{{ rs.slug }}">{{ rs.title }} </a>
+                                                            </h6>
+                                                            <p>برند: {{ rs.brand_name }}</p>
+                                                            <p>مدل: {{ rs.model_name}}</p>
+                                                            <p> رنگ: {{ rs.color}}</p>
+                                                        </div>
+                                                    </td>
+                                                    <td class="product-price">{{ rs.price }} تومان</td>
+                                                    <td class="product-stock text-uppercase">{{ rs.amount }}</td>
+                                                    <td class="product-add-cart">
+                                                        <a href="#" title="Add To Cart">
+                                                            <i class="zmdi zmdi-shopping-cart-plus"></i>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <!-- SHOP SECTION END -->
+
+    </section>
+    <!-- End page content -->
+
+{% endblock %}

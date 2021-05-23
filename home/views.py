@@ -4,6 +4,7 @@ from django.shortcuts import render
 
 # Create your views here.
 import product
+from home.forms import SearchForm
 from home.models import Setting, ContactForm, ContactMessage
 from product.models import Category, Product
 
@@ -59,7 +60,21 @@ def category_products(request, id, slug):
     category = Category.objects.all()
     products = Product.objects.filter(category_id=id)
     context = {
-               'products': products,
-               'category': category
-               }
+        'products': products,
+        'category': category
+    }
     return render(request, 'category_products.html', context)
+
+
+def search_products(request):
+    if request.method == 'POST':
+        form = SearchForm(request.POST)
+        if form.is_valid():
+            category = Category.objects.all()
+            query = form.cleaned_data['query']
+            products = Product.objects.filter(title__icontains=query)
+            context = {'products': products,
+                       'category': category,
+                       }
+            return render(request, 'search_products.html', context)
+    return HttpResponseRedirect('/')

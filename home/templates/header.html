@@ -97,9 +97,10 @@
                                     <button class="search-toggle">
                                         <i class="zmdi zmdi-search"></i>
                                     </button>
-                                    <form action="#">
+                                    <form action="/search/" method="post">
+                                        {% csrf_token %}
                                         <div class="top-search-box">
-                                            <input type="text" placeholder="جستجوی محصول ...">
+                                            <input name="query" type="text" placeholder="جستجوی محصول ...">
                                             <button type="submit">
                                                 <i class="zmdi zmdi-search"></i>
                                             </button>
