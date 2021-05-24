@@ -8,7 +8,7 @@ from django.shortcuts import render
 import product
 from home.forms import SearchForm
 from home.models import Setting, ContactForm, ContactMessage
-from product.models import Category, Product
+from product.models import Category, Product, Picture
 
 
 def index(request):
@@ -61,9 +61,11 @@ def contactus(request):
 def category_products(request, id, slug):
     category = Category.objects.all()
     products = Product.objects.filter(category_id=id)
+    setting = Setting.objects.get(pk=1)
     context = {
         'products': products,
-        'category': category
+        'category': category,
+        'setting': setting
     }
     return render(request, 'category_products.html', context)
 
@@ -97,3 +99,15 @@ def product_search_auto(request):
         data = 'fail'
     mimetype = 'application/json'
     return HttpResponse(data, mimetype)
+
+
+def product_detail(request, id, slug):
+    category = Category.objects.all()
+    product = Product.objects.get(pk=id)
+    images = Picture.objects.filter(product_id=id)
+    context = {
+        'product': product,
+        'category': category,
+        'images': images
+    }
+    return render(request, 'product_detail.html', context)

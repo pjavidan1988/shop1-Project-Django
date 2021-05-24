@@ -52,6 +52,7 @@ class Product(models.Model):
     brand_name = models.CharField(max_length=255)
     color = models.CharField(max_length=255)
     model_name = models.CharField(max_length=255)
+    short_description = RichTextUploadingField()
     description = RichTextUploadingField()
     image = models.ImageField(upload_to='images/Product/%Y/%m/%d/', null=False)
     slider_image = models.ImageField(upload_to='images/Slider/%Y/%m/%d/', null=False)
