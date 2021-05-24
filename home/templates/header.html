@@ -88,9 +88,25 @@
                             </ul>
                         </nav>
                     </div>
+                    <script>
+                        $(function () {
+                            $("#query").autocomplete({
+                                source: "/search_auto/",
+                                select: function (event, ui) { //item selected
+                                    AutoCompleteSelectHandler(event, ui)
+                                },
+                                minLength: 2,
+                            });
+                        });
+
+                        function AutoCompleteSelectHandler(event, ui) {
+                            var selectedObj = ui.item;
+                        }
+                    </script>
                     <!-- header-search & total-cart -->
                     <div class="col-md-2 col-sm-6 col-xs-12">
                         <div class="search-top-cart  f-right">
+
                             <!-- header-search -->
                             <div class="header-search f-left">
                                 <div class="header-search-inner">
@@ -100,7 +116,7 @@
                                     <form action="/search/" method="post">
                                         {% csrf_token %}
                                         <div class="top-search-box">
-                                            <input name="query" type="text" placeholder="جستجوی محصول ...">
+                                            <input id="query" name="query" type="text" placeholder="جستجوی محصول ...">
                                             <button type="submit">
                                                 <i class="zmdi zmdi-search"></i>
                                             </button>
