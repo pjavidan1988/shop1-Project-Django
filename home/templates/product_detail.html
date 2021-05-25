@@ -51,45 +51,18 @@
                                         <div class="row">
                                             <div class="col-xs-12">
                                                 <div id="gallery_01" class="carousel-btn slick-arrow-3 mt-30">
-                                                    <div class="p-c">
-                                                        <a href="#" data-image="img/product/2.jpg"
-                                                           data-zoom-image="img/product/2-large.jpg">
-                                                            <img class="zoom_03" src="img/product/2.jpg" alt="">
-                                                        </a>
-                                                    </div>
-                                                    <div class="p-c">
-                                                        <a href="#" data-image="img/product/3.jpg"
-                                                           data-zoom-image="img/product/3-large.jpg">
-                                                            <img class="zoom_03" src="img/product/3.jpg" alt="">
-                                                        </a>
-                                                    </div>
-                                                    <div class="p-c">
-                                                        <a href="#" data-image="img/product/4.jpg"
-                                                           data-zoom-image="img/product/4-large.jpg">
-                                                            <img class="zoom_03" src="img/product/4.jpg" alt="">
-                                                        </a>
-                                                    </div>
-                                                    <div class="p-c">
-                                                        <a href="#" data-image="img/product/5.jpg"
-                                                           data-zoom-image="img/product/5-large.jpg">
-                                                            <img class="zoom_03" src="img/product/5.jpg" alt="">
-                                                        </a>
-                                                    </div>
-                                                    <div class="p-c">
-                                                        <a href="#" data-image="img/product/6.jpg"
-                                                           data-zoom-image="img/product/6-large.jpg">
-                                                            <img class="zoom_03" src="img/product/6.jpg" alt="">
-                                                        </a>
-                                                    </div>
-                                                    <div class="p-c">
-                                                        <a href="#" data-image="img/product/7.jpg"
-                                                           data-zoom-image="img/product/7-large.jpg">
-                                                            <img class="zoom_03" src="img/product/7.jpg" alt="">
-                                                        </a>
-                                                    </div>
+                                                    {% for rs in images %}
+                                                        <div class="p-c">
+                                                            <a href="#" data-image="{{ rs.image.url }}"
+                                                               data-zoom-image="{{ rs.image.url }}">
+                                                                <img class="zoom_03" src="{{ rs.image.url }}" alt="">
+                                                            </a>
+                                                        </div>
+                                                    {% endfor %}
                                                 </div>
                                             </div>
                                         </div>
+
                                     </div>
                                 </div>
                                 <!-- imgs-zoom-area end -->
@@ -184,11 +157,11 @@
                                         </ul>
                                         <div class="tab-content">
                                             <div role="tabpanel" class="tab-pane active" id="description">
-                                                <p>{{ product.description }}</p>
+                                                <p>{{ product.description | safe }}</p>
 
                                             </div>
                                             <div role="tabpanel" class="tab-pane" id="information">
-                                                <p>{{ product.detail }}</p>
+                                                <p>{{ product.detail | safe }}</p>
 
                                             </div>
                                             <div role="tabpanel" class="tab-pane" id="reviews">
