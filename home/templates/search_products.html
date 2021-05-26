@@ -15,10 +15,11 @@
                 <div class="row">
                     <div class="col-xs-12">
                         <div class="breadcrumbs-inner">
-                            <h1 class="breadcrumbs-title">نتیجه جستجو</h1>
-                            <ul class="breadcrumb-list">
+                            <h1 class="breadcrumbs-title">{{ query }}</h1>
+                            <ul class="breadcrumb">
                                 <li><a href="/">خانه</a></li>
-                                <li>{{ query }}نتیجه جستجو</li>
+                                <li>نتیجه جستجو</li>
+                                <li>{{ query }}</li>
                             </ul>
                         </div>
                     </div>
@@ -36,55 +37,55 @@
             <div class="container">
                 <div class="row">
                     {% for rs in products %}
-                    <div class="col-md-10">
-                        <!-- Tab panes -->
-                        <div class="tab-content">
-                            <!-- wishlist start -->
-                            <div class="tab-pane active" id="wishlist">
-                                <div class="wishlist-content">
-                                    <form action="#">
-                                        <div class="table-content table-responsive mb-50">
-                                            <table class="text-center">
-                                                <thead>
-                                                <tr>
-                                                    <th class="product-thumbnail">محصول</th>
-                                                    <th class="product-price">قیمت</th>
-                                                    <th class="product-stock">وضعیت انبار</th>
-                                                    <th class="product-add-cart">افزودن به سبد</th>
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-                                                <!-- tr -->
-                                                <tr>
-                                                    <td class="product-thumbnail">
-                                                        <div class="pro-thumbnail-img">
-                                                            <img src="{{ rs.image.url }}" alt="">
-                                                        </div>
-                                                        <div class="pro-thumbnail-info text-left">
-                                                            <h6 class="product-title-2">
-                                                                <a href="/product/{{ rs.id }}/{{ rs.slug }}">{{ rs.title }} </a>
-                                                            </h6>
-                                                            <p>برند: {{ rs.brand_name }}</p>
-                                                            <p>مدل: {{ rs.model_name}}</p>
-                                                            <p> رنگ: {{ rs.color}}</p>
-                                                        </div>
-                                                    </td>
-                                                    <td class="product-price">{{ rs.price }} تومان</td>
-                                                    <td class="product-stock text-uppercase">{{ rs.amount }}</td>
-                                                    <td class="product-add-cart">
-                                                        <a href="#" title="Add To Cart">
-                                                            <i class="zmdi zmdi-shopping-cart-plus"></i>
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </form>
+                        <div class="col-md-10">
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+                                <!-- wishlist start -->
+                                <div class="tab-pane active" id="wishlist">
+                                    <div class="wishlist-content">
+                                        <form action="#">
+                                            <div class="table-content table-responsive mb-50">
+                                                <table class="text-center">
+                                                    <thead>
+                                                    <tr>
+                                                        <th class="product-thumbnail">محصول</th>
+                                                        <th class="product-price">قیمت</th>
+                                                        <th class="product-stock">وضعیت انبار</th>
+                                                        <th class="product-add-cart">افزودن به سبد</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <!-- tr -->
+                                                    <tr>
+                                                        <td class="product-thumbnail">
+                                                            <div class="pro-thumbnail-img">
+                                                                <img src="{{ rs.image.url }}" alt="">
+                                                            </div>
+                                                            <div class="pro-thumbnail-info text-left">
+                                                                <h6 class="product-title-2">
+                                                                    <a href="/product/{{ rs.id }}/{{ rs.slug }}">{{ rs.title }} </a>
+                                                                </h6>
+                                                                <p>برند: {{ rs.brand_name }}</p>
+                                                                <p>مدل: {{ rs.model_name }}</p>
+                                                                <p> رنگ: {{ rs.color }}</p>
+                                                            </div>
+                                                        </td>
+                                                        <td class="product-price">{{ rs.price }} تومان</td>
+                                                        <td class="product-stock text-uppercase">{{ rs.amount }}</td>
+                                                        <td class="product-add-cart">
+                                                            <a href="#" title="Add To Cart">
+                                                                <i class="zmdi zmdi-shopping-cart-plus"></i>
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
                     {% endfor %}
                 </div>
             </div>

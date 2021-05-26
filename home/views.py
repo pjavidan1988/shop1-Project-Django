@@ -79,6 +79,7 @@ def search_products(request):
             products = Product.objects.filter(title__icontains=query)
             context = {'products': products,
                        'category': category,
+                       'query': query
                        }
             return render(request, 'search_products.html', context)
     return HttpResponseRedirect('/')
