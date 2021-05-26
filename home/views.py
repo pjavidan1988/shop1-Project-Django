@@ -8,7 +8,7 @@ from django.shortcuts import render
 import product
 from home.forms import SearchForm
 from home.models import Setting, ContactForm, ContactMessage
-from product.models import Category, Product, Picture
+from product.models import Category, Product, Picture, Comment
 
 
 def index(request):
@@ -106,9 +106,11 @@ def product_detail(request, id, slug):
     category = Category.objects.all()
     product = Product.objects.get(pk=id)
     images = Picture.objects.filter(product_id=id)
+    comments = Comment.objects.filter(product_id=id, status='True')
     context = {
         'product': product,
         'category': category,
-        'images': images
+        'images': images,
+        'comments': comments
     }
     return render(request, 'product_detail.html', context)

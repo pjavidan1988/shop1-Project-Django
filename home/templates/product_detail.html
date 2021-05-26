@@ -34,7 +34,6 @@
 
     <!-- Start page content -->
     <section id="page-content" class="page-wrapper">
-
         <!-- SHOP SECTION START -->
         <div class="shop-section mb-80">
             <div class="container">
@@ -46,7 +45,7 @@
                                 <!-- imgs-zoom-area start -->
                                 <div class="col-md-5 col-sm-5 col-xs-12">
                                     <div class="imgs-zoom-area">
-                                        <img id="zoom_03" src="{{ product.image.url }}"
+                                        <img id="zoom_03" src="{{ product.image.url }} "
                                              data-zoom-image="{{ product.image.url }}" alt="">
                                         <div class="row">
                                             <div class="col-xs-12">
@@ -160,57 +159,69 @@
                                                 <!-- reviews-tab-desc -->
                                                 <div class="reviews-tab-desc">
                                                     <!-- comments on t this post -->
-                                                    <div class="post-comments mb-60">
-                                                        <!-- single-comments -->
-                                                        <div class="media mt-30">
-                                                            <div class="media-left pr-30">
-                                                                <a href="#"><img class="media-object"
-                                                                                 src="img/author/2.jpg" alt="#"></a>
-                                                            </div>
-                                                            <div class="media-body">
-                                                                <div class="clearfix">
-                                                                    <div class="name-commenter f-left">
-                                                                        <h6 class="media-heading"><a href="#">تونی
-                                                                            استارک</a></h6>
-                                                                        <p class="mb-10">27 شهریور 1398 در 14:30</p>
-                                                                    </div>
+                                                    {% for rs in comments %}
+                                                        <div class="post-comments mb-60">
+                                                            <!-- single-comments -->
+                                                            <div class="media mt-30">
+                                                                <div class="media-left pr-30">
+                                                                    <a href="#"><img class="media-object" src={% static 'img/author/1.jpg' %} alt="#" height="60"></a>
                                                                 </div>
-                                                                <p class="mb-0">لورم ایپسوم متن ساختگی با تولید سادگی
-                                                                    نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک
-                                                                    است. چاپگرها و متون بلکه روزنامه و مجله در ستون و
-                                                                    سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی
-                                                                    مورد نیاز و کاربردهای</p>
+                                                                <div class="media-body">
+                                                                    <div class="clearfix">
+                                                                        <div class="name-commenter f-left">
+                                                                            <h6 class="media-heading"><a href="#">{{ rs.user.first_name }}</a></h6>
+                                                                            <h6 class="media-heading">{{ rs.subject }}</h6>
+                                                                            <p class="mb-10">{{ rs.create_at }}</p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <p class="mb-0">{{ rs.comment }}</p>
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div>
+                                                    {% endfor %}
+                                                    {% if messages %}
+                                                        {% for message in messages %}
+                                                            <div class="alert alert-success">
+                                                                <strong>{{ message }}</strong>
+                                                            </div>
+                                                        {% endfor %}
+                                                    {% endif %}
                                                     <!-- leave your comment -->
-                                                    <form class="leave-comment" action="/product/addcomment" method="post">
+                                                    <form class="leave-comment"
+                                                          action="/product/addcomment/{{ product.id }}"
+                                                          method="post">
                                                         {% csrf_token %}
                                                         <h4 class="blog-section-title border-left mb-30">دیدگاه خود را
                                                             بیان کنید</h4>
                                                         <div class="row">
                                                             <div class="col-md-6">
-                                                                <input type="text" name="name" placeholder="نام شما ...">
+                                                                <input type="text" name="name"
+                                                                       placeholder="نام شما ...">
                                                             </div>
                                                             <div class="col-md-6">
-                                                                <input type="email" name="email" placeholder="آدرس ایمیل ...">
+                                                                <input type="email" name="email"
+                                                                       placeholder="آدرس ایمیل ...">
                                                             </div>
                                                             <div class="col-md-12">
-                                                                <input type="text" name="subject" placeholder="موضوع ...">
+                                                                <input type="text" name="subject"
+                                                                       placeholder="موضوع ...">
                                                             </div>
                                                             <div class="col-md-12">
-                                                                <textarea class="custom-textarea" placeholder="دیدگاه شما ..."></textarea>
+                                                                <textarea name="comment" class="custom-textarea"
+                                                                          placeholder="دیدگاه شما ..."></textarea>
                                                             </div>
                                                         </div>
-                                                    </form>
-                                                    {% if user.id is not None %}
-                                                    <button class="submit-btn-1 black-bg mt-30 btn-hover-2 f-left"
-                                                            type="submit">ثبت دیدگاه
-                                                    </button>
+                                                        {% if user.id is not None %}
+                                                            <button class="submit-btn-1 black-bg mt-30 btn-hover-2 f-left"
+                                                                    type="submit">ثبت دیدگاه
+                                                            </button>
                                                         {% else %}
-                                                            <div class="alert alert-danger"><strong>شما باید وارد سایت شوید!</strong> <a href="#" class="alert-link">ورود به سایت</a></div>
-                                                    {% endif %}
-                                                    <!--  -->
+                                                            <div class="alert alert-danger"><strong>شما باید وارد سایت
+                                                                شوید!</strong> <a href="#" class="alert-link">ورود به
+                                                                سایت</a></div>
+                                                        {% endif %}
+                                                        <!--  -->
+                                                    </form>
                                                 </div>
                                             </div>
                                         </div>
@@ -400,7 +411,7 @@
                 </div>
             </div>
             <!-- SHOP SECTION END -->
-
+        </div>
     </section>
     <!-- End page content -->
 

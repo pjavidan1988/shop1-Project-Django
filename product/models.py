@@ -91,8 +91,8 @@ class Picture(models.Model):
 class Comment(models.Model):
     STATUS = (
         ('New', 'New'),
-        ('True', 'True'),
-        ('False', 'False'),
+        ('True', 'publish'),
+        ('False', 'unpublished'),
     )
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -100,7 +100,6 @@ class Comment(models.Model):
     email = models.CharField(max_length=100, blank=True)
     subject = models.CharField(max_length=50, blank=True)
     comment = models.CharField(max_length=250, blank=True)
-    rate = models.IntegerField(default=1)
     ip = models.CharField(max_length=20, blank=True)
     status = models.CharField(max_length=10, choices=STATUS, default='New')
     create_at = models.DateTimeField(auto_now_add=True)
@@ -113,4 +112,4 @@ class Comment(models.Model):
 class CommentForm(ModelForm):
     class Meta:
         model = Comment
-        fields = ['name','email','subject', 'comment', 'rate']
+        fields = ['name','email','subject', 'comment']

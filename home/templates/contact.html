@@ -72,8 +72,8 @@
                                     <h4 class="blog-section-title border-left mb-30">در ارتباط باشید</h4>
                                     {% if messages %}
                                         {% for message in messages %}
-                                            <div class="alert alert-{{ message.tags }}" role="alert">
-                                                {{ message }}
+                                            <div class="alert alert-success">
+                                                <strong>{{ message }}</strong>
                                             </div>
                                         {% endfor %}
                                     {% endif %}
