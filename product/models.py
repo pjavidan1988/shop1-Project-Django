@@ -99,7 +99,7 @@ class Comment(models.Model):
     name = models.CharField(max_length=50, blank=True)
     email = models.CharField(max_length=100, blank=True)
     subject = models.CharField(max_length=50, blank=True)
-    comment = models.CharField(max_length=250, blank=True)
+    comment = models.CharField(max_length=2000, blank=True)
     ip = models.CharField(max_length=20, blank=True)
     status = models.CharField(max_length=10, choices=STATUS, default='New')
     create_at = models.DateTimeField(auto_now_add=True)
