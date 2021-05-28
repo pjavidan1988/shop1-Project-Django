@@ -59,7 +59,7 @@ class Product(models.Model):
     image = models.ImageField(upload_to='images/Product/%Y/%m/%d/', null=False)
     slider_image = models.ImageField(upload_to='images/Slider/%Y/%m/%d/', null=False)
     price = models.DecimalField(max_digits=12, decimal_places=0, default=0)
-    amount = models.DecimalField(max_digits=12, decimal_places=0, default=0)
+    amount = models.IntegerField(default=0)
     minAmount = models.IntegerField(default=3)
     detail = RichTextUploadingField()
     slug = models.SlugField(null=False, unique=True, allow_unicode=True)

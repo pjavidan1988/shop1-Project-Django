@@ -18,13 +18,14 @@ def index(request):
     products_latest = Product.objects.all().order_by('-id')[:8]  # last 4 products
     products_picked = Product.objects.all().order_by('?')[:8]  # random selected 4 products
 
+
     page = "home"
     context = {'setting': setting,
                'page': page,
                'products_slider': products_slider,
                'products_latest': products_latest,
                'products_picked': products_picked,
-               'category': category
+               'category': category,
                }
     return render(request, 'index.html', context)
 
@@ -65,7 +66,7 @@ def category_products(request, id, slug):
     context = {
         'products': products,
         'category': category,
-        'setting': setting
+        'setting': setting,
     }
     return render(request, 'category_products.html', context)
 
@@ -114,3 +115,5 @@ def product_detail(request, id, slug):
         'comments': comments
     }
     return render(request, 'product_detail.html', context)
+
+
