@@ -1321,24 +1321,24 @@
     10.5 Product Cart plus minus
 ------------------------------------- */
 
-.cart-plus-minus {
-	border: 1px solid #cccccc;
-	height: 25px;
-	text-align: center;
-	width: 90px;
-	color: #666666;
-}
-.qtybutton {
-	background: #cccccc none repeat scroll 100% 0;
-	height: 100%;
-	width: 30%;
-}
-.dec.qtybutton {
-	float: right;
-}
-.inc.qtybutton {
-	float: left;
-}
+/*.cart-plus-minus {*/
+/*	border: 1px solid #cccccc;*/
+/*	height: 25px;*/
+/*	text-align: center;*/
+/*	width: 90px;*/
+/*	color: #666666;*/
+/*}*/
+/*.qtybutton {*/
+/*	background: #cccccc none repeat scroll 100% 0;*/
+/*	height: 100%;*/
+/*	width: 30%;*/
+/*}*/
+/*.dec.qtybutton {*/
+/*	float: right;*/
+/*}*/
+/*.inc.qtybutton {*/
+/*	float: left;*/
+/*}*/
 input.cart-plus-minus-box {
 	background: transparent none repeat scroll 100% 0;
 	-webkit-box-shadow: none;
@@ -1346,6 +1346,7 @@ input.cart-plus-minus-box {
 	box-shadow: none;
 	height: 100%;
 	margin-bottom: 0;
+	/*margin-right: 60px;*/
 	padding: 0;
 	text-align: center;
 	width: 40%;

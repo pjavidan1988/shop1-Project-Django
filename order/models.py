@@ -26,3 +26,9 @@ class ShopCart(models.Model):
     @property
     def varamount(self):
         return (self.quantity * self.variant.price)
+
+
+class ShopCartForm(ModelForm):
+    class Meta:
+        model = ShopCart
+        fields = ['quantity']
