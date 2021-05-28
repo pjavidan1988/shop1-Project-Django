@@ -22,12 +22,13 @@ from home import views
 from order import views as OrderViews
 
 urlpatterns = [
+    path('admin/', admin.site.urls),
     path('', include('home.urls')),
     path('home/', include('home.urls')),
     path('product/', include('product.urls')),
     path('order/', include('order.urls')),
+    path('user/', include('user.urls'), name='user'),
     path('ckeditor/', include('ckeditor_uploader.urls')),
-    path('admin/', admin.site.urls),
 
     path('aboutus/', views.aboutus, name='aboutus'),
     path('contactus/', views.contactus, name='contactus'),
