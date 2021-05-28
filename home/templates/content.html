@@ -1,4 +1,5 @@
 {% load static %}
+{% load humanize %}
 <!-- START PAGE CONTENT -->
 <section id="page-content" class="page-wrapper">
 
@@ -44,7 +45,7 @@
                                                 <a href="/product/{{ rs.id }}/{{ rs.slug }}">{{ rs.title }}</a>
                                             </h6>
                                             <h6 class="brand-name">{{ rs.category }}</h6>
-                                            <h3 class="pro-price">{{ rs.price }} تومان</h3>
+                                            <h3 class="pro-price">{{ rs.price | intcomma }} تومان</h3>
                                         </div>
                                         <ul class="action-button">
                                             <li>
@@ -86,7 +87,7 @@
                                                 <a href="/product/{{ rs.id }}/{{ rs.slug }}">{{ rs.title }}</a>
                                             </h6>
                                             <h6 class="brand-name">{{ rs.category }}</h6>
-                                            <h3 class="pro-price"> {{ rs.price }} تومان</h3>
+                                            <h3 class="pro-price"> {{ rs.price | intcomma }} تومان</h3>
                                         </div>
                                         <ul class="action-button">
                                             <li>
@@ -741,7 +742,7 @@
                                         <a href="/product/{{ rs.id }}/{{ rs.slug }}">{{ rs.title }}</a>
                                     </h6>
                                     <h6 class="brand-name">{{ rs.category }}</h6>
-                                    <h3 class="pro-price">{{ rs.price }} تومان</h3>
+                                    <h3 class="pro-price">{{ rs.price | intcomma }} تومان</h3>
                                 </div>
                                 <ul class="action-button">
                                     <li>

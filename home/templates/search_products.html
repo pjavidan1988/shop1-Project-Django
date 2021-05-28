@@ -1,4 +1,5 @@
 {% extends 'homebase.html' %}
+{% load humanize %}
 
 {% block title %}  {{ query }}  | نتیجه جستجو {% endblock %}
 {% block description %} {{ setting.description }} {% endblock %}
@@ -70,7 +71,7 @@
                                                                 <p> رنگ: {{ rs.color }}</p>
                                                             </div>
                                                         </td>
-                                                        <td class="product-price">{{ rs.price }} تومان</td>
+                                                        <td class="product-price">{{ rs.price | intcomma }} تومان</td>
                                                         <td class="product-stock text-uppercase">{{ rs.amount }}</td>
                                                         <td class="product-add-cart">
                                                             <a href="#" title="Add To Cart">

@@ -1,4 +1,5 @@
 {% extends 'homebase.html' %}
+{% load humanize %}
 {% load static %}
 
 {% block title %} {{ product.title }} | جزئیات محصول {% endblock %}
@@ -123,7 +124,7 @@
                                         <!-- hr -->
                                         <hr>
                                         <!-- single-product-price -->
-                                        <h3 class="pro-price"> قیمت: {{ product.price }} تومان</h3>
+                                        <h3 class="pro-price"> قیمت: {{ product.price|intcomma }} تومان</h3>
                                         <!--  hr -->
                                         <hr>
                                         <div>
