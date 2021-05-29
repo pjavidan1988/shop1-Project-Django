@@ -1,0 +1,71 @@
+{% extends 'homebase.html' %}
+{% load humanize %}
+{% load i18n %}
+{% block title %}  {{ setting.title }}  | ورود {% endblock %}
+{% block description %} {{ setting.description }} {% endblock %}
+{% block keywords %} {{ setting.keywords }} {% endblock %}
+
+{% block sidebar %} {% include 'sidebar.html' %} {% endblock %}
+
+{% block body %}
+
+    <!-- BREADCRUMBS SETCTION START -->
+    <div class="breadcrumbs-section plr-200 mb-80">
+        <div class="breadcrumbs overlay-bg">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="breadcrumbs-inner">
+                            <h1 class="breadcrumbs-title">ورود</h1>
+                            <ul class="breadcrumb">
+                                <li><a href="/">خانه</a></li>
+                                <li>ورود</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- BREADCRUMBS SETCTION END -->
+
+    <!-- Start page content -->
+    <div id="page-content" class="page-wrapper">
+
+        <!-- LOGIN SECTION START -->
+        <div class="login-section mb-80">
+            <div class="container">
+                <div class="row">
+                        {% if messages %}
+                            {% for message in messages %}
+                                <div class="alert alert-danger" style="text-align: center;">
+                                    <strong>{{ message }}</strong>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                    <div class="col-md-offset-4">
+                        <div class="registered-customers">
+                            <h6 class="widget-title border-left mb-40">ورود</h6>
+                            <form action="" method="post" style="display: inline-flex">
+                                {% csrf_token %}
+                                <div class="login-account p-30 box-shadow">
+                                    <p>اگر حساب کاربری دارید، لطفا وارد شوید.</p>
+                                    <input type="text" name="username" placeholder="آدرس ایمیل" dir="ltr">
+                                    <input type="password" name="password" placeholder="رمز عبور" dir="ltr">
+                                    <p><small><a href="#">رمز عبور خود را فراموش کرده اید؟</a></small></p>
+                                    <button class="submit-btn-1 btn-hover-1" type="submit" value="Login">ورود</button>
+                                    <button class="submit-btn-1 btn-hover-1" type="submit">ثبت نام</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- LOGIN SECTION END -->
+
+    </div>
+    <!-- End page content -->
+
+
+{% endblock %}

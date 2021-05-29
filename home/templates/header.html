@@ -11,7 +11,8 @@
                         {% if messages %}
                             {% for message in messages %}
                                 <div>
-                                    <p class="mb-0"><span class="ltr-text" style="color: #85af85">{{ message }}</span></p>
+                                    <p class="mb-0"><span class="ltr-text" style="color: #85af85">{{ message }}</span>
+                                    </p>
                                 </div>
                             {% endfor %}
                         {% endif %}
@@ -20,22 +21,29 @@
                 <div class="col-sm-6 col-xs-12">
                     <div class="top-link clearfix">
                         <ul class="link f-right">
-                            <li>
-                                <a href="my-account.html">
-                                    <i class="zmdi zmdi-account"></i>
-                                    حساب کاربری
-                                </a>
-                            </li>
+                            {% if user.id is not None %}
+                                <li>
+                                    <a href="my-account.html">
+                                        <i class="zmdi zmdi-account"></i>
+                                        {{ user.first_name }}
+                                    </a>
+                                </li>
+                            {% else %}
+                                <li>
+                                    <a href="/login"><i class="zmdi zmdi-sign-in"></i>
+                                        ورود
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/signup"><i class="zmdi zmdi-account-o"></i>
+                                        ثبت نام
+                                    </a>
+                                </li>
+                            {% endif %}
                             <li>
                                 <a href="wishlist.html">
                                     <i class="zmdi zmdi-favorite"></i>
                                     علاقه‌مندی ها (0)
-                                </a>
-                            </li>
-                            <li>
-                                <a href="login.html">
-                                    <i class="zmdi zmdi-lock"></i>
-                                    ورود
                                 </a>
                             </li>
                             <li>

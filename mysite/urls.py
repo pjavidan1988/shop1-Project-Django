@@ -20,6 +20,7 @@ from django.conf import settings
 
 from home import views
 from order import views as OrderViews
+from user import views as UserViews
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -37,6 +38,7 @@ urlpatterns = [
     path('category/<int:id>/<slug:slug>', views.category_products, name='category_products'),
     path('product/<int:id>/<slug:slug>/', views.product_detail, name='product_detail'),
     path('shopcart/', OrderViews.shopcart, name='shopcart'),
+    path('login/', UserViews.login_form, name='login'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
