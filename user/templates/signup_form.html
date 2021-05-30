@@ -1,0 +1,84 @@
+{% extends 'homebase.html' %}
+{% load humanize %}
+{% load i18n %}
+{% block title %}  {{ setting.title }}  | ثبت نام {% endblock %}
+{% block description %} {{ setting.description }} {% endblock %}
+{% block keywords %} {{ setting.keywords }} {% endblock %}
+
+{% block sidebar %} {% include 'sidebar.html' %} {% endblock %}
+
+{% block body %}
+
+    <!-- BREADCRUMBS SETCTION START -->
+    <div class="breadcrumbs-section plr-200 mb-80">
+        <div class="breadcrumbs overlay-bg">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="breadcrumbs-inner">
+                            <h1 class="breadcrumbs-title">ثبت نام</h1>
+                            <ul class="breadcrumb">
+                                <li><a href="/">خانه</a></li>
+                                <li>ثبت نام</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- BREADCRUMBS SETCTION END -->
+
+    <!-- Start page content -->
+    <div id="page-content" class="page-wrapper">
+
+        <!-- LOGIN SECTION START -->
+        <!-- Start page content -->
+        <div id="page-content" class="page-wrapper">
+
+            <!-- LOGIN SECTION START -->
+            <div class="login-section mb-80">
+                <div class="container">
+                    <div class="row">
+                        {% if messages %}
+                            {% for message in messages %}
+                                <div class="alert alert-danger" style="text-align: center;">
+                                    <strong>{{ message }}</strong>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                        <!-- new-customers -->
+                        <div class="col-md-12">
+                            <div class="new-customers">
+                                <form method="post">
+                                    {% csrf_token %}
+                                    {% for field in form %}
+                                        <p>
+                                            {{ field.label_tag }}<br>
+                                            {{ field }}
+                                            {% if field.help_text %}
+                                                <small style="color: grey">{{ field.help_text }}</small>
+                                            {% endif %}
+                                            {% for error in field.errors %}
+                                                <p style="color: red">{{ error }}</p>
+                                            {% endfor %}
+                                        </p>
+                                    {% endfor %}
+                                    <button class="submit-btn-1 btn-hover-1" type="submit">ثبت نام</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- LOGIN SECTION END -->
+
+        </div>
+        <!-- End page content -->
+        <!-- LOGIN SECTION END -->
+
+    </div>
+    <!-- End page content -->
+
+
+{% endblock %}
