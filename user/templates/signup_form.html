@@ -40,31 +40,34 @@
             <div class="login-section mb-80">
                 <div class="container">
                     <div class="row">
-                        {% if messages %}
-                            {% for message in messages %}
-                                <div class="alert alert-danger" style="text-align: center;">
-                                    <strong>{{ message }}</strong>
-                                </div>
-                            {% endfor %}
-                        {% endif %}
                         <!-- new-customers -->
                         <div class="col-md-12">
                             <div class="new-customers">
-                                <form method="post">
-                                    {% csrf_token %}
-                                    {% for field in form %}
-                                        <p>
-                                            {{ field.label_tag }}<br>
-                                            {{ field }}
-                                            {% if field.help_text %}
-                                                <small style="color: grey">{{ field.help_text }}</small>
-                                            {% endif %}
-                                            {% for error in field.errors %}
-                                                <p style="color: red">{{ error }}</p>
-                                            {% endfor %}
-                                        </p>
+                                {% if messages %}
+                                    {% for message in messages %}
+                                        <div class="alert alert-danger" style="text-align: center;">
+                                            {{ message }}
+                                        </div>
                                     {% endfor %}
-                                    <button class="submit-btn-1 btn-hover-1" type="submit">ثبت نام</button>
+                                {% endif %}
+                                <h6 class="widget-title border-left mb-40" style="margin-right: 200px">ثبت نام</h6>
+                                <form method="post" style="margin-left: 200px; margin-right: 200px">
+                                    <div class="login-account p-30 box-shadow">
+                                        {% csrf_token %}
+                                        {% for field in form %}
+                                            <p>
+                                                {{ field.label_tag }}<br>
+                                                {{ field }}
+                                                {% if field.help_text %}
+                                                    <small style="color: grey; margin-top: 0"></small>
+                                                {% endif %}
+                                                {% for error in field.errors %}
+                                                    <p style="color: red">{{ error }}</p>
+                                                {% endfor %}
+                                            </p>
+                                        {% endfor %}
+                                        <button class="submit-btn-1 btn-hover-1" type="submit">ثبت نام</button>
+                                    </div>
                                 </form>
                             </div>
                         </div>

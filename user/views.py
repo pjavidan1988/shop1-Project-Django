@@ -60,14 +60,23 @@ def signup_form(request):
             password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=password)
             login(request, user)
+            # Create data in profile table for user
+            current_user = request.user
+            data = UserProfile()
+            data.user_id = current_user.id
+            data.image = "images/users/user.jpg"
+            data.save()
+            messages.success(request, 'اکانت شما با موفقیت ایجاد شد')
             return HttpResponseRedirect('/')
         else:
-            messages.warning(request, form.error_messages)
+            messages.warning(request, form.errors)
             return HttpResponseRedirect('/signup')
 
     form = SignUpForm()
     category = Category.objects.all()
-    context = {   'category': category,
-        'form': form,
-    }
+    setting = Setting.objects.get(pk=1)
+    context = {'category': category,
+               'setting': setting,
+               'form': form,
+               }
     return render(request, 'signup_form.html', context)

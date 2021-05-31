@@ -7,10 +7,10 @@ from user.models import UserProfile
 
 
 class SignUpForm(UserCreationForm):
-    username = forms.CharField(max_length=30,error_messages={'required': 'این نام کاربری قبلا انتخاب شده!'} ,label='نام کاربری :')
-    email = forms.EmailField(max_length=200,error_messages={'required': 'لطفا یک ایمیل معتبر وارد کنید'}, label= 'ایمیل :')
-    first_name = forms.CharField(max_length=100, label= 'نام :')
-    last_name = forms.CharField(max_length=100, label= 'نام خانوادگی :')
+    username = forms.CharField(max_length=30,label= 'نام کاربری :')
+    email = forms.EmailField(max_length=200,label= 'ایمیل :')
+    first_name = forms.CharField(max_length=100, help_text='First Name',label= 'نام :')
+    last_name = forms.CharField(max_length=100, help_text='Last Name',label= 'نام خانوادگی :')
 
     class Meta:
         model = User
