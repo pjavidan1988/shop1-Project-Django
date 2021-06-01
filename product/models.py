@@ -62,6 +62,7 @@ class Product(models.Model):
     amount = models.IntegerField(default=0)
     minAmount = models.IntegerField(default=3)
     detail = RichTextUploadingField()
+    transportation = models.DecimalField(max_digits=12, decimal_places=0, default=0)
     slug = models.SlugField(null=False, unique=True, allow_unicode=True)
     status = models.CharField(max_length=10, choices=STATUS)
     create_at = models.DateTimeField(auto_now_add=True)

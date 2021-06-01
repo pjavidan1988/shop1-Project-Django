@@ -7,8 +7,9 @@ from django.shortcuts import render
 from django.utils.crypto import get_random_string
 
 from home.models import Setting
-from order.models import ShopCart, ShopCartForm
+from order.models import ShopCart, ShopCartForm, OrderForm, Order, OrderProduct
 from product.models import Category, Product
+from user.models import UserProfile
 
 
 def index(request):
@@ -65,6 +66,13 @@ def shopcart(request):
     total = 0
     for rs in shopcart:
         total += rs.product.price * rs.quantity
+
+    transport = 0
+    for rs in shopcart:
+        transport += rs.product.transportation * rs.quantity
+
+    final_total = total + transport
+
     amount = 0
     for rs in shopcart:
         amount += rs.quantity
@@ -73,6 +81,8 @@ def shopcart(request):
     context = {'shopcart': shopcart,
                'category': category,
                'total': total,
+               'transport': transport,
+               'final_total': final_total,
                'amount': amount,
                'setting': setting,
                }
@@ -84,3 +94,22 @@ def deletefromcart(request, id):
     ShopCart.objects.filter(id=id).delete()
     messages.success(request, "محصول مورد نظر با موفقیت حذف گردید")
     return HttpResponseRedirect("/shopcart")
+
+
+def orderproduct(request):
+    category = Category.objects.all()
+    current_user = request.user  # Access User Session information
+    shopcart = ShopCart.objects.filter(user_id=current_user.id)
+    profile = UserProfile.objects.get(user_id=current_user.id)
+    setting = Setting.objects.get(pk=1)
+    total = 0
+    for rs in shopcart:
+        total += rs.product.price * rs.quantity
+    # return HttpResponse(str(total))
+    context = {'shopcart': shopcart,
+               'category': category,
+               'total': total,
+               'setting': setting,
+               'profile': profile,
+               }
+    return render(request, 'Order_Form.html', context)

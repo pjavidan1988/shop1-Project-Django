@@ -101,16 +101,6 @@
                                         {% endif %}
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <div class="coupon-discount box-shadow p-30 mb-50">
-                                                    <h6 class="widget-title border-left mb-20">کد تخفیف</h6>
-                                                    <p>اگر کد تخفیف دارید وارد کنید!</p>
-                                                    <input type="text" name="name" placeholder="کد تخفیف را وارد کنید">
-                                                    <button class="submit-btn-1 black-bg btn-hover-2" type="submit">
-                                                        اعمال کد تخفیف
-                                                    </button>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
                                                 <div class="payment-details box-shadow p-30 mb-50">
                                                     <h6 class="widget-title border-left mb-20">جزئیات پرداخت</h6>
                                                     <table>
@@ -120,42 +110,32 @@
                                                         </tr>
                                                         <tr>
                                                             <td class="td-title-1">حمل و نقل</td>
-                                                            <td class="td-title-2">15,000 تومان</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="td-title-1">مالیات</td>
-                                                            <td class="td-title-2"> 15,000 تومان</td>
+                                                            <td class="td-title-2">
+                                                                {% if total >= 200000 %}
+                                                                    رایگان
+                                                                {% else %}
+                                                                    {{ transport | intcomma }}
+                                                                    تومان
+                                                                {% endif %}
+                                                            </td>
                                                         </tr>
                                                         <tr>
                                                             <td class="order-total">مجموع سفارش</td>
-                                                            <td class="order-total-price">{{ total | intcomma }} تومان
+                                                            <td class="order-total-price">
+                                                                {% if total >= 200000 %}
+                                                                    {{ total | intcomma }}
+                                                                    تومان
+                                                                {% else %}
+                                                                    {{ final_total | intcomma }}
+                                                                    تومان
+                                                                {% endif %}
                                                             </td>
                                                         </tr>
                                                     </table>
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="culculate-shipping box-shadow p-30">
-                                                    <h6 class="widget-title border-left mb-20">محاسبه هزینه ارسال</h6>
-                                                    <p>اگر کد تخفیف دارید وارد کنید!</p>
-                                                    <div class="row">
-                                                        <div class="col-sm-4 col-xs-12">
-                                                            <input type="text" placeholder="کشور">
-                                                        </div>
-                                                        <div class="col-sm-4 col-xs-12">
-                                                            <input type="text" placeholder="منطقه / استان">
-                                                        </div>
-                                                        <div class="col-sm-4 col-xs-12">
-                                                            <input type="text" placeholder="کد پستی">
-                                                        </div>
-                                                        <div class="col-md-12">
-                                                            <button class="submit-btn-1 black-bg btn-hover-2">محاسبه
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                <a class="button button-black mt-15" href="/order/orderproduct">
+                                                    <span>ثبت سفارش</span>
+                                                </a>
                                             </div>
                                         </div>
                                     </form>

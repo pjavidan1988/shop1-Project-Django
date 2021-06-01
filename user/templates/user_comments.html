@@ -1,7 +1,7 @@
 {% extends 'homebase.html' %}
 {% load humanize %}
 {% load i18n %}
-{% block title %}  {{ setting.title }}  | ورود {% endblock %}
+{% block title %}  {{ setting.title }}  | نظرات کاربر {% endblock %}
 {% block description %} {{ setting.description }} {% endblock %}
 {% block keywords %} {{ setting.keywords }} {% endblock %}
 
@@ -16,10 +16,10 @@
                 <div class="row">
                     <div class="col-xs-12">
                         <div class="breadcrumbs-inner">
-                            <h1 class="breadcrumbs-title">ورود</h1>
+                            <h1 class="breadcrumbs-title">نظرات کاربر</h1>
                             <ul class="breadcrumb">
                                 <li><a href="/">خانه</a></li>
-                                <li>ورود</li>
+                                <li>نظرات کاربر</li>
                             </ul>
                         </div>
                     </div>
@@ -52,7 +52,7 @@
                                     <p>اگر حساب کاربری دارید، لطفا وارد شوید.</p>
                                     <input type="text" name="username" placeholder="آدرس ایمیل" dir="ltr">
                                     <input type="password" name="password" placeholder="رمز عبور" dir="ltr">
-                                    <p><small></small>در صورتی که ثبت نام نکرده اید<a href="/signup/">  کلیک کنید</a></p>
+                                    <p><small><a href="#">رمز عبور خود را فراموش کرده اید؟</a></small></p>
                                     <button class="submit-btn-1 btn-hover-1" type="submit" value="Login">ورود</button>
                                 </div>
                             </form>
