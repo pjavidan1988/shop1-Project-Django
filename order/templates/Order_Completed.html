@@ -1,0 +1,53 @@
+{% extends 'homebase.html' %}
+{% load humanize %}
+
+{% block title %}{{ setting.title }}  | پرداخت   {% endblock %}
+{% block description %} {{ setting.description }} {% endblock %}
+{% block keywords %} {{ setting.keywords }} {% endblock %}
+
+{% block sidebar %} {% include 'sidebar.html' %} {% endblock %}
+
+{% block body %}
+
+    <!-- BREADCRUMBS SETCTION START -->
+    <div class="breadcrumbs-section plr-200 mb-80">
+        <div class="breadcrumbs overlay-bg">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="breadcrumbs-inner">
+                            <h1 class="breadcrumbs-title">پرداخت</h1>
+                            <ul class="breadcrumb">
+                                <li><a href="/">خانه</a></li>
+                                <li><a href="/shopcart/">سبد خرید</a></li>
+                                <li>پرداخت</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- BREADCRUMBS SETCTION END -->
+
+    <!-- Start page content -->
+    <section id="page-content" class="page-wrapper">
+        <!-- Action start -->
+        <div class="theme-section gray-bg ptb-50 mb-80 " >
+            <div class="container">
+                <div class="row">
+                    <div class="action-box">
+                        <div class="col-lg-8 col-md-8 text-left" style="text-align: center; margin-right: 200px">
+                            <h3 class="text-black">با تشکر از خرید شما</h3>
+                            <p class="text-black">خرید شما با موفقیت انجام شد</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Action end -->
+    </section>
+    <!-- End page content -->
+
+
+{% endblock %}
