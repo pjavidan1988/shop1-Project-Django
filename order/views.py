@@ -31,11 +31,11 @@ def addtoshopcart(request, id):
         form = ShopCartForm(request.POST)
         if form.is_valid():
             if control == 1:  # Update  shopcart
-                data = ShopCart.objects.get(product_id=id, user_id=current_user.id)
+                data = ShopCart.objects.get(product_id=id)
                 data.quantity += form.cleaned_data['quantity']
                 data.save()  #
             else:  # Inser to Shopcart
-                data = ShopCart()
+                data = ShopCart()  # model ile bağlantı kur
                 data.user_id = current_user.id
                 data.product_id = id
                 data.quantity = form.cleaned_data['quantity']
@@ -102,7 +102,8 @@ def orderproduct(request):
     shopcart = ShopCart.objects.filter(user_id=current_user.id)
     total = 0
     for rs in shopcart:
-        total += rs.product.price * rs.quantity
+            total += rs.product.price * rs.quantity
+
 
     if request.method == 'POST':  # if there is a post
         form = OrderForm(request.POST)
@@ -141,7 +142,7 @@ def orderproduct(request):
 
             ShopCart.objects.filter(user_id=current_user.id).delete()  # Clear & Delete shopcart
             request.session['cart_items'] = 0
-            messages.success(request, "با تشکر از خرید شما")
+            messages.success(request, "خرید شما با موفقیت انجام شد")
             return render(request, 'Order_Completed.html', {'ordercode': ordercode, 'category': category})
         else:
             messages.warning(request, form.errors)

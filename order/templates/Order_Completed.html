@@ -33,17 +33,25 @@
     <!-- Start page content -->
     <section id="page-content" class="page-wrapper">
         <!-- Action start -->
-        <div class="theme-section gray-bg ptb-50 mb-80 " >
+        <div>
             <div class="container">
                 <div class="row">
                     <div class="action-box">
-                        <div class="col-lg-8 col-md-8 text-left" style="text-align: center; margin-right: 200px">
-                            <h3 class="text-black">با تشکر از خرید شما</h3>
-                            <p class="text-black">خرید شما با موفقیت انجام شد</p>
+                        <div class="col-lg-8 col-md-8 text-left"
+                             style="text-align: center; margin-right: 200px; margin-bottom: 60px">
+                            <h3 class="title">سفارش تکمیل شد</h3>
                         </div>
+                        <hr>
+                        <h2>عزیز {{ user.first_name }} {{ user.last_name }}</h2>
+                        <hr>
+                        <h3>سفارش شما تکمیل شد</h3>
+                        <h3>کد پیگیری شما : {{ ordercode }}</h3>
+                        <h3>با تشکر از خرید شما</h3>
+                        <hr>
                     </div>
                 </div>
             </div>
+        </div>
         </div>
         <!-- Action end -->
     </section>

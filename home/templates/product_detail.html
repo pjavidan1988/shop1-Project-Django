@@ -106,9 +106,8 @@
                                             <div class="sin-plus-minus f-left clearfix">
                                                 <p class="color-title f-left">تعداد</p>
                                                 <div class="text-uppercase" style="display: contents">
-                                                    <input type="number" value="1" min="1"
-                                                           max="{{ product.amount }}" name="quantity"
-                                                           class="input" style="text-align: center; size: 3px">
+                                                    <input class="input" name="quantity" type="number" value="1" min="1"
+                                                           max="{{ product.amount }}">
                                                 </div>
                                             </div>
                                             <div class="sin-pro-action f-right">
@@ -127,7 +126,8 @@
                                                                 class="zmdi zmdi-refresh"></i></a>
                                                     </li>
                                                     <li>
-                                                        <a href="/order/addtoshopcart/{{ product.id }}" title="Compare" tabindex="0"><i
+                                                        <a href="/order/addtoshopcart/{{ product.id }}"
+                                                           title="ShopCartAdd" tabindex="0"><i
                                                                 class="zmdi zmdi-shopping-cart-add"></i></a>
                                                     </li>
                                                 </ul>
