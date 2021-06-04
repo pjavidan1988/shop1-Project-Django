@@ -1,0 +1,68 @@
+{% extends 'homebase.html' %}
+{% load static %}
+{% load humanize %}
+{% load i18n %}
+{% block title %}  {{ user.first_name }} | پنل کاربری {% endblock %}
+{% block description %} {{ setting.description }} {% endblock %}
+{% block keywords %} {{ setting.keywords }} {% endblock %}
+
+{% block sidebar %} {% include 'sidebar.html' %} {% endblock %}
+
+{% block body %}
+
+    <!-- BREADCRUMBS SETCTION START -->
+    <div class="breadcrumbs-section plr-200 mb-80">
+        <div class="breadcrumbs overlay-bg">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="breadcrumbs-inner">
+                            <h1 class="breadcrumbs-title">به روز رسانی مشخصات</h1>
+                            <ul class="breadcrumb">
+                                <li><a href="/">خانه</a></li>
+                                <li><a href="/user/">پنل کاربری</a></li>
+                                <li>به روز رسانی مشخصات</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- BREADCRUMBS SETCTION END -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 col-xs-12">
+                {% include "user_panel.html" %}
+            </div>
+            <div class="col-md-9 col-xs-12">
+                <h6 class="widget-title border-left mb-20">مشخصات کاربری</h6>
+                <div class="media author-post box-shadow mb-60">
+                    <div class="media-body">
+                        <h3>
+                            {{ user.first_name }} {{ user.last_name }}
+                        </h3>
+
+                        <div class="new-customers">
+                            <div class="p-30">
+                                <div class="row">
+                                    <form method="POST" enctype="multipart/form-data">
+                                        {% csrf_token %}
+                                        <fieldset class="form-group">
+                                            {{ user_form.as_p }}
+                                            {{ profile_form.as_p }}
+                                        </fieldset>
+                                        <div class="form-group">
+                                            <button class="submit-btn-1 mt-30 btn-hover-1" type="submit">به روز رسانی
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

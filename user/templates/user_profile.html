@@ -20,7 +20,7 @@
                             <h1 class="breadcrumbs-title">پنل کاربری</h1>
                             <ul class="breadcrumb">
                                 <li><a href="/">خانه</a></li>
-                                <li>{{ user.first_name }}</li>
+                                <li>پنل کاربری</li>
                             </ul>
                         </div>
                     </div>
@@ -68,6 +68,10 @@
                                             <h6 style="display: inline-block">{{ profile.address }}</h6>
                                         </div>
                                         <div class="col-sm-12">
+                                            <label>کد پستی : </label>
+                                            <h6 style="display: inline-block">{{ profile.postal_code }}</h6>
+                                        </div>
+                                        <div class="col-sm-12">
                                             <label>تلفن : </label>
                                             <h6 style="display: inline-block">{{ profile.phone }}</h6>
                                         </div>
@@ -77,8 +81,8 @@
 
 
                         </div>
-                        <a class="button extra-small mb-20" href="#"><span>به روز رسانی مشخصات </span> </a>
-                        <a class="button extra-small mb-20" href="#"><span>تغییر کلمه عبور </span> </a>
+                        <a class="button extra-small mb-20" href="/user/update"><span>به روز رسانی مشخصات </span> </a>
+                        <a class="button extra-small mb-20" href="/user/password"><span>تغییر کلمه عبور </span> </a>
                     </div>
                 </div>
             </div>

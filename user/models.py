@@ -7,12 +7,13 @@ from django.utils.safestring import mark_safe
 
 
 class UserProfile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    phone = models.CharField(blank=True, max_length=20)
-    address = models.CharField(blank=True, max_length=150)
-    city = models.CharField(blank=True, max_length=20)
-    country = models.CharField(blank=True, max_length=50)
-    image = models.ImageField(blank=True, upload_to='images/users/')
+    user = models.OneToOneField(User, on_delete=models.CASCADE, verbose_name = 'نام')
+    phone = models.CharField(blank=True, max_length=20, verbose_name = 'تلفن')
+    postal_code = models.CharField(blank=True, max_length=20, verbose_name='کد پستی')
+    address = models.CharField(blank=True, max_length=150, verbose_name = 'آدرس')
+    city = models.CharField(blank=True, max_length=20, verbose_name = 'شهر')
+    country = models.CharField(blank=True, max_length=50, verbose_name = 'کشور')
+    image = models.ImageField(blank=True, upload_to='images/users/', verbose_name = 'تصویر')
 
 
 
