@@ -37,17 +37,13 @@
             <div class="container">
                 <div class="row">
                     <div class="action-box">
-                        <div class="col-lg-8 col-md-8 text-left"
-                             style="text-align: center; margin-right: 200px; margin-bottom: 60px">
-                            <h3 class="title">سفارش تکمیل شد</h3>
-                        </div>
+                        <h1 style="text-align: center; color: green">سفارش تکمیل شد</h1>
                         <hr>
-                        <h2>عزیز {{ user.first_name }} {{ user.last_name }}</h2>
+                        <h2 style="text-align: center;">   {{ user.first_name }}  عزیز </h2>
                         <hr>
-                        <h3>سفارش شما تکمیل شد</h3>
-                        <h3>کد پیگیری شما : {{ ordercode }}</h3>
-                        <h3>با تشکر از خرید شما</h3>
-                        <hr>
+                        <h3 style="text-align: center; color: gray">سفارش شما تکمیل شد</h3>
+                        <h3 style="text-align: center; color: gray">کد پیگیری شما : {{ ordercode }}</h3>
+                        <h3 style="text-align: center; color: gray; margin-bottom: 60px">با تشکر از خرید شما</h3>
                     </div>
                 </div>
             </div>

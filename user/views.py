@@ -16,8 +16,14 @@ from user.forms import SignUpForm
 from user.models import UserProfile
 
 
+@login_required(login_url='/login')  # Check login
 def index(request):
-    return HttpResponse("User App")
+    category = Category.objects.all()
+    current_user = request.user  # Access User Session information
+    profile = UserProfile.objects.get(user_id=current_user.id)
+    context = {   'category': category,
+        'profile': profile}
+    return render(request, 'user_profile.html', context)
 
 
 def login_form(request):

@@ -1,0 +1,87 @@
+{% extends 'homebase.html' %}
+{% load static %}
+{% load humanize %}
+{% load i18n %}
+{% block title %}  {{ user.first_name }} | پنل کاربری {% endblock %}
+{% block description %} {{ setting.description }} {% endblock %}
+{% block keywords %} {{ setting.keywords }} {% endblock %}
+
+{% block sidebar %} {% include 'sidebar.html' %} {% endblock %}
+
+{% block body %}
+
+    <!-- BREADCRUMBS SETCTION START -->
+    <div class="breadcrumbs-section plr-200 mb-80">
+        <div class="breadcrumbs overlay-bg">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="breadcrumbs-inner">
+                            <h1 class="breadcrumbs-title">پنل کاربری</h1>
+                            <ul class="breadcrumb">
+                                <li><a href="/">خانه</a></li>
+                                <li>{{ user.first_name }}</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- BREADCRUMBS SETCTION END -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 col-xs-12">
+                {% include "user_panel.html" %}
+            </div>
+            <div class="col-md-9 col-xs-12">
+                <h6 class="widget-title border-left mb-20">مشخصات کاربری</h6>
+                <div class="media author-post box-shadow mb-60">
+                    <div class="media-left pr-20" style="display: block; padding-bottom: 25px">
+                        <a href="#">
+                            <img class="media-object" src="{{ profile.image.url }}"
+                                 style="border-radius: 15px; height: 150px;" alt="#">
+                        </a>
+                    </div>
+                    <div class="media-body">
+                        <h3>
+                            {{ user.first_name }} {{ user.last_name }}
+                        </h3>
+                        <div class="panel panel-default">
+                            <div class="new-customers">
+                                <div class="p-30">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <label>ایمیل : </label>
+                                            <h6 style="display: inline-block">{{ profile.user.email }}</h6>
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <label>کشور : </label>
+                                            <h6 style="display: inline-block">{{ profile.country }}</h6>
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <label>شهر : </label>
+                                            <h6 style="display: inline-block">{{ profile.city }}</h6>
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <label>آدرس : </label>
+                                            <h6 style="display: inline-block">{{ profile.address }}</h6>
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <label>تلفن : </label>
+                                            <h6 style="display: inline-block">{{ profile.phone }}</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <a class="button extra-small mb-20" href="#"><span>به روز رسانی مشخصات </span> </a>
+                        <a class="button extra-small mb-20" href="#"><span>تغییر کلمه عبور </span> </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
