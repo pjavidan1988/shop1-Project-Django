@@ -17,6 +17,7 @@ class SignUpForm(UserCreationForm):
         fields = ('username', 'email', 'first_name', 'last_name', 'password1', 'password2',)
 
 
+
 class UserUpdateForm(UserChangeForm):
     class Meta:
         model = User
@@ -30,6 +31,7 @@ class UserUpdateForm(UserChangeForm):
             'first_name': TextInput(attrs={'class': 'input', 'placeholder': 'نام'}),
             'last_name': TextInput(attrs={'class': 'input', 'placeholder': 'نام خانوادگی'}),
         }
+        error_messages = {'invalid': 'your custom error message'}
 
 
 class ProfileUpdateForm(forms.ModelForm):
@@ -45,4 +47,5 @@ class ProfileUpdateForm(forms.ModelForm):
             'phone': TextInput(attrs={'class': 'input', 'placeholder': 'تلفن'}),
             'image': FileInput(attrs={'class': 'input', 'placeholder': 'تصویر', }),
         }
+        error_messages = {'invalid': 'your custom error message'}
 

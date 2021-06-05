@@ -1,0 +1,111 @@
+{% extends 'homebase.html' %}
+{% load static %}
+{% load humanize %}
+{% load jformat %}
+{% load i18n %}
+{% block title %}  {{ user.first_name }} | سفارشات من {% endblock %}
+{% block description %} {{ setting.description }} {% endblock %}
+{% block keywords %} {{ setting.keywords }} {% endblock %}
+
+{% block sidebar %} {% include 'sidebar.html' %} {% endblock %}
+
+{% block body %}
+
+    <!-- BREADCRUMBS SETCTION START -->
+    <div class="breadcrumbs-section plr-200 mb-80">
+        <div class="breadcrumbs overlay-bg">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="breadcrumbs-inner">
+                            <h1 class="breadcrumbs-title">سفارشات من</h1>
+                            <ul class="breadcrumb">
+                                <li><a href="/">خانه</a></li>
+                                <li><a href="/user/">پنل کاربری</a></li>
+                                <li>سفارشات من</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- BREADCRUMBS SETCTION END -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-xs-12">
+                <h6 class="widget-title border-left mb-20">سفارشات من</h6>
+
+                <!-- Start page content -->
+                <section id="page-content" class="page-wrapper">
+
+                    <!-- SHOP SECTION START -->
+                    <div class="shop-section mb-80">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12">
+                                    <!-- Tab panes -->
+                                    <div class="tab-content">
+                                        <!-- shopping-cart start -->
+                                        <div class="tab-pane active" id="shopping-cart">
+                                            <div class="shopping-cart-content">
+                                                <form action="#">
+                                                    <div class="table-content table-responsive mb-50">
+                                                        <table class="text-center">
+                                                            <thead>
+                                                            <tr>
+                                                                <th class="product-id">کد</th>
+                                                                <th class="product-firstname">نام</th>
+                                                                <th class="product-lastname">نام خانوادگی</th>
+                                                                <th class="product-total">جمع کل</th>
+                                                                <th class="product-status">وضعیت</th>
+                                                                <th class="product-date">تاریخ</th>
+                                                                <th class="product-detail">جزئیات</th>
+                                                            </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                            <!-- tr -->
+                                                            {% for rs in orders %}
+                                                                <tr>
+                                                                    <td class="product-id">{{ rs.id }}</td>
+                                                                    <td class="product-firstname">{{ rs.first_name }}</td>
+                                                                    <td class="product-lastname">{{ rs.last_name }}</td>
+                                                                    <td class="product-total">{{ rs.total|intcomma:False }}</td>
+                                                                    <td class="product-status">{{ rs.status }}</td>
+                                                                    <td class="product-date">{{ rs.create_at|jformat:"%d / %m / %Y -- ساعت %H:%M" }}</td>
+                                                                    <td class="product-detail"><a
+                                                                            class="button button-black mt-15"
+                                                                            href="/user/orderdetail/{{ rs.id }}"><span>جزئیات</span></a>
+                                                                    </td>
+                                                                </tr>
+                                                            {% endfor %}
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                    {% if messages %}
+                                                        {% for message in messages %}
+                                                            <div class="alert alert-success"
+                                                                 style="text-align: center">
+                                                                <strong>{{ message }}</strong>
+                                                            </div>
+                                                        {% endfor %}
+                                                    {% endif %}
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <!-- shopping-cart end -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- SHOP SECTION END -->
+
+                </section>
+                <!-- End page content -->
+
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -11,6 +11,7 @@ from django.shortcuts import render
 from django.utils import translation
 
 from home.models import Setting
+from order.models import Order
 from product.models import Category
 from user.forms import SignUpForm, UserUpdateForm, ProfileUpdateForm
 from user.models import UserProfile
@@ -96,7 +97,7 @@ def user_update(request):
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
             profile_form.save()
-            messages.success(request, 'Your account has been updated!')
+            messages.success(request, 'اکانت شما با موفقیت به روز رسانی شد')
             return HttpResponseRedirect('/user')
     else:
         category = Category.objects.all()
@@ -109,3 +110,33 @@ def user_update(request):
             'profile_form': profile_form
         }
         return render(request, 'user_update.html', context)
+
+
+@login_required(login_url='/login')  # Check login
+def user_password(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)  # Important!
+            messages.success(request, 'رمز عبور شما با موفقیت تغییر یافت')
+            return HttpResponseRedirect('/user')
+        else:
+            messages.error(request, form.errors)
+            return HttpResponseRedirect('/user/password')
+    else:
+        category = Category.objects.all()
+        form = PasswordChangeForm(request.user)
+        return render(request, 'user_password.html', {'form': form, 'category': category
+                                                      })
+
+
+@login_required(login_url='/login')  # Check login
+def user_orders(request):
+    category = Category.objects.all()
+    current_user = request.user
+    orders = Order.objects.filter(user_id=current_user.id)
+    context = {   'category': category,
+        'orders': orders,
+    }
+    return render(request, 'user_orders.html', context)

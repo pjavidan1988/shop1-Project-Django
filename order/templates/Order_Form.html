@@ -72,7 +72,7 @@
                                                                 <p> رنگ: {{ rs.product.color }}</p>
                                                             </div>
                                                         </td>
-                                                        <td class="product-price">{{ rs.product.price | intcomma }}
+                                                        <td class="product-price">{{ rs.product.price | intcomma:False  }}
                                                             تومان
                                                         </td>
                                                         <td class="product-quantity">
@@ -81,7 +81,7 @@
                                                                    style="font-size: 20px">{{ rs.quantity }}</p>
                                                             </div>
                                                         </td>
-                                                        <td class="product-subtotal">{{ rs.amount | intcomma }} تومان
+                                                        <td class="product-subtotal">{{ rs.amount | intcomma:False  }} تومان
                                                         </td>
                                                         <td class="product-remove">
                                                             <a href="/order/deletefromcart/{{ rs.id }}"
@@ -809,7 +809,7 @@
                                                 <table>
                                                     <tr>
                                                         <td class="td-title-1">جمع سبد</td>
-                                                        <td class="td-title-2">{{ total | intcomma }} تومان</td>
+                                                        <td class="td-title-2">{{ total | intcomma:False  }} تومان</td>
                                                     </tr>
                                                     <tr>
                                                         <td class="td-title-1">حمل و نقل</td>
@@ -817,7 +817,7 @@
                                                             {% if total >= 200000 %}
                                                                 رایگان
                                                             {% else %}
-                                                                {{ transport | intcomma }}
+                                                                {{ transport | intcomma:False  }}
                                                                 تومان
                                                             {% endif %}
                                                         </td>
@@ -826,10 +826,10 @@
                                                         <td class="order-total">مجموع سفارش</td>
                                                         <td class="order-total-price">
                                                             {% if total >= 200000 %}
-                                                                {{ total | intcomma }}
+                                                                {{ total | intcomma:False  }}
                                                                 تومان
                                                             {% else %}
-                                                                {{ final_total | intcomma }}
+                                                                {{ final_total | intcomma:False  }}
                                                                 تومان
                                                             {% endif %}
                                                         </td>

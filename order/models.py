@@ -3,8 +3,8 @@ from django.db import models
 
 # Create your models here.
 from django.forms import ModelForm
-
 from product.models import Product
+
 
 
 class ShopCart(models.Model):
@@ -40,12 +40,12 @@ class ShopCartForm(ModelForm):
 
 class Order(models.Model):
     STATUS = (
-        ('New', 'New'),
-        ('Accepted', 'Accepted'),
-        ('Preaparing', 'Preaparing'),
-        ('OnShipping', 'OnShipping'),
-        ('Completed', 'Completed'),
-        ('Canceled', 'Canceled'),
+        ('جدید', 'جدید'),
+        ('پذیرفته شد', 'پذیرفته شد'),
+        ('در حال پردازش', 'در حال پردازش'),
+        ('ارسال به پست', 'ارسال به پست'),
+        ('تکمیل شد', 'تکمیل شد'),
+        ('لغو شد', 'لغو شد'),
     )
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     code = models.CharField(max_length=5, editable=False)
@@ -55,12 +55,13 @@ class Order(models.Model):
     address = models.CharField(blank=True, max_length=150)
     city = models.CharField(blank=True, max_length=20)
     country = models.CharField(blank=True, max_length=20)
-    total = models.FloatField()
-    status = models.CharField(max_length=10, choices=STATUS, default='New')
+    total = models.IntegerField()
+    status = models.CharField(max_length=30, choices=STATUS, verbose_name='وضعیت', default='جدید')
     ip = models.CharField(blank=True, max_length=20)
     adminnote = models.CharField(blank=True, max_length=100)
     create_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
+
 
     def __str__(self):
         return self.user.first_name
@@ -74,17 +75,17 @@ class OrderForm(ModelForm):
 
 class OrderProduct(models.Model):
     STATUS = (
-        ('New', 'New'),
-        ('Accepted', 'Accepted'),
-        ('Canceled', 'Canceled'),
+        ('جدید', 'جدید'),
+        ('پذیرفته شد', 'پذیرفته شد'),
+        ('لغو شد', 'لغو شد'),
     )
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.IntegerField()
-    price = models.FloatField()
-    amount = models.FloatField()
-    status = models.CharField(max_length=10, choices=STATUS, default='New')
+    price = models.IntegerField()
+    amount = models.IntegerField()
+    status = models.CharField(max_length=30, choices=STATUS,verbose_name='وضعیت', default='New')
     create_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
 

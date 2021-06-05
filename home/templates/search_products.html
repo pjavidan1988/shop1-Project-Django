@@ -71,7 +71,7 @@
                                                                 <p> رنگ: {{ rs.color }}</p>
                                                             </div>
                                                         </td>
-                                                        <td class="product-price">{{ rs.price | intcomma }} تومان</td>
+                                                        <td class="product-price">{{ rs.price | intcomma:False  }} تومان</td>
                                                         <td class="product-stock text-uppercase">{{ rs.amount }}</td>
                                                         <td class="product-add-cart">
                                                             <a href="/order/addtoshopcart/{{ rs.id }}" title="Add To Cart">

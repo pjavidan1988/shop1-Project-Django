@@ -2,12 +2,15 @@ from ckeditor_uploader.fields import RichTextUploadingField
 from django.contrib.auth.models import User
 from django.db import models
 
+
 # Create your models here.
 from django.forms import ModelForm
 from django.urls import reverse
 from django.utils.safestring import mark_safe
 from mptt.fields import TreeForeignKey
 from mptt.models import MPTTModel
+from django_jalali.db import models as jmodels
+
 
 
 class Category(MPTTModel):
@@ -22,8 +25,8 @@ class Category(MPTTModel):
     image = models.ImageField(blank=True, upload_to='images/Category/%Y/%m/%d')
     status = models.CharField(max_length=10, choices=STATUS)
     slug = models.SlugField(null=False, unique=True)
-    create_at = models.DateTimeField(auto_now_add=True)
-    update_at = models.DateTimeField(auto_now=True)
+    create_at = jmodels.jDateTimeField(auto_now_add=True)
+    update_at = jmodels.jDateTimeField(auto_now=True)
 
     def __str__(self):
         return self.title

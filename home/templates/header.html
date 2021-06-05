@@ -7,16 +7,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-6 hidden-xs">
-                    <div class="call-us">
-                        {% if messages %}
-                            {% for message in messages %}
-                                <div>
-                                    <p class="mb-0"><span class="ltr-text" style="color: #85af85">{{ message }}</span>
-                                    </p>
-                                </div>
-                            {% endfor %}
-                        {% endif %}
-                    </div>
+
                 </div>
                 <div class="col-sm-6 col-xs-12">
                     <div class="top-link clearfix">
@@ -69,6 +60,13 @@
             </div>
         </div>
     </div>
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-success" style="text-align: center">
+                <strong>{{ message }}</strong>
+            </div>
+        {% endfor %}
+    {% endif %}
     <!-- header-middle-area -->
     <div class="header-middle-area plr-185">
         <div class="container-fluid">

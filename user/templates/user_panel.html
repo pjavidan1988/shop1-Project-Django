@@ -3,12 +3,19 @@
     <div id="cat-treeview" class="product-cat">
 
         <ul>
-            <li><a href="#">مشخصات کاربری</a></li>
-            <li><a href="#">سفارشات من</a></li>
-            <li><a href="#">نظرات من</a></li>
-            <li><a href="#">علاقه مندی ها</a></li>
-            <li><a href="#">محصولات من</a></li>
+            <li><a href="/user">مشخصات کاربری</a></li>
+            <li><a href="/user/orders">سفارشات من</a></li>
+            <li><a href="/user/comments">نظرات من</a></li>
+            <li><a href="/user/favorits">علاقه مندی ها</a></li>
+            <li><a href="/user/orders_produc">سفارش محصول من</a></li>
         </ul>
 
     </div>
 </aside>
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-success" style="text-align: center">
+            <strong>{{ message }}</strong>
+        </div>
+    {% endfor %}
+{% endif %}

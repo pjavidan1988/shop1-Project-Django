@@ -90,7 +90,7 @@
                                                             <a href="#"><i class="zmdi zmdi-star-half"></i></a>
                                                             <a href="#"><i class="zmdi zmdi-star-outline"></i></a>
                                                         </div>
-                                                        <h3 class="pro-price">{{ rs.price | intcomma}} تومان</h3>
+                                                        <h3 class="pro-price">{{ rs.price | intcomma:False }} تومان</h3>
                                                         <ul class="action-button">
                                                             <li>
                                                                 <a href="#" title="Wishlist"><i class="zmdi zmdi-favorite"></i></a>
@@ -138,7 +138,7 @@
                                                             </div>
                                                         </div>
                                                         <h6 class="brand-name mb-15">{{ rs.category }}</h6>
-                                                        <h3 class="pro-price">{{ rs.price | intcomma }} تومان</h3>
+                                                        <h3 class="pro-price">{{ rs.price | intcomma:False  }} تومان</h3>
                                                         <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله</p>
                                                         <ul class="action-button">
                                                             <li>
