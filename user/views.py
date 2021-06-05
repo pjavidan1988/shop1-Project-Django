@@ -11,7 +11,7 @@ from django.shortcuts import render
 from django.utils import translation
 
 from home.models import Setting
-from order.models import Order
+from order.models import Order, OrderProduct
 from product.models import Category
 from user.forms import SignUpForm, UserUpdateForm, ProfileUpdateForm
 from user.models import UserProfile
@@ -136,7 +136,46 @@ def user_orders(request):
     category = Category.objects.all()
     current_user = request.user
     orders = Order.objects.filter(user_id=current_user.id)
-    context = {   'category': category,
-        'orders': orders,
-    }
+    context = {'category': category,
+               'orders': orders,
+               }
     return render(request, 'user_orders.html', context)
+
+
+@login_required(login_url='/login')  # Check login
+def user_orderdetail(request, id):
+    category = Category.objects.all()
+    current_user = request.user
+    order = Order.objects.get(user_id=current_user.id, id=id)
+    orderitems = OrderProduct.objects.filter(order_id=id)
+    context = {
+        'category': category,
+        'order': order,
+        'orderitems': orderitems,
+    }
+    return render(request, 'user_order_detail.html', context)
+
+
+@login_required(login_url='/login')  # Check login
+def user_order_product(request):
+    category = Category.objects.all()
+    current_user = request.user
+    order_product = OrderProduct.objects.filter(user_id=current_user.id).order_by('-id')
+    context = {'category': category,
+               'order_product': order_product,
+               }
+    return render(request, 'user_order_products.html', context)
+
+
+@login_required(login_url='/login')  # Check login
+def user_order_product_detail(request, id, oid):
+    category = Category.objects.all()
+    current_user = request.user
+    order = Order.objects.get(user_id=current_user.id, id=oid)
+    orderitems = OrderProduct.objects.filter(id=id, user_id=current_user.id)
+    context = {
+         'category': category,
+        'order': order,
+        'orderitems': orderitems,
+    }
+    return render(request, 'user_order_detail.html', context)

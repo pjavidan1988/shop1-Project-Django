@@ -1,0 +1,161 @@
+{% extends 'homebase.html' %}
+{% load static %}
+{% load humanize %}
+{% load jformat %}
+{% load i18n %}
+{% block title %}  {{ user.first_name }} | جزئیات سفارش {% endblock %}
+{% block description %} {{ setting.description }} {% endblock %}
+{% block keywords %} {{ setting.keywords }} {% endblock %}
+
+{% block sidebar %} {% include 'sidebar.html' %} {% endblock %}
+
+{% block body %}
+
+    <!-- BREADCRUMBS SETCTION START -->
+    <div class="breadcrumbs-section plr-200 mb-80">
+        <div class="breadcrumbs overlay-bg">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="breadcrumbs-inner">
+                            <h1 class="breadcrumbs-title">جزئیات سفارش</h1>
+                            <ul class="breadcrumb">
+                                <li><a href="/">خانه</a></li>
+                                <li><a href="/user/">پنل کاربری</a></li>
+                                <li><a href="/user/orders/">سفارشات من</a></li>
+                                <li>جزئیات سفارش</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- BREADCRUMBS SETCTION END -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-xs-12">
+                <h6 class="widget-title border-left mb-20">جزئیات سفارش</h6>
+
+                <!-- Start page content -->
+                <section id="page-content" class="page-wrapper">
+
+                    <!-- SHOP SECTION START -->
+                    <div class="shop-section mb-80">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12">
+                                    <!-- Tab panes -->
+                                    <div class="tab-content">
+                                        <!-- shopping-cart start -->
+                                        <div class="tab-pane active" id="shopping-cart">
+                                            <div class="shopping-cart-content">
+                                                <div class="panel panel-default">
+                                                    <div class="new-customers">
+                                                        <div class="p-30">
+                                                            <div class="row">
+                                                                <div class="col-sm-12">
+                                                                    <label>شماره مرسوله پستی : </label>
+                                                                    <h6 style="display: inline-block">{{ order.adminnote }}</h6>
+                                                                </div>
+                                                                <div class="col-sm-12">
+                                                                    <label>وضعیت : </label>
+                                                                    <h6 style="display: inline-block">{{ order.status }}</h6>
+                                                                </div>
+                                                                <div class="col-sm-12">
+                                                                    <label>شهر : </label>
+                                                                    <h6 style="display: inline-block">{{ order.city }}</h6>
+                                                                </div>
+                                                                <div class="col-sm-12">
+                                                                    <label>آدرس : </label>
+                                                                    <h6 style="display: inline-block">{{ order.address }}</h6>
+                                                                </div>
+                                                                <div class="col-sm-12">
+                                                                    <label>تاریخ : </label>
+                                                                    <h6 style="display: inline-block">{{ order.create_at|jformat:"%d / %m / %Y - ساعت %H:%M" }}</h6>
+                                                                </div>
+                                                                <div class="col-sm-12">
+                                                                    <label>تلفن : </label>
+                                                                    <h6 style="display: inline-block">{{ order.phone }}</h6>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- shopping-cart end -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- SHOP SECTION END -->
+                </section>
+                <!-- End page content -->
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-xs-12">
+                <h6 class="widget-title border-left mb-20">جزئیات سفارش</h6>
+
+                <!-- Start page content -->
+                <section id="page-content" class="page-wrapper">
+
+                    <!-- SHOP SECTION START -->
+                    <div class="shop-section mb-80">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12">
+                                    <!-- Tab panes -->
+                                    <div class="tab-content">
+                                        <!-- shopping-cart start -->
+                                        <div class="tab-pane active" id="shopping-cart">
+                                            <form action="#">
+                                                <div class="table-content table-responsive mb-50">
+                                                    <table class="text-center">
+                                                        <thead>
+                                                        <tr>
+                                                            <th class="product-thumbnail">تصویر</th>
+                                                            <th class="product-thumbnail">نام محصول</th>
+                                                            <th class="product-price">قیمت</th>
+                                                            <th class="product-quantity">تعداد</th>
+                                                            <th class="product-quantity">جمع کل</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        <!-- tr -->
+                                                        {% for rs in orderitems %}
+                                                            <tr>
+                                                                <td class="product-thumbnail"><a href="/product/{{ rs.product_id }}/{{ rs.product.slug }}">
+                                                                    <img src="{{ rs.product.image.url }}" height="80">
+                                                                </a></td>
+                                                                <td class="product-thumbnail">{{ rs.product.title}}</td>
+                                                                <td class="product-thumbnail">{{ rs.price | intcomma:False }}تومان</td>
+                                                                <td class="product-price">{{ rs.quantity}}</td>
+                                                                <td class="product-quantity">{{ rs.amount | intcomma:False }}تومان</td>
+                                                            </tr>
+                                                        {% endfor %}
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <!-- shopping-cart end -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- SHOP SECTION END -->
+
+                </section>
+                <!-- End page content -->
+
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
