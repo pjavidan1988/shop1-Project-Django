@@ -12,7 +12,7 @@ from django.utils import translation
 
 from home.models import Setting
 from order.models import Order, OrderProduct
-from product.models import Category
+from product.models import Category, Comment
 from user.forms import SignUpForm, UserUpdateForm, ProfileUpdateForm
 from user.models import UserProfile
 
@@ -101,13 +101,15 @@ def user_update(request):
             return HttpResponseRedirect('/user')
     else:
         category = Category.objects.all()
+        setting = Setting.objects.get(pk=1)
         user_form = UserUpdateForm(instance=request.user)
         profile_form = ProfileUpdateForm(
             instance=request.user.userprofile)  # "userprofile" model -> OneToOneField relatinon with user
         context = {
             'category': category,
             'user_form': user_form,
-            'profile_form': profile_form
+            'profile_form': profile_form,
+            'setting': setting
         }
         return render(request, 'user_update.html', context)
 
@@ -126,18 +128,21 @@ def user_password(request):
             return HttpResponseRedirect('/user/password')
     else:
         category = Category.objects.all()
+        setting = Setting.objects.get(pk=1)
         form = PasswordChangeForm(request.user)
-        return render(request, 'user_password.html', {'form': form, 'category': category
+        return render(request, 'user_password.html', {'form': form, 'category': category, 'setting': setting
                                                       })
 
 
 @login_required(login_url='/login')  # Check login
 def user_orders(request):
     category = Category.objects.all()
+    setting = Setting.objects.get(pk=1)
     current_user = request.user
     orders = Order.objects.filter(user_id=current_user.id)
     context = {'category': category,
                'orders': orders,
+               'setting': setting
                }
     return render(request, 'user_orders.html', context)
 
@@ -145,6 +150,7 @@ def user_orders(request):
 @login_required(login_url='/login')  # Check login
 def user_orderdetail(request, id):
     category = Category.objects.all()
+    setting = Setting.objects.get(pk=1)
     current_user = request.user
     order = Order.objects.get(user_id=current_user.id, id=id)
     orderitems = OrderProduct.objects.filter(order_id=id)
@@ -152,6 +158,7 @@ def user_orderdetail(request, id):
         'category': category,
         'order': order,
         'orderitems': orderitems,
+        'setting': setting
     }
     return render(request, 'user_order_detail.html', context)
 
@@ -159,10 +166,12 @@ def user_orderdetail(request, id):
 @login_required(login_url='/login')  # Check login
 def user_order_product(request):
     category = Category.objects.all()
+    setting = Setting.objects.get(pk=1)
     current_user = request.user
     order_product = OrderProduct.objects.filter(user_id=current_user.id).order_by('-id')
     context = {'category': category,
                'order_product': order_product,
+               'setting': setting
                }
     return render(request, 'user_order_products.html', context)
 
@@ -170,12 +179,27 @@ def user_order_product(request):
 @login_required(login_url='/login')  # Check login
 def user_order_product_detail(request, id, oid):
     category = Category.objects.all()
+    setting = Setting.objects.get(pk=1)
     current_user = request.user
     order = Order.objects.get(user_id=current_user.id, id=oid)
     orderitems = OrderProduct.objects.filter(id=id, user_id=current_user.id)
     context = {
-         'category': category,
+        'category': category,
         'order': order,
         'orderitems': orderitems,
+        'setting': setting
     }
     return render(request, 'user_order_detail.html', context)
+
+
+def user_comments(request):
+    category = Category.objects.all()
+    setting = Setting.objects.get(pk=1)
+    current_user = request.user
+    comments = Comment.objects.filter(user_id=current_user.id)
+    context = {
+        'category': category,
+        'comments': comments,
+        'setting': setting
+    }
+    return render(request, 'user_comments.html', context)

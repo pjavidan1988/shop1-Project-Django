@@ -32,7 +32,8 @@ def index(request):
 
 def aboutus(request):
     setting = Setting.objects.get(pk=1)
-    context = {'setting': setting, }
+    category = Category.objects.all()
+    context = {'setting': setting, 'category': category }
     return render(request, 'about.html', context)
 
 
@@ -54,8 +55,9 @@ def contactus(request):
             return HttpResponseRedirect('/contactus')
 
     setting = Setting.objects.get(pk=1)
+    category = Category.objects.all()
     form = ContactForm
-    context = {'setting': setting, 'form': form, }
+    context = {'setting': setting, 'form': form, 'category': category, }
     return render(request, 'contact.html', context)
 
 

@@ -102,8 +102,17 @@ def orderproduct(request):
     shopcart = ShopCart.objects.filter(user_id=current_user.id)
     total = 0
     for rs in shopcart:
-            total += rs.product.price * rs.quantity
+        total += rs.product.price * rs.quantity
 
+    transport = 0
+    for rs in shopcart:
+        transport += rs.product.transportation * rs.quantity
+
+    final_total = total + transport
+
+    amount = 0
+    for rs in shopcart:
+        amount += rs.quantity
 
     if request.method == 'POST':  # if there is a post
         form = OrderForm(request.POST)
@@ -155,5 +164,8 @@ def orderproduct(request):
                'total': total,
                'form': form,
                'profile': profile,
+               'transport': transport,
+               'final_total': final_total,
+               'amount': amount,
                }
     return render(request, 'Order_Form.html', context)
