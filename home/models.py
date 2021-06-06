@@ -1,7 +1,6 @@
 from ckeditor_uploader.fields import RichTextUploadingField
 from django.db import models
 
-
 # Create your models here.
 from django.forms import ModelForm, TextInput, Textarea
 
@@ -47,11 +46,11 @@ class ContactMessage(models.Model):
         ('Read', 'Read'),
         ('Closed', 'Closed'),
     )
-    name = models.CharField(blank=True, max_length=20, verbose_name = 'نام')
-    email = models.CharField(blank=True, max_length=50, verbose_name = 'ایمیل')
+    name = models.CharField(blank=True, max_length=20, verbose_name='نام')
+    email = models.CharField(blank=True, max_length=50, verbose_name='ایمیل')
     phone = models.CharField(blank=True, max_length=11, verbose_name='شماره تلفن')
-    subject = models.CharField(blank=True, max_length=50, verbose_name = 'موضوع')
-    message = models.TextField(blank=True, max_length=255, verbose_name = 'پیام')
+    subject = models.CharField(blank=True, max_length=50, verbose_name='موضوع')
+    message = models.TextField(blank=True, max_length=255, verbose_name='پیام')
     status = models.CharField(max_length=10, choices=STATUS, default='New')
     ip = models.CharField(blank=True, max_length=20)
     note = models.CharField(blank=True, max_length=100)
@@ -65,11 +64,27 @@ class ContactMessage(models.Model):
 class ContactForm(ModelForm):
     class Meta:
         model = ContactMessage
-        fields = ['name', 'email', 'subject','phone', 'message']
+        fields = ['name', 'email', 'subject', 'phone', 'message']
         widgets = {
             'name': TextInput(attrs={'class': 'input', 'placeholder': 'نام شما'}),
             'subject': TextInput(attrs={'class': 'input', 'placeholder': 'موضوع'}),
             'phone': TextInput(attrs={'class': 'input', 'placeholder': 'شماره تلفن'}),
             'email': TextInput(attrs={'class': 'input', 'placeholder': 'ایمیل شما'}),
-            'message': Textarea(attrs={'class': 'input', 'placeholder': 'پیام خود را بنویسید', 'rows':'5'}),
+            'message': Textarea(attrs={'class': 'input', 'placeholder': 'پیام خود را بنویسید', 'rows': '5'}),
         }
+
+
+class FAQ(models.Model):
+    STATUS = (
+        ('True', 'True'),
+        ('False', 'False'),
+    )
+    ordernumber = models.IntegerField()
+    question = models.CharField(max_length=200)
+    answer = RichTextUploadingField()
+    status = models.CharField(max_length=10, choices=STATUS)
+    create_at = models.DateTimeField(auto_now_add=True)
+    update_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.question

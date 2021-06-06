@@ -7,7 +7,7 @@ from django.shortcuts import render
 # Create your views here.
 import product
 from home.forms import SearchForm
-from home.models import Setting, ContactForm, ContactMessage
+from home.models import Setting, ContactForm, ContactMessage, FAQ
 from product.models import Category, Product, Picture, Comment
 
 
@@ -17,7 +17,6 @@ def index(request):
     products_slider = Product.objects.all().order_by('?')[:5]  # first 4 products
     products_latest = Product.objects.all().order_by('-id')[:8]  # last 4 products
     products_picked = Product.objects.all().order_by('?')[:8]  # random selected 4 products
-
 
     page = "home"
     context = {'setting': setting,
@@ -33,7 +32,7 @@ def index(request):
 def aboutus(request):
     setting = Setting.objects.get(pk=1)
     category = Category.objects.all()
-    context = {'setting': setting, 'category': category }
+    context = {'setting': setting, 'category': category}
     return render(request, 'about.html', context)
 
 
@@ -119,3 +118,14 @@ def product_detail(request, id, slug):
     return render(request, 'product_detail.html', context)
 
 
+def faq(request):
+    category = Category.objects.all()
+    faq = FAQ.objects.filter(status="True").order_by("ordernumber")
+    setting = Setting.objects.get(pk=1)
+
+    context = {
+        'faq': faq,
+        'category': category,
+        'setting': setting,
+    }
+    return render(request, 'faq.html', context)

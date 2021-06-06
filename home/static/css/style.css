@@ -1445,6 +1445,10 @@ table {
 .product-thumbnail {
 	width: 420px;
 }
+
+.product-comment {
+	width: 2200px;
+}
 .pro-thumbnail-img {
 	float: right;
 	width: 28%;

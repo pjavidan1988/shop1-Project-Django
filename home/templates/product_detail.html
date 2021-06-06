@@ -1,7 +1,7 @@
 {% extends 'homebase.html' %}
 {% load humanize %}
 {% load static %}
-
+{% load jformat %}
 {% block title %} {{ product.title }} | جزئیات محصول {% endblock %}
 {% block description %} {{ product.description }} {% endblock %}
 {% block keywords %} {{ product.keywords }} {% endblock %}
@@ -188,7 +188,7 @@
                                                         <div class="media mt-30">
                                                             <div class="media-left pr-30">
                                                                 <a href="#"><img class="media-object"
-                                                                                 src={% static 'img/author/1.jpg' %} alt="#"
+                                                                                 src="{{ rs.user.userprofile.image.url }}" alt="#"
                                                                                  height="60"></a>
                                                             </div>
                                                             <div class="media-body">
@@ -198,7 +198,7 @@
                                                                                 href="#">{{ rs.user.first_name }}</a>
                                                                         </h6>
                                                                         <h6 class="media-heading">{{ rs.subject }}</h6>
-                                                                        <p class="mb-10">{{ rs.create_at }}</p>
+                                                                        <p class="mb-10">{{ rs.create_at|jformat:"%d / %m / %Y - ساعت %H:%M" }}</p>
                                                                     </div>
                                                                 </div>
                                                                 <p class="mb-0">{{ rs.comment }}</p>

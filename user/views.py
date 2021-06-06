@@ -203,3 +203,13 @@ def user_comments(request):
         'setting': setting
     }
     return render(request, 'user_comments.html', context)
+
+
+@login_required(login_url='/login')  # Check login
+def user_deletecomment(request, id):
+    current_user = request.user
+    Comment.objects.filter(id=id, user_id=current_user.id).delete()
+    messages.success(request, 'نظر با موفقیت خذف شد')
+    return HttpResponseRedirect('/user/comments')
+
+
