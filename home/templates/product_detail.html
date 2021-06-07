@@ -112,10 +112,13 @@
                                             </div>
                                             <div class="sin-pro-action f-right">
                                                 <ul class="action-button">
+                                                <form action="/order/addtowishlist/{{ product.id }}" method="post">
+                                                    {% csrf_token %}
                                                     <li>
-                                                        <a href="#" title="Wishlist" tabindex="0"><i
+                                                        <a href="/order/addtowishlist/{{ product.id }}" title="Wishlist" tabindex="0"><i
                                                                 class="zmdi zmdi-favorite"></i></a>
                                                     </li>
+                                                </form>
                                                     <li>
                                                         <a href="#" data-toggle="modal" data-target="#productModal"
                                                            title="Quickview" tabindex="0"><i

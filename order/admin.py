@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from order.models import ShopCart, Order, OrderProduct
+from order.models import ShopCart, Order, OrderProduct, wishList
 
 
 class ShopCartAdmin(admin.ModelAdmin):
@@ -30,6 +30,12 @@ class OrderProductAdmin(admin.ModelAdmin):
     list_filter = ['user']
 
 
+class wishListAdmin(admin.ModelAdmin):
+    list_display = ['product', 'user', 'price', 'amount']
+    list_filter = ['user']
+
+
 admin.site.register(ShopCart, ShopCartAdmin)
+admin.site.register(wishList, wishListAdmin)
 admin.site.register(Order, OrderAdmin)
 admin.site.register(OrderProduct, OrderProductAdmin)

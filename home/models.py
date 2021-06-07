@@ -23,6 +23,7 @@ class Setting(models.Model):
     smtppassword = models.CharField(blank=True, max_length=10)
     smtpport = models.CharField(blank=True, max_length=5)
     icon = models.ImageField(blank=True, upload_to='images/Icons/%Y/%m/%d/')
+    logo = models.ImageField(blank=True, upload_to='images/Logo/%Y/%m/%d/')
     facebook = models.CharField(blank=True, max_length=150)
     instagram = models.CharField(blank=True, max_length=150)
     twitter = models.CharField(blank=True, max_length=150)

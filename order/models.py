@@ -6,7 +6,6 @@ from django.forms import ModelForm
 from product.models import Product
 
 
-
 class ShopCart(models.Model):
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)
@@ -62,7 +61,6 @@ class Order(models.Model):
     create_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
 
-
     def __str__(self):
         return self.user.first_name
 
@@ -85,9 +83,31 @@ class OrderProduct(models.Model):
     quantity = models.IntegerField()
     price = models.IntegerField()
     amount = models.IntegerField()
-    status = models.CharField(max_length=30, choices=STATUS,verbose_name='وضعیت', default='New')
+    status = models.CharField(max_length=30, choices=STATUS, verbose_name='وضعیت', default='New')
     create_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.product.title
+
+
+class wishList(models.Model):
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)
+
+    def __str__(self):
+        return self.product.title
+
+    @property
+    def price(self):
+        return (self.product.price)
+
+
+    @property
+    def amount(self):
+        return (self.product.amount)
+
+class wishListForm(ModelForm):
+    class Meta:
+        model = wishList
+        fields = ['product']

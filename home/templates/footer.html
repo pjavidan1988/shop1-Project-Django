@@ -10,100 +10,16 @@
                         <div class="col-lg-4 col-md-5 col-sm-4">
                             <div class="single-footer footer-about">
                                 <div class="footer-logo">
-                                    <img src="{% static '' %}img/logo/logo.png" alt="">
-                                </div>
-                                <div class="footer-brief">
-                                    <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان
-                                        گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم
-                                        است</p>
-                                    <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان
-                                        گرافیک است. چاپگرها و متون بلکه روزنامه</p>
+                                    <img src="{{ setting.logo.url }}" alt="" height="80">
                                 </div>
                                 <ul class="footer-social">
                                     <li>
-                                        <a class="facebook" href="" title="Facebook"><i class="zmdi zmdi-facebook"></i></a>
+                                        <a class="google-plus" href="" title="INSTAGRAM"><i class="zmdi zmdi-instagram"></i></a>
                                     </li>
                                     <li>
-                                        <a class="google-plus" href="" title="Google Plus"><i
-                                                class="zmdi zmdi-google-plus"></i></a>
-                                    </li>
-                                    <li>
-                                        <a class="twitter" href="" title="Twitter"><i class="zmdi zmdi-twitter"></i></a>
-                                    </li>
-                                    <li>
-                                        <a class="rss" href="" title="RSS"><i class="zmdi zmdi-rss"></i></a>
+                                        <a class="rss"  href="" title="WHATSAPP"><i class="zmdi zmdi-whatsapp"></i></a>
                                     </li>
                                 </ul>
-                            </div>
-                        </div>
-                        <div class="col-lg-2 hidden-md hidden-sm">
-                            <div class="single-footer">
-                                <h4 class="footer-title border-left">حمل و نقل</h4>
-                                <ul class="footer-menu">
-                                    <li>
-                                        <a href="#"><i class="zmdi zmdi-circle"></i><span>محصولات جدید</span></a>
-                                    </li>
-                                    <li>
-                                        <a href="#"><i class="zmdi zmdi-circle"></i><span>محصولات تخفیف دار</span></a>
-                                    </li>
-                                    <li>
-                                        <a href="#"><i class="zmdi zmdi-circle"></i><span>محصولات پر فروش</span></a>
-                                    </li>
-                                    <li>
-                                        <a href="#"><i class="zmdi zmdi-circle"></i><span>محصولات محبوب</span></a>
-                                    </li>
-                                    <li>
-                                        <a href="#"><i class="zmdi zmdi-circle"></i><span>تولید کنندگان</span></a>
-                                    </li>
-                                    <li>
-                                        <a href="#"><i class="zmdi zmdi-circle"></i><span>فروشندگان</span></a>
-                                    </li>
-                                    <li>
-                                        <a href="#"><i class="zmdi zmdi-circle"></i><span>محصولات ویژه</span></a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col-lg-2 col-md-3 col-sm-4">
-                            <div class="single-footer">
-                                <h4 class="footer-title border-left">حساب کاربری</h4>
-                                <ul class="footer-menu">
-                                    <li>
-                                        <a href="#"><i class="zmdi zmdi-circle"></i><span>حساب کاربری</span></a>
-                                    </li>
-                                    <li>
-                                        <a href="#"><i class="zmdi zmdi-circle"></i><span>لیست علاقه‌مندی ها</span></a>
-                                    </li>
-                                    <li>
-                                        <a href="#"><i class="zmdi zmdi-circle"></i><span>سبد خرید</span></a>
-                                    </li>
-                                    <li>
-                                        <a href="#"><i class="zmdi zmdi-circle"></i><span>ورود</span></a>
-                                    </li>
-                                    <li>
-                                        <a href="#"><i class="zmdi zmdi-circle"></i><span>ثبت نام</span></a>
-                                    </li>
-                                    <li>
-                                        <a href="#"><i class="zmdi zmdi-circle"></i><span>پرداخت</span></a>
-                                    </li>
-                                    <li>
-                                        <a href="#"><i class="zmdi zmdi-circle"></i><span>تکمیل سفارش</span></a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-4 col-sm-4">
-                            <div class="single-footer">
-                                <h4 class="footer-title border-left">ارتباط با ما</h4>
-                                <div class="footer-message">
-                                    <form action="#">
-                                        <input type="text" name="name" placeholder="نام شما ...">
-                                        <input type="email" name="email" placeholder="... ایمیل شما" dir="ltr">
-                                        <textarea class="height-80" name="message"
-                                                  placeholder="پیام شما ..."></textarea>
-                                        <button class="submit-btn-1 mt-20 btn-hover-1" type="submit">ثبت پیام</button>
-                                    </form>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -124,20 +40,6 @@
                             </div>
                         </div>
                         <div class="col-sm-6 col-xs-12">
-                            <ul class="footer-payment text-right">
-                                <li>
-                                    <a href="#"><img src="{% static '' %}img/payment/1.jpg" alt=""></a>
-                                </li>
-                                <li>
-                                    <a href="#"><img src="{% static '' %}img/payment/2.jpg" alt=""></a>
-                                </li>
-                                <li>
-                                    <a href="#"><img src="{% static '' %}img/payment/3.jpg" alt=""></a>
-                                </li>
-                                <li>
-                                    <a href="#"><img src="{% static '' %}img/payment/4.jpg" alt=""></a>
-                                </li>
-                            </ul>
                         </div>
                     </div>
                 </div>

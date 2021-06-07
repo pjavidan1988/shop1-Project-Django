@@ -32,6 +32,12 @@
                                     </a>
                                 </li>
                                 <li>
+                                    <a href="/wishlist">
+                                        <i class="zmdi zmdi-favorite"></i>
+                                        علاقه مندی ها
+                                    </a>
+                                </li>
+                                <li>
                                     <a href="/logout"><i class="zmdi zmdi-close"></i>
                                         خروج
                                     </a>
@@ -70,7 +76,7 @@
                     <div class="col-md-2 col-sm-6 col-xs-12">
                         <div class="logo">
                             <a href="/">
-                                <img src="{% static '' %}img/logo/logo.png" alt="main logo">
+                                <img src="{{ setting.logo.url }}" alt="main logo" height="70">
                             </a>
                         </div>
                     </div>

@@ -18,6 +18,7 @@ def index(request):
     products_latest = Product.objects.all().order_by('-id')[:8]  # last 4 products
     products_picked = Product.objects.all().order_by('?')[:8]  # random selected 4 products
 
+
     page = "home"
     context = {'setting': setting,
                'page': page,
