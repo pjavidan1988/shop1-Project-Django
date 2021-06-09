@@ -169,110 +169,22 @@
             </div>
             <div class="blog">
                 <div class="row active-blog">
+                    {% for rs in blog %}
                     <!-- blog-item start -->
                     <div class="col-xs-12">
                         <div class="blog-item">
-                            <img src="{% static '' %}img/blog/1.jpg" alt="">
+                            <img src="{{ rs.img.url }}" alt="">
                             <div class="blog-desc">
-                                <h5 class="blog-title"><a href="single-blog.html">عنوان بلاگ نمایشی</a></h5>
-                                <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان
-                                    گرافیک است. چاپگرها و متون بلکه روزنامه</p>
+                                <h5 class="blog-title"><a href="/blog/{{ rs.id }}">{{ rs.title }}</a></h5>
+                                <p>{{ rs.description|striptags|truncatechars:150|safe }}</p>
                                 <div class="read-more">
-                                    <a href="single-blog.html">بیشتر بخوانید</a>
+                                    <a href="/blog/{{ rs.id }}">بیشتر بخوانید</a>
                                 </div>
-                                <ul class="blog-meta">
-                                    <li>
-                                        <a href="#"><i class="zmdi zmdi-favorite"></i>89 لایک</a>
-                                    </li>
-                                    <li>
-                                        <a href="#"><i class="zmdi zmdi-comments"></i>59 دیدگاه</a>
-                                    </li>
-                                    <li>
-                                        <a href="#"><i class="zmdi zmdi-share"></i>29 اشتراک</a>
-                                    </li>
-                                </ul>
                             </div>
                         </div>
                     </div>
                     <!-- blog-item end -->
-                    <!-- blog-item start -->
-                    <div class="col-xs-12">
-                        <div class="blog-item">
-                            <img src="{% static '' %}img/blog/2.jpg" alt="">
-                            <div class="blog-desc">
-                                <h5 class="blog-title"><a href="single-blog.html">عنوان بلاگ نمایشی</a></h5>
-                                <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان
-                                    گرافیک است. چاپگرها و متون بلکه روزنامه</p>
-                                <div class="read-more">
-                                    <a href="single-blog.html">بیشتر بخوانید</a>
-                                </div>
-                                <ul class="blog-meta">
-                                    <li>
-                                        <a href="#"><i class="zmdi zmdi-favorite"></i>89 لایک</a>
-                                    </li>
-                                    <li>
-                                        <a href="#"><i class="zmdi zmdi-comments"></i>59 دیدگاه</a>
-                                    </li>
-                                    <li>
-                                        <a href="#"><i class="zmdi zmdi-share"></i>29 اشتراک</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- blog-item end -->
-                    <!-- blog-item start -->
-                    <div class="col-xs-12">
-                        <div class="blog-item">
-                            <img src="{% static '' %}img/blog/3.jpg" alt="">
-                            <div class="blog-desc">
-                                <h5 class="blog-title"><a href="single-blog.html">عنوان بلاگ نمایشی</a></h5>
-                                <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان
-                                    گرافیک است. چاپگرها و متون بلکه روزنامه</p>
-                                <div class="read-more">
-                                    <a href="single-blog.html">بیشتر بخوانید</a>
-                                </div>
-                                <ul class="blog-meta">
-                                    <li>
-                                        <a href="#"><i class="zmdi zmdi-favorite"></i>89 لایک</a>
-                                    </li>
-                                    <li>
-                                        <a href="#"><i class="zmdi zmdi-comments"></i>59 دیدگاه</a>
-                                    </li>
-                                    <li>
-                                        <a href="#"><i class="zmdi zmdi-share"></i>29 اشتراک</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- blog-item end -->
-                    <!-- blog-item start -->
-                    <div class="col-xs-12">
-                        <div class="blog-item">
-                            <img src="{% static '' %}img/blog/1.jpg" alt="">
-                            <div class="blog-desc">
-                                <h5 class="blog-title"><a href="single-blog.html">عنوان بلاگ نمایشی</a></h5>
-                                <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان
-                                    گرافیک است. چاپگرها و متون بلکه روزنامه</p>
-                                <div class="read-more">
-                                    <a href="single-blog.html">بیشتر بخوانید</a>
-                                </div>
-                                <ul class="blog-meta">
-                                    <li>
-                                        <a href="#"><i class="zmdi zmdi-favorite"></i>89 لایک</a>
-                                    </li>
-                                    <li>
-                                        <a href="#"><i class="zmdi zmdi-comments"></i>59 دیدگاه</a>
-                                    </li>
-                                    <li>
-                                        <a href="#"><i class="zmdi zmdi-share"></i>29 اشتراک</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- blog-item end -->
+                    {% endfor %}
                 </div>
             </div>
         </div>

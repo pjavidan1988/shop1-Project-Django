@@ -1,0 +1,69 @@
+{% extends 'homebase.html' %}
+{% load humanize %}
+{% load jformat %}
+
+{% block title %}{{ setting.title }}  | وبلاگ   {% endblock %}
+{% block description %} {{ setting.description }} {% endblock %}
+{% block keywords %} {{ setting.keywords }} {% endblock %}
+
+{% block sidebar %} {% include 'sidebar.html' %} {% endblock %}
+
+{% block body %}
+
+    <!-- BREADCRUMBS SETCTION START -->
+    <div class="breadcrumbs-section plr-200 mb-80">
+        <div class="breadcrumbs overlay-bg">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="breadcrumbs-inner">
+                            <h1 class="breadcrumbs-title">جزئیات بلاگ</h1>
+                            <ul class="breadcrumb">
+                                <li><a href="/">خانه</a></li>
+                                <li><a href="/shopcart/">بلاگ</a></li>
+                                <li>جزئیات بلاگ</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- BREADCRUMBS SETCTION END -->
+
+    <!-- Start page content -->
+    <section id="page-content" class="page-wrapper">
+
+        <!-- BLOG SECTION START -->
+        <div class="blog-section mb-50">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 col-xs-12 mb-50 pr-50">
+                        <div class="blog-details-area">
+                            <!-- blog-details-photo -->
+                            <div class="blog-details-photo bg-img-1 p-20 mb-30">
+                                <img src="{{ blog.img.url }}" alt="">
+                                <div class="today-date bg-img-1">
+                                    <span class="meta-date">{{ blog.create_at|jformat:"%d" }}</span>
+                                    <span class="meta-month">{{ blog.create_at|jformat:"%m" }}</span>
+                                    <span class="meta-month">{{ blog.create_at|jformat:"%Y" }}</span>
+                                </div>
+                            </div>
+                            <h3 class="blog-details-title mb-20">{{ blog.title }}</h3>
+                            <!-- blog-description -->
+                            <div class="blog-description mb-60">
+                                <div class="quote-author pl-30">
+                                    <p class="quote-border pl-30">{{ blog.description | safe }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- BLOG SECTION END -->
+
+    </section>
+    <!-- End page content -->
+
+{% endblock %}

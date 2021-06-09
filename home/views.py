@@ -7,7 +7,7 @@ from django.shortcuts import render
 # Create your views here.
 import product
 from home.forms import SearchForm
-from home.models import Setting, ContactForm, ContactMessage, FAQ
+from home.models import Setting, ContactForm, ContactMessage, FAQ, Blog
 from product.models import Category, Product, Picture, Comment
 
 
@@ -17,7 +17,7 @@ def index(request):
     products_slider = Product.objects.all().order_by('?')[:5]  # first 4 products
     products_latest = Product.objects.all().order_by('-id')[:8]  # last 4 products
     products_picked = Product.objects.all().order_by('?')[:8]  # random selected 4 products
-
+    blog = Blog.objects.all().order_by('-id')[:6]
 
     page = "home"
     context = {'setting': setting,
@@ -26,6 +26,7 @@ def index(request):
                'products_latest': products_latest,
                'products_picked': products_picked,
                'category': category,
+               'blog': blog
                }
     return render(request, 'index.html', context)
 
@@ -130,3 +131,27 @@ def faq(request):
         'setting': setting,
     }
     return render(request, 'faq.html', context)
+
+
+def blog(request):
+    category = Category.objects.all()
+    blog = Blog.objects.order_by('title')
+    setting = Setting.objects.get(pk=1)
+
+    context = {
+        'blog': blog,
+        'category': category,
+        'setting': setting,
+    }
+    return render(request, 'all_blogs.html', context)
+
+
+def blog_detail(request, id):
+    category = Category.objects.all()
+    blog = Blog.objects.get(pk=id)
+
+    context = {
+        'blog': blog,
+        'category': category,
+    }
+    return render(request, 'blog_detail.html', context)

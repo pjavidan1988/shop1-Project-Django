@@ -1,0 +1,67 @@
+{% extends 'homebase.html' %}
+{% load humanize %}
+
+{% block title %}{{ setting.title }}  | وبلاگ   {% endblock %}
+{% block description %} {{ setting.description }} {% endblock %}
+{% block keywords %} {{ setting.keywords }} {% endblock %}
+
+{% block sidebar %} {% include 'sidebar.html' %} {% endblock %}
+
+{% block body %}
+
+    <!-- BREADCRUMBS SETCTION START -->
+    <div class="breadcrumbs-section plr-200 mb-80">
+        <div class="breadcrumbs overlay-bg">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="breadcrumbs-inner">
+                            <h1 class="breadcrumbs-title">بلاگ</h1>
+                            <ul class="breadcrumb">
+                                <li><a href="/">خانه</a></li>
+                                <li>بلاگ</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- BREADCRUMBS SETCTION END -->
+
+    <!-- Start page content -->
+    <div id="page-content" class="page-wrapper">
+
+        <!-- BLOG SECTION START -->
+
+        <div class="blog-section mb-50">
+            <div class="container">
+
+                <div class="row equal-height">
+                    {% for rs in blog %}
+                        <!-- blog-item start -->
+                        <div class="col-md-4 col-sm-6 col-xs-12">
+                            <div class="blog-item">
+                                <img src="{{ rs.img.url }}" alt="">
+                                <div class="blog-desc">
+                                    <h5 class="blog-title"><a href="/blog/{{ rs.id }}">{{ rs.title }}</a></h5>
+                                    <p>{{ rs.description|striptags|truncatechars:150|safe }}</p>
+                                    <div class="read-more">
+                                        <a href="/blog/{{ rs.id }}">بیشتر بخوانید</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- blog-item end -->
+                    {% endfor %}
+                </div>
+
+            </div>
+        </div>
+
+        <!-- BLOG SECTION END -->
+
+    </div>
+    <!-- End page content -->
+
+{% endblock %}
