@@ -25,8 +25,8 @@ class Category(MPTTModel):
     image = models.ImageField(blank=True, upload_to='images/Category/%Y/%m/%d')
     status = models.CharField(max_length=10, choices=STATUS)
     slug = models.SlugField(null=False, unique=True)
-    create_at = jmodels.jDateTimeField(auto_now_add=True)
-    update_at = jmodels.jDateTimeField(auto_now=True)
+    create_at = models.DateTimeField(auto_now_add=True)
+    update_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.title

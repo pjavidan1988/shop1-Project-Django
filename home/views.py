@@ -81,9 +81,11 @@ def search_products(request):
             category = Category.objects.all()
             query = form.cleaned_data['query']
             products = Product.objects.filter(title__icontains=query)
+            setting = Setting.objects.get(pk=1)
             context = {'products': products,
                        'category': category,
-                       'query': query
+                       'query': query,
+                       'setting' : setting
                        }
             return render(request, 'search_products.html', context)
     return HttpResponseRedirect('/')
@@ -111,11 +113,13 @@ def product_detail(request, id, slug):
     product = Product.objects.get(pk=id)
     images = Picture.objects.filter(product_id=id)
     comments = Comment.objects.filter(product_id=id, status='True')
+    setting = Setting.objects.get(pk=1)
     context = {
         'product': product,
         'category': category,
         'images': images,
-        'comments': comments
+        'comments': comments,
+        'setting' : setting
     }
     return render(request, 'product_detail.html', context)
 
@@ -149,9 +153,10 @@ def blog(request):
 def blog_detail(request, id):
     category = Category.objects.all()
     blog = Blog.objects.get(pk=id)
-
+    setting = Setting.objects.get(pk=1)
     context = {
         'blog': blog,
         'category': category,
+        'setting': setting
     }
     return render(request, 'blog_detail.html', context)

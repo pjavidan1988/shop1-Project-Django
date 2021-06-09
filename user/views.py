@@ -22,8 +22,11 @@ def index(request):
     category = Category.objects.all()
     current_user = request.user  # Access User Session information
     profile = UserProfile.objects.get(user_id=current_user.id)
+    setting = Setting.objects.get(pk=1)
     context = {'category': category,
-               'profile': profile}
+               'profile': profile,
+               'setting' : setting
+               }
     return render(request, 'user_profile.html', context)
 
 
