@@ -150,9 +150,10 @@ def orderproduct(request):
                 product.save()
 
             ShopCart.objects.filter(user_id=current_user.id).delete()  # Clear & Delete shopcart
+            setting = Setting.objects.get(pk=1)
             request.session['cart_items'] = 0
             messages.success(request, "خرید شما با موفقیت انجام شد")
-            return render(request, 'Order_Completed.html', {'ordercode': ordercode, 'category': category})
+            return render(request, 'Order_Completed.html', {'ordercode': ordercode, 'category': category,'setting':setting})
         else:
             messages.warning(request, form.errors)
             return HttpResponseRedirect("/order/orderproduct")

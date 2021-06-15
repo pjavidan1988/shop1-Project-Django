@@ -3,7 +3,7 @@ from django.contrib import admin
 # Register your models here.
 from mptt.admin import DraggableMPTTAdmin
 
-from product.models import Category, Product, Picture, Comment
+from product.models import Category, Product, Picture, Comment, Variants, Color, Size
 
 
 class CategoryAdmin(admin.ModelAdmin):
@@ -17,6 +17,7 @@ class CategoryAdmin2(DraggableMPTTAdmin):
                     'related_products_count', 'related_products_cumulative_count')
     list_display_links = ('indented_title',)
     prepopulated_fields = {'slug': ('title',)}
+
     # inlines = [CategoryLangInline]
 
     def get_queryset(self, request):
@@ -49,6 +50,12 @@ class CategoryAdmin2(DraggableMPTTAdmin):
     related_products_cumulative_count.short_description = 'Related products (in tree)'
 
 
+class ProductVariantsInline(admin.TabularInline):
+    model = Variants
+    extra = 1
+    show_change_link = True
+
+
 class ProductImageInline(admin.TabularInline):
     model = Picture
     readonly_fields = ('id',)
@@ -56,18 +63,39 @@ class ProductImageInline(admin.TabularInline):
 
 
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ['title', 'category', 'status','amount', 'image_tag']
+    list_display = ['title', 'category', 'status', 'amount', 'image_tag']
     list_filter = ['category']
+    list_editable = ('amount', 'category', 'status',)
     readonly_fields = ('image_tag',)
-    inlines = [ProductImageInline]
+    inlines = [ProductImageInline, ProductVariantsInline]
     prepopulated_fields = {'slug': ('title',)}
 
+
 class CommentAdmin(admin.ModelAdmin):
-    list_display = ['subject','comment', 'status','create_at']
+    list_display = ['subject', 'comment', 'status', 'create_at']
     list_filter = ['status']
-    readonly_fields = ('subject','comment','ip','user','product','id')
+    readonly_fields = ('subject', 'comment', 'ip', 'user', 'product', 'id')
+
+
+class ColorAdmin(admin.ModelAdmin):
+    list_display = ['name', 'code','id']
+    list_editable = ('code',)
+
+
+class SizeAdmin(admin.ModelAdmin):
+    list_display = ['name', 'code','id']
+    list_editable = ('code',)
+
+
+class VariantsAdmin(admin.ModelAdmin):
+    list_display = ['title', 'product', 'color', 'size', 'price', 'quantity','id']
+    list_editable = ('size', 'color', 'price', 'quantity',)
+
 
 admin.site.register(Category, CategoryAdmin2)
 admin.site.register(Product, ProductAdmin)
-admin.site.register(Comment,CommentAdmin)
+admin.site.register(Comment, CommentAdmin)
 admin.site.register(Picture)
+admin.site.register(Variants, VariantsAdmin)
+admin.site.register(Color, ColorAdmin)
+admin.site.register(Size, SizeAdmin)

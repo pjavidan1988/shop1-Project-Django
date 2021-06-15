@@ -8,7 +8,7 @@ from django.shortcuts import render
 import product
 from home.forms import SearchForm
 from home.models import Setting, ContactForm, ContactMessage, FAQ, Blog
-from product.models import Category, Product, Picture, Comment
+from product.models import Category, Product, Picture, Comment, Variants
 
 
 def index(request):
@@ -85,7 +85,7 @@ def search_products(request):
             context = {'products': products,
                        'category': category,
                        'query': query,
-                       'setting' : setting
+                       'setting': setting
                        }
             return render(request, 'search_products.html', context)
     return HttpResponseRedirect('/')
@@ -109,19 +109,31 @@ def product_search_auto(request):
 
 
 def product_detail(request, id, slug):
-    category = Category.objects.all()
-    product = Product.objects.get(pk=id)
     images = Picture.objects.filter(product_id=id)
     comments = Comment.objects.filter(product_id=id, status='True')
+    category = Category.objects.all()
+    product = Product.objects.get(pk=id)
     setting = Setting.objects.get(pk=1)
-    context = {
-        'product': product,
-        'category': category,
-        'images': images,
-        'comments': comments,
-        'setting' : setting
-    }
-    return render(request, 'product_detail.html', context)
+    if product.variant != "None":  # Product have variants
+        if request.method == 'POST':  # if we select color
+            variant = Variants.objects.filter(product_id=id)
+            var_id = request.POST.get('select')
+            variants = Variants.objects.get(id=var_id)
+        else:
+            variant = Variants.objects.filter(product_id=id)
+            variants = Variants.objects.get(id=variant[0].id)
+        context = {'product': product, 'category': category,
+                   'images': images, 'comments': comments, 'setting': setting, 'variant':variant,
+                   'variants':variants
+                   }
+        return render(request, 'product_detail.html', context)
+    else:
+        return render(request, 'product_detail.html', {'product': product, 'category': category,
+                   'images': images, 'comments': comments, 'setting': setting,
+                   })
+
+
+
 
 
 def faq(request):

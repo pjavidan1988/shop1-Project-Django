@@ -47,14 +47,14 @@ class ContactMessage(models.Model):
         ('Read', 'Read'),
         ('Closed', 'Closed'),
     )
-    name = models.CharField(blank=True, max_length=20, verbose_name='نام')
-    email = models.CharField(blank=True, max_length=50, verbose_name='ایمیل')
+    name = models.CharField(blank=True, max_length=255, verbose_name='نام')
+    email = models.CharField(blank=True, max_length=255, verbose_name='ایمیل')
     phone = models.CharField(blank=True, max_length=11, verbose_name='شماره تلفن')
-    subject = models.CharField(blank=True, max_length=50, verbose_name='موضوع')
+    subject = models.CharField(blank=True, max_length=255, verbose_name='موضوع')
     message = models.TextField(blank=True, max_length=255, verbose_name='پیام')
     status = models.CharField(max_length=10, choices=STATUS, default='New')
     ip = models.CharField(blank=True, max_length=20)
-    note = models.CharField(blank=True, max_length=100)
+    note = models.CharField(blank=True, max_length=255)
     create_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
 
@@ -81,7 +81,7 @@ class FAQ(models.Model):
         ('False', 'False'),
     )
     ordernumber = models.IntegerField()
-    question = models.CharField(max_length=200)
+    question = models.CharField(max_length=255)
     answer = RichTextUploadingField()
     status = models.CharField(max_length=10, choices=STATUS)
     create_at = models.DateTimeField(auto_now_add=True)
@@ -92,7 +92,7 @@ class FAQ(models.Model):
 
 
 class Blog(models.Model):
-    title = models.CharField(max_length=150)
+    title = models.CharField(max_length=255)
     img = models.ImageField(blank=True, upload_to='images/blog/%Y/%m/%d/')
     description = RichTextUploadingField()
     create_at = models.DateTimeField(auto_now_add=True)
