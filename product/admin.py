@@ -65,7 +65,7 @@ class ProductImageInline(admin.TabularInline):
 class ProductAdmin(admin.ModelAdmin):
     list_display = ['title', 'category', 'status', 'amount', 'image_tag']
     list_filter = ['category']
-    list_editable = ('amount', 'category', 'status',)
+    list_editable = ('amount', 'category',)
     readonly_fields = ('image_tag',)
     inlines = [ProductImageInline, ProductVariantsInline]
     prepopulated_fields = {'slug': ('title',)}
