@@ -4,12 +4,13 @@ from django.db import models
 # Create your models here.
 from django.forms import ModelForm
 from product.models import Product
+from django_jalali.db import models as jmodels
 
 
 class ShopCart(models.Model):
-    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
-    product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)
-    quantity = models.IntegerField()
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, verbose_name='کاربر')
+    product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True, verbose_name='محصول')
+    quantity = models.IntegerField(verbose_name='تعداد')
 
     def __str__(self):
         return self.product.title
@@ -30,6 +31,10 @@ class ShopCart(models.Model):
     def varamount(self):
         return (self.quantity * self.variant.price)
 
+    class Meta:
+        verbose_name = 'سبد خرید'
+        verbose_name_plural = 'سبد خرید'
+
 
 class ShopCartForm(ModelForm):
     class Meta:
@@ -46,24 +51,27 @@ class Order(models.Model):
         ('تکمیل شد', 'تکمیل شد'),
         ('لغو شد', 'لغو شد'),
     )
-    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
-    code = models.CharField(max_length=5, editable=True)
-    first_name = models.CharField(max_length=255)
-    last_name = models.CharField(max_length=255)
-    phone = models.CharField(blank=True, max_length=20)
-    address = models.CharField(blank=True, max_length=255)
-    city = models.CharField(blank=True, max_length=255)
-    country = models.CharField(blank=True, max_length=255)
-    total = models.IntegerField()
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, verbose_name='کاربر')
+    code = models.CharField(max_length=5, editable=True, verbose_name='کد پیگیری')
+    first_name = models.CharField(max_length=255, verbose_name='نام')
+    last_name = models.CharField(max_length=255, verbose_name='نام خانوادگی')
+    phone = models.CharField(blank=True, max_length=20, verbose_name='تلفن')
+    address = models.CharField(blank=True, max_length=255, verbose_name='آدرس')
+    city = models.CharField(blank=True, max_length=255, verbose_name='شهر')
+    country = models.CharField(blank=True, max_length=255, verbose_name='کشور')
+    total = models.IntegerField(verbose_name='جمع')
     status = models.CharField(max_length=30, choices=STATUS, verbose_name='وضعیت', default='جدید')
-    ip = models.CharField(blank=True, max_length=20)
-    adminnote = models.CharField(blank=True, max_length=255)
-    create_at = models.DateTimeField(auto_now_add=True)
-    update_at = models.DateTimeField(auto_now=True)
+    ip = models.CharField(blank=True, max_length=20, verbose_name='ای پی')
+    adminnote = models.CharField(blank=True, max_length=255, verbose_name='کد پیگیری مرسوله پستی')
+    create_at = jmodels.jDateField(auto_now_add=True)
+    update_at = jmodels.jDateField(auto_now=True, verbose_name='به روز شده در')
 
     def __str__(self):
-        return self.user.first_name
+        return self.first_name
 
+    class Meta:
+        verbose_name = 'سفارش'
+        verbose_name_plural = 'سفارشات'
 
 class OrderForm(ModelForm):
     class Meta:
@@ -84,11 +92,15 @@ class OrderProduct(models.Model):
     price = models.IntegerField()
     amount = models.IntegerField()
     status = models.CharField(max_length=30, choices=STATUS, verbose_name='وضعیت', default='New')
-    create_at = models.DateTimeField(auto_now_add=True)
-    update_at = models.DateTimeField(auto_now=True)
+    create_at = jmodels.jDateField(auto_now_add=True)
+    update_at = jmodels.jDateField(auto_now=True, verbose_name='به روز شده در')
 
     def __str__(self):
         return self.product.title
+
+    class Meta:
+        verbose_name = 'سفارش محصولات'
+        verbose_name_plural = 'سفارش محصولات'
 
 
 class wishList(models.Model):
@@ -106,6 +118,10 @@ class wishList(models.Model):
     @property
     def amount(self):
         return (self.product.amount)
+
+    class Meta:
+        verbose_name = 'لیست علاقه مندی ها'
+        verbose_name_plural = 'لیست علاقه مندی ها'
 
 class wishListForm(ModelForm):
     class Meta:

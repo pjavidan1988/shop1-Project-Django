@@ -1,7 +1,9 @@
+
+
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 # Create your views here.
 from django.utils.crypto import get_random_string
@@ -153,7 +155,8 @@ def orderproduct(request):
             setting = Setting.objects.get(pk=1)
             request.session['cart_items'] = 0
             messages.success(request, "خرید شما با موفقیت انجام شد")
-            return render(request, 'Order_Completed.html', {'ordercode': ordercode, 'category': category,'setting':setting})
+            return render(request, 'Order_Completed.html',
+                          {'ordercode': ordercode, 'category': category, 'setting': setting})
         else:
             messages.warning(request, form.errors)
             return HttpResponseRedirect("/order/orderproduct")
