@@ -16,7 +16,8 @@ class Category(MPTTModel):
         ('True', 'True'),
         ('False', 'False'),
     )
-    parent = TreeForeignKey('self', blank=True, null=True, related_name='children', on_delete=models.CASCADE, verbose_name='دسته والد')
+    parent = TreeForeignKey('self', blank=True, null=True, related_name='children', on_delete=models.CASCADE,
+                            verbose_name='دسته والد')
     title = models.CharField(max_length=50, verbose_name='عنوان')
     keywords = models.CharField(max_length=255, verbose_name='کلید واژه')
     description = models.TextField(max_length=255, verbose_name='توضیحات')
@@ -56,7 +57,8 @@ class Product(models.Model):
     VARIANTS = (
         ('هیچ یک', 'هیچ یک'),
         ('سایز', 'سایز'),
-        ('رنگ', 'رنگ')
+        ('رنگ', 'رنگ'),
+        ('هر دو', 'هر دو'),
     )
 
     category = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name='دسته بندی')
@@ -75,7 +77,7 @@ class Product(models.Model):
     transportation = models.DecimalField(max_digits=12, decimal_places=0, default=0, verbose_name='حمل و نقل')
     slug = models.SlugField(null=False, unique=True, verbose_name='نامک')
     status = models.CharField(max_length=10, choices=STATUS, verbose_name='وضعیت')
-    variant=models.CharField(max_length=10,choices=VARIANTS, default='None', verbose_name='نوع')
+    variant = models.CharField(max_length=10, choices=VARIANTS, default='None', verbose_name='نوع')
     create_at = jmodels.jDateField(auto_now_add=True)
     update_at = jmodels.jDateField(auto_now=True, verbose_name='به روز شده در')
 
@@ -83,12 +85,29 @@ class Product(models.Model):
         return self.title
 
     def image_tag(self):
-        return mark_safe('<img src="{}" height="50"/>'.format(self.image.url))
+        if self.image.url is not None:
+            return mark_safe('<img src="{}" height="50"/>'.format(self.image.url))
+        else:
+            return ""
 
-    image_tag.short_description = 'Image'
+    image_tag.short_description = 'تصویر'
 
     def get_absolute_url(self):
         return reverse('category_detail', kwargs={'slug': self.slug})
+
+    def avaregereview(self):
+        reviews = Comment.objects.filter(product=self, status='True').aggregate(avarage=Avg('rate'))
+        avg = 0
+        if reviews["avarage"] is not None:
+            avg = float(reviews["avarage"])
+        return avg
+
+    def countreview(self):
+        reviews = Comment.objects.filter(product=self, status='True').aggregate(count=Count('id'))
+        cnt = 0
+        if reviews["count"] is not None:
+            cnt = int(reviews["count"])
+        return cnt
 
     class Meta:
         verbose_name = 'محصول'
@@ -165,7 +184,7 @@ class Color(models.Model):
 
 class Variants(models.Model):
     title = models.CharField(max_length=100, blank=True, null=True, verbose_name='عنوان')
-    product = models.ForeignKey(Product, on_delete=models.CASCADE,related_name='pr', verbose_name='محصول')
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='pr', verbose_name='محصول')
     color = models.ForeignKey(Color, on_delete=models.CASCADE, blank=True, null=True, verbose_name='رنگ')
     size = models.ForeignKey(Size, on_delete=models.CASCADE, blank=True, null=True, verbose_name='سایز')
     quantity = models.IntegerField(default=1, verbose_name='تعداد')

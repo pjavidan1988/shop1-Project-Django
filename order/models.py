@@ -85,13 +85,13 @@ class OrderProduct(models.Model):
         ('پذیرفته شد', 'پذیرفته شد'),
         ('لغو شد', 'لغو شد'),
     )
-    order = models.ForeignKey(Order, on_delete=models.CASCADE)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    quantity = models.IntegerField()
-    price = models.IntegerField()
-    amount = models.IntegerField()
-    status = models.CharField(max_length=30, choices=STATUS, verbose_name='وضعیت', default='New')
+    order = models.ForeignKey(Order, on_delete=models.CASCADE, verbose_name='سفارش')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='کاربر')
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name='محصول')
+    quantity = models.IntegerField(verbose_name='تعداد')
+    price = models.IntegerField(verbose_name='قیمت')
+    amount = models.IntegerField(verbose_name='مقدار')
+    status = models.CharField(max_length=30, choices=STATUS, verbose_name='وضعیت', default='جدید')
     create_at = jmodels.jDateField(auto_now_add=True)
     update_at = jmodels.jDateField(auto_now=True, verbose_name='به روز شده در')
 
@@ -104,8 +104,8 @@ class OrderProduct(models.Model):
 
 
 class wishList(models.Model):
-    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
-    product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, verbose_name='کاربر')
+    product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True, verbose_name='محصول')
 
     def __str__(self):
         return self.product.title
