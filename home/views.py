@@ -1,10 +1,12 @@
 import json
 
 from django.contrib import messages
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render
 
 # Create your views here.
+from django.template.loader import render_to_string
+
 import product
 from home.forms import SearchForm
 from home.models import Setting, ContactForm, ContactMessage, FAQ, Blog
@@ -109,31 +111,46 @@ def product_search_auto(request):
 
 
 def product_detail(request, id, slug):
+    query = request.GET.get('q')
+    product = Product.objects.get(pk=id)
+    category = Category.objects.all()
     images = Picture.objects.filter(product_id=id)
     comments = Comment.objects.filter(product_id=id, status='True')
-    category = Category.objects.all()
-    product = Product.objects.get(pk=id)
     setting = Setting.objects.get(pk=1)
+    context = {'product': product, 'category': category,
+               'images': images, 'comments': comments,'setting':setting,
+               }
     if product.variant != "None":  # Product have variants
         if request.method == 'POST':  # if we select color
-            variant = Variants.objects.filter(product_id=id)
-            var_id = request.POST.get('select')
-            variants = Variants.objects.get(id=var_id)
+            variant_id = request.POST.get('variantid')
+            variant = Variants.objects.get(id=variant_id)  # selected product by click color radio
+            colors = Variants.objects.filter(product_id=id, size_id=variant.size_id)
+            sizes = Variants.objects.raw('SELECT DISTINCT * FROM  product_variants WHERE product_id=%s ORDER BY size_id',[id])
+            query += variant.title + ' Size:' + str(variant.size) + ' Color:' + str(variant.color)
         else:
-            variant = Variants.objects.filter(product_id=id)
-            variants = Variants.objects.get(id=variant[0].id)
-        context = {'product': product, 'category': category,
-                   'images': images, 'comments': comments, 'setting': setting, 'variant':variant,
-                   'variants':variants
-                   }
-        return render(request, 'product_detail.html', context)
-    else:
-        return render(request, 'product_detail.html', {'product': product, 'category': category,
-                   'images': images, 'comments': comments, 'setting': setting,
-                   })
+            variants = Variants.objects.filter(product_id=id)
+            colors = Variants.objects.filter(product_id=id, size_id=variants[0].size_id)
+            sizes = Variants.objects.raw('SELECT DISTINCT * FROM  product_variants WHERE product_id=%s ORDER BY size_id',[id])
+            variant = Variants.objects.get(id=variants[0].id)
+        context.update({'sizes': sizes, 'colors': colors,
+                        'variant': variant, 'query': query
+                        })
+    return render(request, 'product_detail.html', context)
 
-
-
+def ajaxcolor(request):
+    data = {}
+    if request.POST.get('action') == 'post':
+        size_id = request.POST.get('size')
+        productid = request.POST.get('productid')
+        colors = Variants.objects.filter(product_id=productid, size_id=size_id)
+        context = {
+            'size_id': size_id,
+            'productid': productid,
+            'colors': colors,
+        }
+        data = {'rendered_table': render_to_string('color_list.html', context=context)}
+        return JsonResponse(data)
+    return JsonResponse(data)
 
 
 def faq(request):

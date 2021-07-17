@@ -1,3 +1,4 @@
+import admin_thumbnails
 from django.contrib import admin
 
 # Register your models here.
@@ -50,8 +51,16 @@ class CategoryAdmin2(DraggableMPTTAdmin):
     related_products_cumulative_count.short_description = 'Related products (in tree)'
 
 
+@admin_thumbnails.thumbnail('image')
+class ProductImageInline(admin.TabularInline):
+    model = Picture
+    readonly_fields = ('id',)
+    extra = 1
+
+
 class ProductVariantsInline(admin.TabularInline):
     model = Variants
+    readonly_fields = ('image_tag',)
     extra = 1
     show_change_link = True
 
@@ -62,8 +71,13 @@ class ProductImageInline(admin.TabularInline):
     extra = 1
 
 
+@admin_thumbnails.thumbnail('image')
+class ImagesAdmin(admin.ModelAdmin):
+    list_display = ['image', 'title', 'image_thumbnail']
+
+
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ['title', 'category', 'status', 'amount', 'image_tag']
+    list_display = ['title', 'category', 'status', 'amount', 'image_tag', 'id']
     list_filter = ['category']
     list_editable = ('amount', 'category',)
     readonly_fields = ('image_tag',)
@@ -78,17 +92,17 @@ class CommentAdmin(admin.ModelAdmin):
 
 
 class ColorAdmin(admin.ModelAdmin):
-    list_display = ['name', 'code','id']
+    list_display = ['name', 'code', 'id']
     list_editable = ('code',)
 
 
 class SizeAdmin(admin.ModelAdmin):
-    list_display = ['name', 'code','id']
+    list_display = ['name', 'code', 'id']
     list_editable = ('code',)
 
 
 class VariantsAdmin(admin.ModelAdmin):
-    list_display = ['title', 'product', 'color', 'size', 'price', 'quantity','id']
+    list_display = ['title','product','color','size','price','quantity','image_tag']
     list_editable = ('size', 'color', 'price', 'quantity',)
 
 

@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.db import models
 
 # Create your models here.
+from django.db.models import Avg, Count
 from django.forms import ModelForm
 from django.urls import reverse
 from django.utils.safestring import mark_safe
@@ -187,11 +188,27 @@ class Variants(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='pr', verbose_name='محصول')
     color = models.ForeignKey(Color, on_delete=models.CASCADE, blank=True, null=True, verbose_name='رنگ')
     size = models.ForeignKey(Size, on_delete=models.CASCADE, blank=True, null=True, verbose_name='سایز')
+    image_id = models.IntegerField(blank=True, null=True, default=0)
     quantity = models.IntegerField(default=1, verbose_name='تعداد')
     price = models.DecimalField(max_digits=12, decimal_places=0, default=0, verbose_name='قیمت')
 
     def __str__(self):
         return self.title
+
+    def image(self):
+        img = Picture.objects.get(id=self.image_id)
+        if img.id is not None:
+             varimage=img.image.url
+        else:
+            varimage=""
+        return varimage
+
+    def image_tag(self):
+        img = Picture.objects.get(id=self.image_id)
+        if img.id is not None:
+             return mark_safe('<img src="{}" height="50"/>'.format(img.image.url))
+        else:
+            return ""
 
     class Meta:
         verbose_name = 'نوع'

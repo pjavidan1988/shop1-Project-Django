@@ -1,6 +1,7 @@
 {% extends 'homebase.html' %}
 {% load humanize %}
 {% load static %}
+{% load i18n %}
 {% load jformat %}
 {% block title %} {{ product.title }} | جزئیات محصول {% endblock %}
 {% block description %} {{ product.description }} {% endblock %}
@@ -124,6 +125,29 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        {#                                        <script>#}
+                                        {#                                            $(document).on('change', '#post-form', function (e) {#}
+                                        {#                                                e.preventDefault();#}
+                                        {#                                                $.ajax({#}
+                                        {#                                                    type: 'POST',#}
+                                        {#                                                    url: '{% url "ajaxcolor" %}',#}
+                                        {#                                                    data: {#}
+                                        {#                                                        productid: $('#productid').val(),#}
+                                        {#                                                        size: $('#size').val(),#}
+                                        {#                                                        csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),#}
+                                        {#                                                        action: 'post'#}
+                                        {#                                                    },#}
+                                        {#                                                    data_type: 'html',#}
+                                        {#                                                    success: function (data) {#}
+                                        {#                                                        console.log("success");#}
+                                        {#                                                        $('#appendHere').html(data.rendered_table);#}
+                                        {#                                                    },#}
+                                        {#                                                    error: function (data) {#}
+                                        {#                                                        alert("Got an error dude " + data);#}
+                                        {#                                                    }#}
+                                        {#                                                });#}
+                                        {#                                            });#}
+                                        {#                                        </script>#}
                                         <form action="/order/addtoshopcart/{{ product.id }}" method="post">
                                             <!-- hr -->
                                             {% if product.variant == 'هر دو' %}
@@ -136,7 +160,7 @@
                                                         {% csrf_token %}
                                                         <div class="widget-color f-left">
                                                             <select name="size" id="size">
-                                                                {% for rs in variant %}
+                                                                {% for rs in sizes %}
                                                                     <option {% if variant.size_id == rs.size_id %}
                                                                         selected {% endif %}
                                                                         value="{{ rs.size_id }}">{{ rs.size.name }}</option>
@@ -146,8 +170,37 @@
                                                     </form>
                                                 </div>
                                                 <hr>
+                                                <div class="single-pro-color-rating clearfix">
+                                                    <form method="post" action="?q=selectvariant" id="post-color">
+                                                        {% csrf_token %}
+                                                        <div id="appendHere">
+                                                            <input type="hidden" name="size" id="size"
+                                                                   value="{{ size_id }}">
+                                                            <ul class="color-option" style="display: flex">
+                                                                <p class="color-title f-left">نوع</p>
+                                                                {% for rs in colors %}
+                                                                    <input type="radio"  {% if variant.id == rs.id %}
+                                                                           checked {% endif %} name="variantid"
+                                                                           id="variantid" value="{{ rs.id }}"
+                                                                           onchange="this.form.submit();"
+                                                                           style="margin-left: 5px">
+                                                                    <li  {% if variant.id == rs.id %}
+                                                                        class="active" {% endif %}
+                                                                        style="margin-left: 15px">
+                                                                        <a style="margin-left: 12px">
+                                                                            {{ rs.color }}
+                                                                        </a>
+                                                                        <a>
+                                                                         {{ rs.price |intcomma:False }}  هزار تومان
+                                                                        </a>
+                                                                    </li>
+                                                                {% endfor %}
+                                                            </ul>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                                <hr>
                                                 <!-- single-product-price -->
-
                                                 <h3 class="pro-price"> قیمت: {{ variant.price |intcomma:False }}
                                                     تومان</h3>
 
