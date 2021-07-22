@@ -46,7 +46,7 @@
                     <div class="col-sm-4 col-xs-12">
                         <div class="contact-address box-shadow">
                             <i class="zmdi zmdi-phone"></i>
-                            <h6><a class="ltr-text" href="tel:555-555-1212">{{ setting.phone }}</a></h6>
+                            <h6>{{ setting.phone }}</h6>
                         </div>
                     </div>
                     <div class="col-sm-4 col-xs-12">
@@ -61,23 +61,15 @@
         </div>
         <!-- ADDRESS SECTION END -->
 
-
         <!-- MESSAGE BOX SECTION START -->
         <div class="message-box-section mt--50 mb-80">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-md-6">
                         <div class="message-box box-shadow white-bg">
                             <div class="row">
-                                <div class="col-md-12">
+                                <div class="col-md-6">
                                     <h4 class="blog-section-title border-left mb-30">در ارتباط باشید</h4>
-                                    {% if messages %}
-                                        {% for message in messages %}
-                                            <div class="alert alert-success" style="text-align: center">
-                                                <strong>{{ message }}</strong>
-                                            </div>
-                                        {% endfor %}
-                                    {% endif %}
                                 </div>
                                 <form id="contact-form" action="" method="post">
                                     <div class="col-md-12">
@@ -89,7 +81,25 @@
                                     </div>
                                 </form>
                             </div>
-                            <p class="form-messege"></p>
+                            <div style="margin-top: 20px">
+                                {% if messages %}
+                                    {% for message in messages %}
+                                        <div class="alert alert-success" style="text-align: center">
+                                            <strong>{{ message }}</strong>
+                                        </div>
+                                    {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="message-box box-shadow white-bg">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h4 class="blog-section-title border-left mb-30">توضیحات</h4>
+                                </div>
+                                <p>{{ setting.contact |safe }}</p>
+                            </div>
                         </div>
                     </div>
                 </div>

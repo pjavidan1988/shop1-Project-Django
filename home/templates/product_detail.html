@@ -125,29 +125,29 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        {#                                        <script>#}
-                                        {#                                            $(document).on('change', '#post-form', function (e) {#}
-                                        {#                                                e.preventDefault();#}
-                                        {#                                                $.ajax({#}
-                                        {#                                                    type: 'POST',#}
-                                        {#                                                    url: '{% url "ajaxcolor" %}',#}
-                                        {#                                                    data: {#}
-                                        {#                                                        productid: $('#productid').val(),#}
-                                        {#                                                        size: $('#size').val(),#}
-                                        {#                                                        csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),#}
-                                        {#                                                        action: 'post'#}
-                                        {#                                                    },#}
-                                        {#                                                    data_type: 'html',#}
-                                        {#                                                    success: function (data) {#}
-                                        {#                                                        console.log("success");#}
-                                        {#                                                        $('#appendHere').html(data.rendered_table);#}
-                                        {#                                                    },#}
-                                        {#                                                    error: function (data) {#}
-                                        {#                                                        alert("Got an error dude " + data);#}
-                                        {#                                                    }#}
-                                        {#                                                });#}
-                                        {#                                            });#}
-                                        {#                                        </script>#}
+{#                                        <script>#}
+{#                                            $(document).on('change', '#post-form', function (e) {#}
+{#                                                e.preventDefault();#}
+{#                                                $.ajax({#}
+{#                                                    type: 'POST',#}
+{#                                                    url: '{% url "ajaxcolor" %}',#}
+{#                                                    data: {#}
+{#                                                        productid: $('#productid').val(),#}
+{#                                                        size: $('#size').val(),#}
+{#                                                        csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),#}
+{#                                                        action: 'post'#}
+{#                                                    },#}
+{#                                                    data_type: 'html',#}
+{#                                                    success: function (data) {#}
+{#                                                        console.log("success");#}
+{#                                                        $('#appendHere').html(data.rendered_table);#}
+{#                                                    },#}
+{#                                                    error: function (data) {#}
+{#                                                        alert("Got an error dude " + data);#}
+{#                                                    }#}
+{#                                                });#}
+{#                                            });#}
+{#                                        </script>#}
                                         <form action="/order/addtoshopcart/{{ product.id }}" method="post">
                                             <!-- hr -->
                                             {% if product.variant == 'هر دو' %}

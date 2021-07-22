@@ -17,7 +17,7 @@ class Setting(models.Model):
     keywords = models.CharField(max_length=255, verbose_name='کلید واژه')
     description = models.CharField(max_length=255, verbose_name='توضحات')
     company = models.CharField(max_length=50, verbose_name='نام شرکت')
-    address = RichTextUploadingField(blank=True, verbose_name='آدرس')
+    address = models.CharField(max_length=250, verbose_name='آدرس')
     phone = models.CharField(blank=True, max_length=15, verbose_name='تلفن')
     fax = models.CharField(blank=True, max_length=15, verbose_name='فکس')
     email = models.CharField(blank=True, max_length=50, verbose_name='ایمیل')
@@ -79,7 +79,7 @@ class ContactForm(ModelForm):
         model = ContactMessage
         fields = ['name', 'email', 'subject', 'phone', 'message']
         widgets = {
-            'name': TextInput(attrs={'class': 'input', 'placeholder': 'نام شما'}),
+            'name': TextInput(attrs={'class': 'input','class': 'col-md-6', 'placeholder': 'نام شما'}),
             'subject': TextInput(attrs={'class': 'input', 'placeholder': 'موضوع'}),
             'phone': TextInput(attrs={'class': 'input', 'placeholder': 'شماره تلفن'}),
             'email': TextInput(attrs={'class': 'input', 'placeholder': 'ایمیل شما'}),
