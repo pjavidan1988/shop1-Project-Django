@@ -125,89 +125,106 @@
                                                 </div>
                                             </div>
                                         </div>
-{#                                        <script>#}
-{#                                            $(document).on('change', '#post-form', function (e) {#}
-{#                                                e.preventDefault();#}
-{#                                                $.ajax({#}
-{#                                                    type: 'POST',#}
-{#                                                    url: '{% url "ajaxcolor" %}',#}
-{#                                                    data: {#}
-{#                                                        productid: $('#productid').val(),#}
-{#                                                        size: $('#size').val(),#}
-{#                                                        csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),#}
-{#                                                        action: 'post'#}
-{#                                                    },#}
-{#                                                    data_type: 'html',#}
-{#                                                    success: function (data) {#}
-{#                                                        console.log("success");#}
-{#                                                        $('#appendHere').html(data.rendered_table);#}
-{#                                                    },#}
-{#                                                    error: function (data) {#}
-{#                                                        alert("Got an error dude " + data);#}
-{#                                                    }#}
-{#                                                });#}
-{#                                            });#}
-{#                                        </script>#}
-                                        <form action="/order/addtoshopcart/{{ product.id }}" method="post">
-                                            <!-- hr -->
-                                            {% if product.variant == 'هر دو' %}
-                                                <hr>
-                                                <div class="single-pro-color-rating clearfix">
+                                        <!-- hr -->
+                                        {% if product.variant == 'هر دو' %}
+                                            <hr>
+                                            <div class="single-pro-color-rating clearfix">
+                                            <div class="product-options">
+                                                <div class="size-option">
                                                     <form method="POST" id="post-form">
                                                         <input type="hidden" name="productid" id="productid"
                                                                value="{{ product.id }}">
                                                         <p class="color-title f-left">سایز</p>
                                                         {% csrf_token %}
-                                                        <div class="widget-color f-left">
-                                                            <select name="size" id="size">
-                                                                {% for rs in sizes %}
-                                                                    <option {% if variant.size_id == rs.size_id %}
-                                                                        selected {% endif %}
-                                                                        value="{{ rs.size_id }}">{{ rs.size.name }}</option>
-                                                                {% endfor %}
-                                                            </select>
-                                                        </div>
+                                                        <select name="size" id="size">
+                                                            {% for rs in sizes %}
+                                                                <option {% if variant.size_id == rs.size_id %}
+                                                                    selected {% endif %}
+                                                                    value="{{ rs.size_id }}">{{ rs.size.name }}</option>
+                                                            {% endfor %}
+                                                        </select>
                                                     </form>
                                                 </div>
-                                                <hr>
-                                                <div class="single-pro-color-rating clearfix">
-                                                    <form method="post" action="?q=selectvariant" id="post-color">
-                                                        {% csrf_token %}
-                                                        <div id="appendHere">
-                                                            <input type="hidden" name="size" id="size"
-                                                                   value="{{ size_id }}">
-                                                            <ul class="color-option" style="display: flex">
-                                                                <p class="color-title f-left">نوع</p>
-                                                                {% for rs in colors %}
-                                                                    <input type="radio"  {% if variant.id == rs.id %}
-                                                                           checked {% endif %} name="variantid"
-                                                                           id="variantid" value="{{ rs.id }}"
-                                                                           onchange="this.form.submit();"
-                                                                           style="margin-left: 5px">
-                                                                    <li  {% if variant.id == rs.id %}
-                                                                        class="active" {% endif %}
-                                                                        style="margin-left: 15px">
-                                                                        <a style="margin-left: 12px">
-                                                                            {{ rs.color }}
-                                                                        </a>
-                                                                        <a>
-                                                                         {{ rs.price |intcomma:False }}  هزار تومان
-                                                                        </a>
-                                                                    </li>
-                                                                {% endfor %}
-                                                            </ul>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                                <hr>
-                                                <!-- single-product-price -->
-                                                <h3 class="pro-price"> قیمت: {{ variant.price |intcomma:False }}
-                                                    تومان</h3>
-
+                                            </div>
+                                            <hr>
+                                            <div class="single-pro-color-rating clearfix">
+                                                <form method="post" action="?q=selectvariant" id="post-color">
+                                                    {% csrf_token %}
+                                                    <div id="appendHere">
+                                                        <input type="hidden" name="size" id="size"
+                                                               value="{{ size_id }}">
+                                                        <ul class="color-option" style="display: flex">
+                                                            <p class="color-title f-left">نوع</p>
+                                                            {% for rs in colors %}
+                                                                <input type="radio"  {% if variant.id == rs.id %}
+                                                                       checked {% endif %} name="variantid"
+                                                                       id="variantid" value="{{ rs.id }}"
+                                                                       onchange="this.form.submit();"
+                                                                       style="margin-left: 5px">
+                                                                <li  {% if variant.id == rs.id %}
+                                                                    class="active" {% endif %}
+                                                                    style="margin-left: 15px">
+                                                                    <a style="margin-left: 12px">
+                                                                        {{ rs.color }}
+                                                                    </a>
+                                                                    <a>
+                                                                        {{ rs.price |intcomma:False }} هزار تومان
+                                                                    </a>
+                                                                </li>
+                                                            {% endfor %}
+                                                        </ul>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            <hr>
+                                        {% endif %}
+                                        {% if  product.variant != 'هیچ یک' %}
+                                            <!-- single-product-price -->
+                                            <form action="/order/addtoshopcart/{{ product.id }}" method="post" id="addchart-form">
+                                                {% csrf_token %}
+                                                <input type="hidden" name="variantid" id="variantid" value="{{ variant.id }}">
+                                                <h3 class="pro-price"> قیمت: {{ variant.price |intcomma:False }} تومان</h3>
                                                 <!--  hr -->
                                                 <hr>
-                                                <h3 class="pro-price">{% if product.amount > 0 %} موجودی :
-                                                    {{ product.amount }} {% else %} ناموجود {% endif %}</h3>
+                                                <h3 class="pro-price">{% if variant.quantity > 0 %} موجودی :
+                                                    {{ variant.quantity }} {% else %} ناموجود {% endif %}</h3>
+                                                <!--  hr -->
+                                                <hr>
+                                                <div>
+                                                    <h3 class="pro-price"> سایز : {{ variant.size }}</h3>
+                                                </div>
+                                                <hr>
+                                                <div>
+                                                    <h3 class="pro-price"> نوع : {{ variant.color }} </h3>
+                                                </div>
+                                                <hr>
+                                                <!-- plus-minus-pro-action -->
+                                                <div class="plus-minus-pro-action">
+                                                    <div class="sin-plus-minus f-left clearfix">
+                                                        <p class="color-title f-left">تعداد</p>
+                                                        <div class="text-uppercase" style="display: contents">
+                                                            <input class="input" style="text-align: center" name="quantity" type="number" value="1" min="1" max="{{ variant.quantity }}">
+                                                        </div>
+                                                    </div>
+                                                    <div class="sin-pro-action f-right">
+                                                        <ul class="action-button">
+                                                            <li>
+                                                                <a href="/order/addtowishlist/{{ product.id }}" title="Wishlist" tabindex="0"><i class="zmdi zmdi-favorite"></i></a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div style="margin-top: 60px">
+                                                    <button type="submit" {% if variant.quantity < 1 %}disabled {% endif %} class="submit-btn-1 mt-60 btn-hover-2 f-left" type="submit" style="margin-bottom: 100px">افزودن به سبد خرید</button>
+                                                </div>
+                                            </form>
+                                        {% else %}
+                                            <form action="/order/addtoshopcart/{{ product.id }}" method="post" id="addchart-form">
+                                                {% csrf_token %}
+                                                <h3 class="pro-price"> قیمت: {{ product.price |intcomma:False }}تومان</h3>
+                                                <!--  hr -->
+                                                <hr>
+                                                <h3 class="pro-price">{% if product.amount > 0 %} موجودی :{{ product.amount }} {% else %} ناموجود {% endif %}</h3>
                                                 <!--  hr -->
                                                 <hr>
                                                 <!-- plus-minus-pro-action -->
@@ -215,317 +232,244 @@
                                                     <div class="sin-plus-minus f-left clearfix">
                                                         <p class="color-title f-left">تعداد</p>
                                                         <div class="text-uppercase" style="display: contents">
-                                                            <input class="input" style="text-align: center"
-                                                                   name="quantity"
-                                                                   type="number" value="1" min="1"
-                                                                   max="{{ product.amount }}">
+                                                            <input class="input" style="text-align: center" name="quantity" type="number" value="1" min="1" max="{{ product.amount }}">
                                                         </div>
                                                     </div>
                                                     <div class="sin-pro-action f-right">
                                                         <ul class="action-button">
                                                             <li>
-                                                                <a href="/order/addtowishlist/{{ product.id }}"
-                                                                   title="Wishlist" tabindex="0"><i
-                                                                        class="zmdi zmdi-favorite"></i></a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#" data-toggle="modal"
-                                                                   data-target="#productModal"
-                                                                   title="Quickview" tabindex="0"><i
-                                                                        class="zmdi zmdi-zoom-in"></i></a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#" title="Compare" tabindex="0"><i
-                                                                        class="zmdi zmdi-refresh"></i></a>
+                                                                <a href="/order/addtowishlist/{{ product.id }}" title="Wishlist" tabindex="0"><i class="zmdi zmdi-favorite"></i></a>
                                                             </li>
                                                         </ul>
                                                     </div>
                                                 </div>
-                                                <div style="margin-top: 60px">
-                                                    <button type="submit" {% if product.amount < 1 %}
-                                                            disabled {% endif %}
-                                                            class="submit-btn-1 mt-60 btn-hover-2 f-left"
-                                                            type="submit">افزودن به سبد خرید
-                                                    </button>
+                                                <div  style="margin-top: 60px">
+                                                    <button type="submit" {% if product.amount < 1 %}disabled {% endif %} class="submit-btn-1 mt-60 btn-hover-2 f-left" type="submit" style="margin-bottom: 100px">افزودن به سبد خرید</button>
                                                 </div>
-                                            {% else %}
-                                                <form action="/order/addtoshopcart/{{ product.id }}" method="post">
-                                                    {% csrf_token %}
-                                                    <hr>
-                                                    <!-- single-product-price -->
-                                                    <h3 class="pro-price"> قیمت: {{ product.price|intcomma:False }}
-                                                        تومان</h3>
-                                                    <!--  hr -->
-                                                    <hr>
-                                                    <h3 class="pro-price">{% if product.amount > 0 %} موجودی :
-                                                        {{ product.amount }} {% else %} ناموجود {% endif %}</h3>
-                                                    <!--  hr -->
-                                                    <hr>
-                                                    <!-- plus-minus-pro-action -->
-                                                    <div class="plus-minus-pro-action">
-                                                        <div class="sin-plus-minus f-left clearfix">
-                                                            <p class="color-title f-left">تعداد</p>
-                                                            <div class="text-uppercase" style="display: contents">
-                                                                <input class="input" style="text-align: center"
-                                                                       name="quantity"
-                                                                       type="number" value="1" min="1"
-                                                                       max="{{ product.amount }}">
-                                                            </div>
-                                                        </div>
-                                                        <div class="sin-pro-action f-right">
-                                                            <ul class="action-button">
-                                                                <li>
-                                                                    <a href="/order/addtowishlist/{{ product.id }}"
-                                                                       title="Wishlist" tabindex="0"><i
-                                                                            class="zmdi zmdi-favorite"></i></a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="#" data-toggle="modal"
-                                                                       data-target="#productModal"
-                                                                       title="Quickview" tabindex="0"><i
-                                                                            class="zmdi zmdi-zoom-in"></i></a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="#" title="Compare" tabindex="0"><i
-                                                                            class="zmdi zmdi-refresh"></i></a>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                    <div style="margin-top: 60px">
-                                                        <button type="submit" {% if product.amount < 1 %}
-                                                                disabled {% endif %}
-                                                                class="submit-btn-1 mt-60 btn-hover-2 f-left"
-                                                                type="submit">افزودن به سبد خرید
-                                                        </button>
-                                                    </div>
-                                                </form>
-                                            {% endif %}
-                                        </form>
+                                            </form>
+                                        {% endif %}
+                                        </div>
                                     </div>
+                                    <!-- single-product-info end -->
                                 </div>
-                                <!-- single-product-info end -->
                             </div>
-                        </div>
-                        <!-- single-product-area end -->
-                        <form class="leave-comment"
-                              action="/product/addcomment/{{ product.id }}"
-                              method="post">
-                            {% csrf_token %}
-                            <h4 class="blog-section-title border-left mb-30">دیدگاه خود را
-                                بیان کنید</h4>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <input type="text" name="name"
-                                           placeholder="نام شما ...">
-                                </div>
-                                <div class="col-md-6">
-                                    <input type="email" name="email"
-                                           placeholder="آدرس ایمیل ...">
-                                </div>
-                                <div class="col-md-12">
-                                    <input type="text" name="subject"
-                                           placeholder="موضوع ...">
-                                </div>
-                                <div class="col-md-12">
+                            <!-- single-product-area end -->
+                            <form class="leave-comment" action="/product/addcomment/{{ product.id }}" method="post">
+                                {% csrf_token %}
+                                <h4 class="blog-section-title border-left mb-30">دیدگاه خود رابیان کنید</h4>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <input type="text" name="name"
+                                               placeholder="نام شما ...">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="email" name="email"
+                                               placeholder="آدرس ایمیل ...">
+                                    </div>
+                                    <div class="col-md-12">
+                                        <input type="text" name="subject"
+                                               placeholder="موضوع ...">
+                                    </div>
+                                    <div class="col-md-12">
                                       <textarea name="comment" class="custom-textarea"
                                                 placeholder="دیدگاه شما ..."></textarea>
+                                    </div>
                                 </div>
-                            </div>
-                            {% if user.id is not None %}
-                                <button class="submit-btn-1 black-bg mt-30 btn-hover-2 f-left"
-                                        type="submit">ثبت دیدگاه
-                                </button>
-                            {% else %}
-                                <div class="alert alert-danger"><strong>شما باید وارد سایت
-                                    شوید!</strong> <a href="/login" class="alert-link">ورود به
-                                    سایت</a></div>
-                            {% endif %}
-                            <!--  -->
-                        </form>
-                    </div>
-                    <div class="related-product-area">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="section-title text-left mb-40" style="margin-top: 60px">
-                                    <h2>محصولات مرتبط</h2>
-                                </div>
-                            </div>
+                                {% if user.id is not None %}
+                                    <button class="submit-btn-1 black-bg mt-30 btn-hover-2 f-left"
+                                            type="submit">ثبت دیدگاه
+                                    </button>
+                                {% else %}
+                                    <div class="alert alert-danger"><strong>شما باید وارد سایت
+                                        شوید!</strong> <a href="/login" class="alert-link">ورود به
+                                        سایت</a></div>
+                                {% endif %}
+                                <!--  -->
+                            </form>
                         </div>
-                        <div class="row">
-                            <div class="active-related-product">
-                                <!-- product-item start -->
-                                <div class="col-xs-12">
-                                    <div class="product-item">
-                                        <div class="product-img">
-                                            <a href="single-product.html">
-                                                <img src="img/product/1.jpg" alt="">
-                                            </a>
-                                        </div>
-                                        <div class="product-info">
-                                            <h6 class="product-title">
-                                                <a href="single-product.html">نام محصول نمایشی</a>
-                                            </h6>
-                                            <div class="pro-rating">
-                                                <a href="#"><i class="zmdi zmdi-star"></i></a>
-                                                <a href="#"><i class="zmdi zmdi-star"></i></a>
-                                                <a href="#"><i class="zmdi zmdi-star"></i></a>
-                                                <a href="#"><i class="zmdi zmdi-star-half"></i></a>
-                                                <a href="#"><i class="zmdi zmdi-star-outline"></i></a>
-                                            </div>
-                                            <h3 class="pro-price">869,000 تومان</h3>
-                                            <ul class="action-button">
-                                                <li>
-                                                    <a href="#" title="Wishlist"><i class="zmdi zmdi-favorite"></i></a>
-                                                </li>
-                                                <li>
-                                                    <a href="#" data-toggle="modal" data-target="#productModal"
-                                                       title="Quickview"><i class="zmdi zmdi-zoom-in"></i></a>
-                                                </li>
-                                                <li>
-                                                    <a href="#" title="Compare"><i
-                                                            class="zmdi zmdi-refresh"></i></a>
-                                                </li>
-                                                <li>
-                                                    <a href="#" title="Add to cart"><i
-                                                            class="zmdi zmdi-shopping-cart-plus"></i></a>
-                                                </li>
-                                            </ul>
-                                        </div>
+                        <div class="related-product-area">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="section-title text-left mb-40" style="margin-top: 60px">
+                                        <h2>محصولات مرتبط</h2>
                                     </div>
                                 </div>
-                                <!-- product-item end -->
-                                <!-- product-item start -->
-                                <div class="col-xs-12">
-                                    <div class="product-item">
-                                        <div class="product-img">
-                                            <a href="single-product.html">
-                                                <img src="img/product/1.jpg" alt="">
-                                            </a>
-                                        </div>
-                                        <div class="product-info">
-                                            <h6 class="product-title">
-                                                <a href="single-product.html">نام محصول نمایشی</a>
-                                            </h6>
-                                            <div class="pro-rating">
-                                                <a href="#"><i class="zmdi zmdi-star"></i></a>
-                                                <a href="#"><i class="zmdi zmdi-star"></i></a>
-                                                <a href="#"><i class="zmdi zmdi-star"></i></a>
-                                                <a href="#"><i class="zmdi zmdi-star-half"></i></a>
-                                                <a href="#"><i class="zmdi zmdi-star-outline"></i></a>
+                            </div>
+                            <div class="row">
+                                <div class="active-related-product">
+                                    <!-- product-item start -->
+                                    <div class="col-xs-12">
+                                        <div class="product-item">
+                                            <div class="product-img">
+                                                <a href="single-product.html">
+                                                    <img src="img/product/1.jpg" alt="">
+                                                </a>
                                             </div>
-                                            <h3 class="pro-price">869,000 تومان</h3>
-                                            <ul class="action-button">
-                                                <li>
-                                                    <a href="#" title="Wishlist"><i class="zmdi zmdi-favorite"></i></a>
-                                                </li>
-                                                <li>
-                                                    <a href="#" data-toggle="modal" data-target="#productModal"
-                                                       title="Quickview"><i class="zmdi zmdi-zoom-in"></i></a>
-                                                </li>
-                                                <li>
-                                                    <a href="#" title="Compare"><i
-                                                            class="zmdi zmdi-refresh"></i></a>
-                                                </li>
-                                                <li>
-                                                    <a href="#" title="Add to cart"><i
-                                                            class="zmdi zmdi-shopping-cart-plus"></i></a>
-                                                </li>
-                                            </ul>
+                                            <div class="product-info">
+                                                <h6 class="product-title">
+                                                    <a href="single-product.html">نام محصول نمایشی</a>
+                                                </h6>
+                                                <div class="pro-rating">
+                                                    <a href="#"><i class="zmdi zmdi-star"></i></a>
+                                                    <a href="#"><i class="zmdi zmdi-star"></i></a>
+                                                    <a href="#"><i class="zmdi zmdi-star"></i></a>
+                                                    <a href="#"><i class="zmdi zmdi-star-half"></i></a>
+                                                    <a href="#"><i class="zmdi zmdi-star-outline"></i></a>
+                                                </div>
+                                                <h3 class="pro-price">869,000 تومان</h3>
+                                                <ul class="action-button">
+                                                    <li>
+                                                        <a href="#" title="Wishlist"><i class="zmdi zmdi-favorite"></i></a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#" data-toggle="modal" data-target="#productModal"
+                                                           title="Quickview"><i class="zmdi zmdi-zoom-in"></i></a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#" title="Compare"><i
+                                                                class="zmdi zmdi-refresh"></i></a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#" title="Add to cart"><i
+                                                                class="zmdi zmdi-shopping-cart-plus"></i></a>
+                                                    </li>
+                                                </ul>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <!-- product-item end -->
-                                <!-- product-item start -->
-                                <div class="col-xs-12">
-                                    <div class="product-item">
-                                        <div class="product-img">
-                                            <a href="single-product.html">
-                                                <img src="img/product/1.jpg" alt="">
-                                            </a>
-                                        </div>
-                                        <div class="product-info">
-                                            <h6 class="product-title">
-                                                <a href="single-product.html">نام محصول نمایشی</a>
-                                            </h6>
-                                            <div class="pro-rating">
-                                                <a href="#"><i class="zmdi zmdi-star"></i></a>
-                                                <a href="#"><i class="zmdi zmdi-star"></i></a>
-                                                <a href="#"><i class="zmdi zmdi-star"></i></a>
-                                                <a href="#"><i class="zmdi zmdi-star-half"></i></a>
-                                                <a href="#"><i class="zmdi zmdi-star-outline"></i></a>
+                                    <!-- product-item end -->
+                                    <!-- product-item start -->
+                                    <div class="col-xs-12">
+                                        <div class="product-item">
+                                            <div class="product-img">
+                                                <a href="single-product.html">
+                                                    <img src="img/product/1.jpg" alt="">
+                                                </a>
                                             </div>
-                                            <h3 class="pro-price">869,000 تومان</h3>
-                                            <ul class="action-button">
-                                                <li>
-                                                    <a href="#" title="Wishlist"><i class="zmdi zmdi-favorite"></i></a>
-                                                </li>
-                                                <li>
-                                                    <a href="#" data-toggle="modal" data-target="#productModal"
-                                                       title="Quickview"><i class="zmdi zmdi-zoom-in"></i></a>
-                                                </li>
-                                                <li>
-                                                    <a href="#" title="Compare"><i
-                                                            class="zmdi zmdi-refresh"></i></a>
-                                                </li>
-                                                <li>
-                                                    <a href="#" title="Add to cart"><i
-                                                            class="zmdi zmdi-shopping-cart-plus"></i></a>
-                                                </li>
-                                            </ul>
+                                            <div class="product-info">
+                                                <h6 class="product-title">
+                                                    <a href="single-product.html">نام محصول نمایشی</a>
+                                                </h6>
+                                                <div class="pro-rating">
+                                                    <a href="#"><i class="zmdi zmdi-star"></i></a>
+                                                    <a href="#"><i class="zmdi zmdi-star"></i></a>
+                                                    <a href="#"><i class="zmdi zmdi-star"></i></a>
+                                                    <a href="#"><i class="zmdi zmdi-star-half"></i></a>
+                                                    <a href="#"><i class="zmdi zmdi-star-outline"></i></a>
+                                                </div>
+                                                <h3 class="pro-price">869,000 تومان</h3>
+                                                <ul class="action-button">
+                                                    <li>
+                                                        <a href="#" title="Wishlist"><i class="zmdi zmdi-favorite"></i></a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#" data-toggle="modal" data-target="#productModal"
+                                                           title="Quickview"><i class="zmdi zmdi-zoom-in"></i></a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#" title="Compare"><i
+                                                                class="zmdi zmdi-refresh"></i></a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#" title="Add to cart"><i
+                                                                class="zmdi zmdi-shopping-cart-plus"></i></a>
+                                                    </li>
+                                                </ul>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <!-- product-item end -->
-                                <!-- product-item start -->
-                                <div class="col-xs-12">
-                                    <div class="product-item">
-                                        <div class="product-img">
-                                            <a href="single-product.html">
-                                                <img src="img/product/1.jpg" alt="">
-                                            </a>
-                                        </div>
-                                        <div class="product-info">
-                                            <h6 class="product-title">
-                                                <a href="single-product.html">نام محصول نمایشی</a>
-                                            </h6>
-                                            <div class="pro-rating">
-                                                <a href="#"><i class="zmdi zmdi-star"></i></a>
-                                                <a href="#"><i class="zmdi zmdi-star"></i></a>
-                                                <a href="#"><i class="zmdi zmdi-star"></i></a>
-                                                <a href="#"><i class="zmdi zmdi-star-half"></i></a>
-                                                <a href="#"><i class="zmdi zmdi-star-outline"></i></a>
+                                    <!-- product-item end -->
+                                    <!-- product-item start -->
+                                    <div class="col-xs-12">
+                                        <div class="product-item">
+                                            <div class="product-img">
+                                                <a href="single-product.html">
+                                                    <img src="img/product/1.jpg" alt="">
+                                                </a>
                                             </div>
-                                            <h3 class="pro-price">869,000 تومان</h3>
-                                            <ul class="action-button">
-                                                <li>
-                                                    <a href="#" title="Wishlist"><i class="zmdi zmdi-favorite"></i></a>
-                                                </li>
-                                                <li>
-                                                    <a href="#" data-toggle="modal" data-target="#productModal"
-                                                       title="Quickview"><i class="zmdi zmdi-zoom-in"></i></a>
-                                                </li>
-                                                <li>
-                                                    <a href="#" title="Compare"><i
-                                                            class="zmdi zmdi-refresh"></i></a>
-                                                </li>
-                                                <li>
-                                                    <a href="#" title="Add to cart"><i
-                                                            class="zmdi zmdi-shopping-cart-plus"></i></a>
-                                                </li>
-                                            </ul>
+                                            <div class="product-info">
+                                                <h6 class="product-title">
+                                                    <a href="single-product.html">نام محصول نمایشی</a>
+                                                </h6>
+                                                <div class="pro-rating">
+                                                    <a href="#"><i class="zmdi zmdi-star"></i></a>
+                                                    <a href="#"><i class="zmdi zmdi-star"></i></a>
+                                                    <a href="#"><i class="zmdi zmdi-star"></i></a>
+                                                    <a href="#"><i class="zmdi zmdi-star-half"></i></a>
+                                                    <a href="#"><i class="zmdi zmdi-star-outline"></i></a>
+                                                </div>
+                                                <h3 class="pro-price">869,000 تومان</h3>
+                                                <ul class="action-button">
+                                                    <li>
+                                                        <a href="#" title="Wishlist"><i class="zmdi zmdi-favorite"></i></a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#" data-toggle="modal" data-target="#productModal"
+                                                           title="Quickview"><i class="zmdi zmdi-zoom-in"></i></a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#" title="Compare"><i
+                                                                class="zmdi zmdi-refresh"></i></a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#" title="Add to cart"><i
+                                                                class="zmdi zmdi-shopping-cart-plus"></i></a>
+                                                    </li>
+                                                </ul>
+                                            </div>
                                         </div>
                                     </div>
+                                    <!-- product-item end -->
+                                    <!-- product-item start -->
+                                    <div class="col-xs-12">
+                                        <div class="product-item">
+                                            <div class="product-img">
+                                                <a href="single-product.html">
+                                                    <img src="img/product/1.jpg" alt="">
+                                                </a>
+                                            </div>
+                                            <div class="product-info">
+                                                <h6 class="product-title">
+                                                    <a href="single-product.html">نام محصول نمایشی</a>
+                                                </h6>
+                                                <div class="pro-rating">
+                                                    <a href="#"><i class="zmdi zmdi-star"></i></a>
+                                                    <a href="#"><i class="zmdi zmdi-star"></i></a>
+                                                    <a href="#"><i class="zmdi zmdi-star"></i></a>
+                                                    <a href="#"><i class="zmdi zmdi-star-half"></i></a>
+                                                    <a href="#"><i class="zmdi zmdi-star-outline"></i></a>
+                                                </div>
+                                                <h3 class="pro-price">869,000 تومان</h3>
+                                                <ul class="action-button">
+                                                    <li>
+                                                        <a href="#" title="Wishlist"><i class="zmdi zmdi-favorite"></i></a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#" data-toggle="modal" data-target="#productModal"
+                                                           title="Quickview"><i class="zmdi zmdi-zoom-in"></i></a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#" title="Compare"><i
+                                                                class="zmdi zmdi-refresh"></i></a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#" title="Add to cart"><i
+                                                                class="zmdi zmdi-shopping-cart-plus"></i></a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- product-item end -->
                                 </div>
-                                <!-- product-item end -->
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <!-- SHOP SECTION END -->
+            <!-- SHOP SECTION END -->
 
     </section>
     <section>
