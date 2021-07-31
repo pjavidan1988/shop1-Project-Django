@@ -9,7 +9,7 @@ from django.template.loader import render_to_string
 
 import product
 from home.forms import SearchForm
-from home.models import Setting, ContactForm, ContactMessage, FAQ, Blog
+from home.models import Setting, ContactForm, ContactMessage, FAQ, Blog, sizeMessageForm, sizeMessage
 from product.models import Category, Product, Picture, Comment, Variants
 
 
@@ -62,6 +62,29 @@ def contactus(request):
     form = ContactForm
     context = {'setting': setting, 'form': form, 'category': category, }
     return render(request, 'contact.html', context)
+
+def oredersize(request):
+    if request.method == 'POST':
+        form = sizeMessageForm(request.POST)
+        if form.is_valid():
+            # send and save data
+            data = sizeMessage()
+            data.name = form.cleaned_data['name']
+            data.phone = form.cleaned_data['phone']
+            data.width = form.cleaned_data['width']
+            data.height = form.cleaned_data['height']
+            data.type = form.cleaned_data['type']
+            data.ip = request.META.get('REMOTE_ADDR')
+            data.save()
+            # send and save data
+            messages.success(request, "پیام شما با موفقیت ارسال شد")
+            return HttpResponseRedirect('/ordersize')
+
+    setting = Setting.objects.get(pk=1)
+    category = Category.objects.all()
+    form = sizeMessageForm
+    context = {'setting': setting, 'form': form, 'category': category, }
+    return render(request, 'oredrsize.html', context)
 
 
 def category_products(request, id, slug):

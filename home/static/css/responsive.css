@@ -604,7 +604,9 @@
     }
 
     .logo img {
-        width: 100px;
+        width: 40%;
+        height: 40%;
+        object-fit: cover;
     }
 
     .sticky .logo {
@@ -757,7 +759,9 @@
     }
 
     .logo img {
-        width: 100px;
+        width: 50%;
+        height: 50%;
+        object-fit: cover;
     }
 
     /*header-search & total-cart*/

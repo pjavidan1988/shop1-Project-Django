@@ -33,6 +33,7 @@ urlpatterns = [
 
     path('aboutus/', views.aboutus, name='aboutus'),
     path('contactus/', views.contactus, name='contactus'),
+    path('ordersize/', views.oredersize, name='ordersize'),
     path('search/', views.search_products, name='search_products'),
     path('search_auto/', views.product_search_auto, name='product_search_auto'),
     path('category/<int:id>/<slug:slug>', views.category_products, name='category_products'),

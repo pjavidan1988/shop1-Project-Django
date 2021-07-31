@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from home.models import Setting, ContactMessage, FAQ, Blog
+from home.models import Setting, ContactMessage, FAQ, Blog, sizeMessage
 
 
 class SettingAdmin(admin.ModelAdmin):
@@ -11,6 +11,10 @@ class SettingAdmin(admin.ModelAdmin):
 class ContactMessageAdmin(admin.ModelAdmin):
     list_display = ['name', 'subject', 'update_at', 'status']
     readonly_fields = ('name', 'subject', 'email', 'message', 'ip')
+
+class sizeMessageAdmin(admin.ModelAdmin):
+    list_display = ['name', 'phone', 'update_at', 'status']
+    readonly_fields = ('name', 'phone', 'width', 'height', 'type')
 
 
 class FAQAdmin(admin.ModelAdmin):
@@ -27,5 +31,6 @@ class BlogAdmin(admin.ModelAdmin):
 
 admin.site.register(Setting, SettingAdmin)
 admin.site.register(ContactMessage, ContactMessageAdmin)
+admin.site.register(sizeMessage, sizeMessageAdmin)
 admin.site.register(FAQ,FAQAdmin)
 admin.site.register(Blog, BlogAdmin)

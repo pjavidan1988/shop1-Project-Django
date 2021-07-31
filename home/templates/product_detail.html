@@ -98,16 +98,14 @@
                                                             <!-- single comments -->
                                                             <div class="media mt-30">
                                                                 <div class="media-left">
-                                                                    <a href="#"><img class="media-object"
-                                                                                     src="{{ rs.user.userprofile.image.url }}"
-                                                                                     alt="#"></a>
+                                                                    <a href="#"><img class="media-object" src="{{ rs.user.userprofile.image.url }}" alt=""></a>
                                                                 </div>
                                                                 <div class="media-body">
                                                                     <div class="clearfix">
                                                                         <div class="name-commenter pull-left">
                                                                             <h1 class="media-heading">{{ rs.user.first_name }}</h1>
                                                                             <h3 class="media-heading">{{ rs.subject }}</h3>
-                                                                            <p class="mb-10">{{ rs.create_at|jformat:"%d / %m / %Y - ساعت %H:%M" }}</p>
+                                                                            <p class="mb-10">{{ rs.create_at|jformat:"%d / %m / %Y" }}</p>
                                                                         </div>
                                                                     </div>
                                                                     <p class="mb-0">{{ rs.comment }}</p>
@@ -125,15 +123,15 @@
                                                 </div>
                                             </div>
                                         </div>
+
                                         <!-- hr -->
-                                        {% if product.variant == 'هر دو' %}
+                                        {% if product.variant == 'Size-Color' %}
                                             <hr>
                                             <div class="single-pro-color-rating clearfix">
                                             <div class="product-options">
                                                 <div class="size-option">
                                                     <form method="POST" id="post-form">
-                                                        <input type="hidden" name="productid" id="productid"
-                                                               value="{{ product.id }}">
+                                                        <input type="hidden" name="productid" id="productid" value="{{ product.id }}">
                                                         <p class="color-title f-left">سایز</p>
                                                         {% csrf_token %}
                                                         <select name="size" id="size">
@@ -177,8 +175,12 @@
                                                 </form>
                                             </div>
                                             <hr>
+                                            <div>
+                                                <p class="color-title" style="display: contents">در صورت درخواست اندازه دلخواه <a href="/ordersize" style="color: #00a9da">کلیک کنید</a></p>
+                                            </div>
+                                            <hr>
                                         {% endif %}
-                                        {% if  product.variant != 'هیچ یک' %}
+                                        {% if  product.variant != 'None' %}
                                             <!-- single-product-price -->
                                             <form action="/order/addtoshopcart/{{ product.id }}" method="post" id="addchart-form">
                                                 {% csrf_token %}
@@ -221,6 +223,7 @@
                                         {% else %}
                                             <form action="/order/addtoshopcart/{{ product.id }}" method="post" id="addchart-form">
                                                 {% csrf_token %}
+                                                <hr>
                                                 <h3 class="pro-price"> قیمت: {{ product.price |intcomma:False }}تومان</h3>
                                                 <!--  hr -->
                                                 <hr>

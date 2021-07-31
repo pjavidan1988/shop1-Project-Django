@@ -1,0 +1,112 @@
+{% extends 'homebase.html' %}
+{% load humanize %}
+
+{% block title %}  {{ setting.title }}  | سفارش پرده مغناطیسی {% endblock %}
+{% block description %} {{ setting.description }} {% endblock %}
+{% block keywords %} {{ setting.keywords }} {% endblock %}
+
+{% block sidebar %} {% include 'sidebar.html' %} {% endblock %}
+
+{% block body %}
+
+    <!-- BREADCRUMBS SETCTION START -->
+    <div class="breadcrumbs-section plr-200 mb-80">
+        <div class="breadcrumbs overlay-bg">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="breadcrumbs-inner">
+                            <h1 class="breadcrumbs-title">سفارش</h1>
+                            <ul class="breadcrumb">
+                                <li><a href="/">خانه</a></li>
+                                <li>سفارش</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- BREADCRUMBS SETCTION END -->
+
+    <!-- Start page content -->
+    <section id="page-content" class="page-wrapper">
+
+        <!-- ADDRESS SECTION START -->
+        <div class="address-section mb-80">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-4 col-xs-12">
+                        <div class="contact-address box-shadow">
+                            <i class="zmdi zmdi-pin"></i>
+                            <h6>{{ setting.address | safe }}</h6>
+                            <h6></h6>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 col-xs-12">
+                        <div class="contact-address box-shadow">
+                            <i class="zmdi zmdi-phone"></i>
+                            <h6>{{ setting.phone }}</h6>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 col-xs-12">
+                        <div class="contact-address box-shadow">
+                            <i class="zmdi zmdi-email"></i>
+                            <h6>{{ setting.email }}</h6>
+                            <h6>{{ setting.smtpemail }}</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ADDRESS SECTION END -->
+
+        <!-- MESSAGE BOX SECTION START -->
+        <div class="message-box-section mt--50 mb-80">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="message-box box-shadow white-bg">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h4 class="blog-section-title border-left mb-30">وارد کردن اطلاعات سفارش</h4>
+                                </div>
+                                <form id="contact-form" action="" method="post">
+                                    <div class="col-md-12">
+                                        {% csrf_token %}
+                                        {{ form.as_p }}
+                                    </div>
+                                    <div class="col-md-12">
+                                        <button class="submit-btn-1 mt-30 btn-hover-1" type="submit">ثبت پیام</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div style="margin-top: 20px">
+                                {% if messages %}
+                                    {% for message in messages %}
+                                        <div class="alert alert-success" style="text-align: center">
+                                            <strong>{{ message }}</strong>
+                                        </div>
+                                    {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="message-box box-shadow white-bg">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h4 class="blog-section-title border-left mb-30">توضیحات</h4>
+                                </div>
+                                <p>{{ setting.contact |safe }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- MESSAGE BOX SECTION END -->
+    </section>
+    <!-- End page content -->
+
+{% endblock %}

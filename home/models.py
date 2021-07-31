@@ -87,6 +87,45 @@ class ContactForm(ModelForm):
         }
 
 
+class sizeMessage(models.Model):
+    STATUS = (
+        ('جدید', 'جدید'),
+        ('خوانده شده', 'خوانده شده'),
+        ('بستن', 'بستن'),
+    )
+    name = models.CharField(blank=True, max_length=255, verbose_name='نام')
+    phone = models.CharField(blank=True, max_length=11, verbose_name='شماره تلفن')
+    width = models.CharField(blank=True, max_length=5, verbose_name='عرض')
+    height = models.CharField(blank=True, max_length=5, verbose_name='ارتفاع')
+    type = models.CharField(blank=True, max_length=5, verbose_name='نوع پرده')
+    status = models.CharField(max_length=10, choices=STATUS, default='جدید', verbose_name='وضعیت')
+    ip = models.CharField(blank=True, max_length=20, verbose_name='ای پی')
+    note = models.CharField(blank=True, max_length=255, verbose_name='یادداشت')
+    create_at = models.DateTimeField(auto_now_add=True)
+    update_at = models.DateTimeField(auto_now=True, verbose_name='به روز شده در')
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'سفارش پرده'
+        verbose_name_plural = 'سفارش پرده'
+
+
+class sizeMessageForm(ModelForm):
+    class Meta:
+        model = sizeMessage
+        fields = ['name', 'phone', 'width', 'height', 'type']
+        widgets = {
+            'name': TextInput(attrs={'class': 'input', 'placeholder': 'نام شما'}),
+            'phone': TextInput(attrs={'class': 'input', 'placeholder': 'شماره تلفن'}),
+            'width': TextInput(attrs={'class': 'input', 'placeholder': 'عرض پرده(سانتی متر)'}),
+            'height': TextInput(attrs={'class': 'input', 'placeholder': 'ارتفاع پرده(سانتی متر)'}),
+            'type': TextInput(attrs={'class': 'input', 'placeholder': '(توری یا نایلونی)'}),
+
+        }
+
+
 class FAQ(models.Model):
     STATUS = (
         ('True', 'True'),

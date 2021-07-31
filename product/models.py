@@ -56,10 +56,8 @@ class Product(models.Model):
         ('False', 'False'),
     )
     VARIANTS = (
-        ('هیچ یک', 'هیچ یک'),
-        ('سایز', 'سایز'),
-        ('رنگ', 'رنگ'),
-        ('هر دو', 'هر دو'),
+        ('None', 'هیچ کدام'),
+        ('Size-Color', 'اندازه'),
     )
 
     category = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name='دسته بندی')
@@ -179,14 +177,14 @@ class Color(models.Model):
         return self.name
 
     class Meta:
-        verbose_name = 'رنگ'
-        verbose_name_plural = 'رنگ ها'
+        verbose_name = 'نوع پرده'
+        verbose_name_plural = 'نوع پرده'
 
 
 class Variants(models.Model):
     title = models.CharField(max_length=100, blank=True, null=True, verbose_name='عنوان')
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='pr', verbose_name='محصول')
-    color = models.ForeignKey(Color, on_delete=models.CASCADE, blank=True, null=True, verbose_name='رنگ')
+    color = models.ForeignKey(Color, on_delete=models.CASCADE, blank=True, null=True, verbose_name='نوع')
     size = models.ForeignKey(Size, on_delete=models.CASCADE, blank=True, null=True, verbose_name='سایز')
     image_id = models.IntegerField(blank=True, null=True, default=0)
     quantity = models.IntegerField(default=1, verbose_name='تعداد')
