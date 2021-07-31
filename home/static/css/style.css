@@ -1973,6 +1973,7 @@ table {
 }
 .message-box {
 	padding: 40px 60px;
+	margin-top: 55px;
 }
 .message-box input {
 	margin-bottom: 30px;
