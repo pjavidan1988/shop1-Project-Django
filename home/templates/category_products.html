@@ -36,7 +36,7 @@
         <div class="shop-section mb-80">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-9 col-md-push-3 col-sm-12">
+                    <div class="col-md-12 col-sm-12">
                         <div class="shop-content">
                             <!-- shop-option start -->
                             <div class="shop-option box-shadow mb-30 clearfix">
@@ -50,20 +50,6 @@
                                                 class="zmdi zmdi-view-list-alt"></i></a>
                                     </li>
                                 </ul>
-                                <!-- short-by -->
-                                <div class="short-by f-left text-center">
-                                    <span>ترتیب :</span>
-                                    <select>
-                                        <option value="volvo">جدیدترین ها</option>
-                                        <option value="saab">محبوب ترین ها</option>
-                                        <option value="mercedes">پرفروش ترین ها</option>
-                                        <option value="audi">بیشترین امتیاز</option>
-                                    </select>
-                                </div>
-                                <!-- showing -->
-                                <div class="showing f-right text-right">
-                                    <span>نمایش: 1-9 از 17</span>
-                                </div>
                             </div>
                             <!-- shop-option end -->
                             <!-- Tab Content start -->
@@ -84,38 +70,39 @@
                                                         <h6 class="product-title">
                                                             <a href="/product/{{ rs.id }}/{{ rs.slug }}">{{ rs.title }} </a>
                                                         </h6>
-                                                        <div class="pro-rating">
-                                                            <a href="#"><i class="zmdi zmdi-star"></i></a>
-                                                            <a href="#"><i class="zmdi zmdi-star"></i></a>
-                                                            <a href="#"><i class="zmdi zmdi-star"></i></a>
-                                                            <a href="#"><i class="zmdi zmdi-star-half"></i></a>
-                                                            <a href="#"><i class="zmdi zmdi-star-outline"></i></a>
-                                                        </div>
-                                                        <h3 class="pro-price">{{ rs.price | intcomma:False }} تومان</h3>
+                                                        {% if rs.variant == 'Size-Color' %}
+                                                            <h3 class="pro-price">قسمت هر متر {{ rs.price | intcomma:False }} تومان</h3>
+                                                        {% else %}
+                                                            <h3 class="pro-price">{{ rs.price | intcomma:False }} تومان</h3>
+                                                        {% endif %}
                                                         {% if rs.amount < 1 %}
                                                             <h6 style="font-size: 20px; color: #ac2925">نا موجود</h6>
                                                         {% else %}
                                                             <ul class="action-button">
-                                                                <li>
-                                                                    <a href="/order/addtowishlist/{{ rs.id }}"
-                                                                       title="Wishlist"><i
-                                                                            class="zmdi zmdi-favorite"></i></a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="#" data-toggle="modal"
-                                                                       data-target="#productModal" title="Quickview"><i
-                                                                            class="zmdi zmdi-zoom-in"></i></a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="#" title="Compare"><i
-                                                                            class="zmdi zmdi-refresh"></i></a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="/order/addtoshopcart/{{ rs.id }}"
-                                                                       title="Add to cart"><i
-                                                                            class="zmdi zmdi-shopping-cart-plus"></i></a>
-                                                                </li>
-                                                            </ul>
+                                            <li>
+                                                <a href="/order/addtowishlist/{{ rs.id }}" title="Wishlist"><i
+                                                        class="zmdi zmdi-favorite"></i></a>
+                                            </li>
+                                            {% if rs.amount < 1 %}
+                                                <li>
+                                                    <h6 style="font-size: 12px; color: #ac2925">نا موجود</h6>
+                                                </li>
+                                            {% else %}
+                                                {% if rs.variant == 'Size-Color' %}
+                                                    <li>
+                                                        <a href="/product/{{ rs.id }}/{{ rs.slug }}"
+                                                           title="Add to cart"><i
+                                                                class="zmdi zmdi-shopping-cart"></i></a>
+                                                    </li>
+                                                {% else %}
+                                                    <li>
+                                                        <a href="/order/addtoshopcart/{{ rs.id }}"
+                                                           title="Add to cart"><i
+                                                                class="zmdi zmdi-shopping-cart-plus"></i></a>
+                                                    </li>
+                                                {% endif %}
+                                            {% endif %}
+                                        </ul>
                                                         {% endif %}
                                                     </div>
                                                 </div>
@@ -141,16 +128,13 @@
                                                             <h6 class="product-title f-left">
                                                                 <a href="/product/{{ rs.id }}/{{ rs.slug }}">{{ rs.title }} </a>
                                                             </h6>
-                                                            <div class="pro-rating f-right">
-                                                                <a href="#"><i class="zmdi zmdi-star"></i></a>
-                                                                <a href="#"><i class="zmdi zmdi-star"></i></a>
-                                                                <a href="#"><i class="zmdi zmdi-star"></i></a>
-                                                                <a href="#"><i class="zmdi zmdi-star-half"></i></a>
-                                                                <a href="#"><i class="zmdi zmdi-star-outline"></i></a>
-                                                            </div>
                                                         </div>
                                                         <h6 class="brand-name mb-15">{{ rs.category }}</h6>
-                                                        <h3 class="pro-price">{{ rs.price | intcomma:False }} تومان</h3>
+                                                        {% if rs.variant == 'Size-Color' %}
+                                                            <h3 class="pro-price">قسمت هر متر {{ rs.price | intcomma:False }} تومان</h3>
+                                                        {% else %}
+                                                            <h3 class="pro-price">{{ rs.price | intcomma:False }} تومان</h3>
+                                                        {% endif %}
                                                         <p>{{ rs.short_description | safe }}</p>
                                                         {% if rs.amount < 1 %}
                                                             <h6 style="font-size: 20px; color: #ac2925">نا موجود</h6>
@@ -160,15 +144,6 @@
                                                                     <a href="/order/addtowishlist/{{ rs.id }}"
                                                                        title="Wishlist"><i
                                                                             class="zmdi zmdi-favorite"></i></a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="#" data-toggle="modal"
-                                                                       data-target="#productModal" title="Quickview"><i
-                                                                            class="zmdi zmdi-zoom-in"></i></a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="#" title="Compare"><i
-                                                                            class="zmdi zmdi-refresh"></i></a>
                                                                 </li>
                                                                 <li>
                                                                     <a href="/order/addtoshopcart/{{ rs.id }}"
@@ -186,165 +161,7 @@
                                 </div>
                             </div>
                             <!-- Tab Content end -->
-                            <!-- shop-pagination start -->
-                            <ul class="shop-pagination box-shadow text-center ptblr-10-30">
-                                <li><a href="#"><i class="zmdi zmdi-chevron-right"></i></a></li>
-                                <li><a href="#">01</a></li>
-                                <li><a href="#">02</a></li>
-                                <li><a href="#">03</a></li>
-                                <li><a href="#">...</a></li>
-                                <li><a href="#">05</a></li>
-                                <li class="active"><a href="#"><i class="zmdi zmdi-chevron-left"></i></a></li>
-                            </ul>
-                            <!-- shop-pagination end -->
                         </div>
-                    </div>
-                    <div class="col-md-3 col-md-pull-9 col-sm-12">
-                        <!-- widget-search -->
-                        <aside class="widget-search mb-30">
-                            <form action="#">
-                                <input type="text" placeholder="جستجو ...">
-                                <button type="submit"><i class="zmdi zmdi-search"></i></button>
-                            </form>
-                        </aside>
-                        <!-- widget-categories -->
-                        <aside class="widget widget-categories box-shadow mb-30">
-                            <h6 class="widget-title border-left mb-20">دسته ها</h6>
-                            <div id="cat-treeview" class="product-cat">
-                                <ul>
-                                    <li class="closed"><a href="#">برند یک</a>
-                                        <ul>
-                                            <li><a href="#">موبایل</a></li>
-                                            <li><a href="#">تب</a></li>
-                                            <li><a href="#">ساعت</a></li>
-                                            <li><a href="#">هدفون</a></li>
-                                            <li><a href="#">حافظه</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="open"><a href="#">برند دو</a>
-                                        <ul>
-                                            <li><a href="#">موبایل</a></li>
-                                            <li><a href="#">تب</a></li>
-                                            <li><a href="#">ساعت</a></li>
-                                            <li><a href="#">هدفون</a></li>
-                                            <li><a href="#">حافظه</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="closed"><a href="#">لوازم جانبی</a>
-                                        <ul>
-                                            <li><a href="#">کفش</a></li>
-                                            <li><a href="#">عینک آفتابی</a></li>
-                                            <li><a href="#">ساعت ها</a></li>
-                                            <li><a href="#">ابزار کاربردی</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="closed"><a href="#">برند های برتر</a>
-                                        <ul>
-                                            <li><a href="#">موبایل</a></li>
-                                            <li><a href="#">تب</a></li>
-                                            <li><a href="#">ساعت</a></li>
-                                            <li><a href="#">هدفون</a></li>
-                                            <li><a href="#">حافظه</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="closed"><a href="#">جواهرات</a>
-                                        <ul>
-                                            <li><a href="#">کفش</a></li>
-                                            <li><a href="#">عینک آفتابی</a></li>
-                                            <li><a href="#">ساعت ها</a></li>
-                                            <li><a href="#">ابزار کاربردی</a></li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </div>
-                        </aside>
-                        <!-- shop-filter -->
-                        <aside class="widget shop-filter box-shadow mb-30">
-                            <h6 class="widget-title border-left mb-20">قیمت</h6>
-                            <div class="price_filter">
-                                <div class="price_slider_amount">
-                                    <input type="submit" value="محدوده قیمت (تومان) :">
-                                    <input type="text" id="amount" name="price" placeholder="Add Your Price">
-                                </div>
-                                <div id="slider-range"></div>
-                            </div>
-                        </aside>
-                        <!-- widget-color -->
-                        <aside class="widget widget-color box-shadow mb-30">
-                            <h6 class="widget-title border-left mb-20">رنگ</h6>
-                            <ul>
-                                <li class="color-1"><a href="#">نارنجی روشن</a></li>
-                                <li class="color-2"><a href="#">نارنجی تیره</a></li>
-                                <li class="color-3"><a href="#">گوجه ای</a></li>
-                                <li class="color-4"><a href="#">آبی آسمانی</a></li>
-                                <li class="color-5"><a href="#">سبز روشن</a></li>
-                                <li class="color-6"><a href="#">سبز تیره</a></li>
-                            </ul>
-                        </aside>
-                        <!-- operating-system -->
-                        <aside class="widget operating-system box-shadow mb-30">
-                            <h6 class="widget-title border-left mb-20">سیستم عامل</h6>
-                            <form action="">
-                                <label><input type="checkbox" name="operating-1" value="phone-1">ویندوز فون</label><br>
-                                <label><input type="checkbox" name="operating-1" value="phone-1">بلک بری آی او
-                                    اس</label><br>
-                                <label><input type="checkbox" name="operating-1" value="phone-1">اندروید</label><br>
-                                <label><input type="checkbox" name="operating-1" value="phone-1">آی او اس</label><br>
-                                <label><input type="checkbox" name="operating-1" value="phone-1">ویندوز فون</label><br>
-                                <label><input type="checkbox" name="operating-1" value="phone-1">سیمبیان</label><br>
-                                <label class="mb-0"><input type="checkbox" name="operating-1" value="phone-1">بلک بری او
-                                    اس</label><br>
-                            </form>
-                        </aside>
-                        <!-- widget-product -->
-                        <aside class="widget widget-product box-shadow">
-                            <h6 class="widget-title border-left mb-20">محصولات اخیر</h6>
-                            <!-- product-item start -->
-                            <div class="product-item">
-                                <div class="product-img">
-                                    <a href="single-product.html">
-                                        <img src="img/product/4.jpg" alt="">
-                                    </a>
-                                </div>
-                                <div class="product-info">
-                                    <h6 class="product-title">
-                                        <a href="single-product.html">نام محصول نمایشی</a>
-                                    </h6>
-                                    <h3 class="pro-price">869,000 تومان</h3>
-                                </div>
-                            </div>
-                            <!-- product-item end -->
-                            <!-- product-item start -->
-                            <div class="product-item">
-                                <div class="product-img">
-                                    <a href="single-product.html">
-                                        <img src="img/product/8.jpg" alt="">
-                                    </a>
-                                </div>
-                                <div class="product-info">
-                                    <h6 class="product-title">
-                                        <a href="single-product.html">نام محصول نمایشی</a>
-                                    </h6>
-                                    <h3 class="pro-price">869,000 تومان</h3>
-                                </div>
-                            </div>
-                            <!-- product-item end -->
-                            <!-- product-item start -->
-                            <div class="product-item">
-                                <div class="product-img">
-                                    <a href="single-product.html">
-                                        <img src="img/product/12.jpg" alt="">
-                                    </a>
-                                </div>
-                                <div class="product-info">
-                                    <h6 class="product-title">
-                                        <a href="single-product.html">نام محصول نمایشی</a>
-                                    </h6>
-                                    <h3 class="pro-price">869,000 تومان</h3>
-                                </div>
-                            </div>
-                            <!-- product-item end -->
-                        </aside>
                     </div>
                 </div>
             </div>

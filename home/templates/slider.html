@@ -17,7 +17,14 @@
                                     <div class="slider-info-inner">
                                         <h1 class="slider-title-1 text-uppercase text-black-1">{{ rs.title }}</h1>
                                         <div class="slider-brief text-black-2">
-                                            <p> {{ rs.price | intcomma:False  }}  تومان</p>
+                                            <p>{{ rs.short_description | safe }}</p>
+
+                                            {% if rs.variant == 'Size-Color' %}
+                                                <h3 class="pro-price">قیمت هر متر {{ rs.price | intcomma:False }}
+                                                    تومان</h3>
+                                            {% else %}
+                                                <h3 class="pro-price">    قیمت : {{ rs.price | intcomma:False }}  تومان </h3>
+                                            {% endif %}
                                         </div>
                                         <a href="/product/{{ rs.id }}/{{ rs.slug }}"
                                            class="button extra-small button-black">

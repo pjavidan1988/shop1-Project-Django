@@ -50,18 +50,24 @@
                                                 <a href="/order/addtowishlist/{{ rs.id }}" title="Wishlist"><i
                                                         class="zmdi zmdi-favorite"></i></a>
                                             </li>
-                                            <li>
-                                                <a href="#" title="Compare"><i class="zmdi zmdi-refresh"></i></a>
-                                            </li>
                                             {% if rs.amount < 1 %}
                                                 <li>
                                                     <h6 style="font-size: 12px; color: #ac2925">نا موجود</h6>
                                                 </li>
                                             {% else %}
-                                                <li>
-                                                    <a href="/order/addtoshopcart/{{ rs.id }}" title="Add to cart"><i
-                                                            class="zmdi zmdi-shopping-cart-plus"></i></a>
-                                                </li>
+                                                {% if rs.variant == 'Size-Color' %}
+                                                    <li>
+                                                        <a href="/product/{{ rs.id }}/{{ rs.slug }}"
+                                                           title="Add to cart"><i
+                                                                class="zmdi zmdi-shopping-cart"></i></a>
+                                                    </li>
+                                                {% else %}
+                                                    <li>
+                                                        <a href="/order/addtoshopcart/{{ rs.id }}"
+                                                           title="Add to cart"><i
+                                                                class="zmdi zmdi-shopping-cart-plus"></i></a>
+                                                    </li>
+                                                {% endif %}
                                             {% endif %}
                                         </ul>
                                     </div>
@@ -95,13 +101,25 @@
                                                 <a href="/order/addtowishlist/{{ rs.id }}" title="Wishlist"><i
                                                         class="zmdi zmdi-favorite"></i></a>
                                             </li>
-                                            <li>
-                                                <a href="#" title="Compare"><i class="zmdi zmdi-refresh"></i></a>
-                                            </li>
-                                            <li>
-                                                <a href="/order/addtoshopcart/{{ rs.id }}" title="Add to cart"><i
-                                                        class="zmdi zmdi-shopping-cart-plus"></i></a>
-                                            </li>
+                                            {% if rs.amount < 1 %}
+                                                <li>
+                                                    <h6 style="font-size: 12px; color: #ac2925">نا موجود</h6>
+                                                </li>
+                                            {% else %}
+                                                {% if rs.variant == 'Size-Color' %}
+                                                    <li>
+                                                        <a href="/product/{{ rs.id }}/{{ rs.slug }}"
+                                                           title="Add to cart"><i
+                                                                class="zmdi zmdi-shopping-cart"></i></a>
+                                                    </li>
+                                                {% else %}
+                                                    <li>
+                                                        <a href="/order/addtoshopcart/{{ rs.id }}"
+                                                           title="Add to cart"><i
+                                                                class="zmdi zmdi-shopping-cart-plus"></i></a>
+                                                    </li>
+                                                {% endif %}
+                                            {% endif %}
                                         </ul>
                                     </div>
                                 </div>
@@ -142,25 +160,33 @@
                                         <a href="/product/{{ rs.id }}/{{ rs.slug }}">{{ rs.title }}</a>
                                     </h6>
                                     <h6 class="brand-name">{{ rs.category }}</h6>
-                                    <h3 class="pro-price">{{ rs.price | intcomma:False }} تومان</h3>
+                                    {% if rs.variant == 'Size-Color' %}
+                                        <h3 class="pro-price"> هر متر {{ rs.price | intcomma:False }} تومان</h3>
+                                    {% else %}
+                                        <h3 class="pro-price">{{ rs.price | intcomma:False }} تومان</h3>
+                                    {% endif %}
                                 </div>
                                 <ul class="action-button">
                                     <li>
                                         <a href="/order/addtowishlist/{{ rs.id }}" title="Wishlist"><i
                                                 class="zmdi zmdi-favorite"></i></a>
                                     </li>
-                                    <li>
-                                        <a href="#" title="Compare"><i class="zmdi zmdi-refresh"></i></a>
-                                    </li>
                                     {% if rs.amount < 1 %}
                                         <li>
                                             <h6 style="font-size: 12px; color: #ac2925">نا موجود</h6>
                                         </li>
                                     {% else %}
-                                        <li>
-                                            <a href="/order/addtoshopcart/{{ rs.id }}" title="Add to cart"><i
-                                                    class="zmdi zmdi-shopping-cart-plus"></i></a>
-                                        </li>
+                                        {% if rs.variant == 'Size-Color' %}
+                                            <li>
+                                                <a href="/product/{{ rs.id }}/{{ rs.slug }}" title="Add to cart"><i
+                                                        class="zmdi zmdi-shopping-cart"></i></a>
+                                            </li>
+                                        {% else %}
+                                            <li>
+                                                <a href="/order/addtoshopcart/{{ rs.id }}" title="Add to cart"><i
+                                                        class="zmdi zmdi-shopping-cart-plus"></i></a>
+                                            </li>
+                                        {% endif %}
                                     {% endif %}
                                 </ul>
                             </div>

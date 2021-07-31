@@ -35,6 +35,7 @@ class Setting(models.Model):
     copyright_text = models.CharField(max_length=150, verbose_name='حق کپی رایت')
     copyright_url = models.CharField(max_length=150, verbose_name='آدرس کپی رایت')
     contact = RichTextUploadingField(blank=True, verbose_name='تماس')
+    order = RichTextUploadingField(blank=True, verbose_name='توضیحات سفارش')
     references = RichTextUploadingField(blank=True, verbose_name='منابع')
     status = models.CharField(max_length=10, choices=STATUS, verbose_name='وضعیت')
     create_at = jmodels.jDateField(auto_now_add=True)
