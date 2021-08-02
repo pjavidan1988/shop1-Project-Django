@@ -98,7 +98,9 @@
                                                             <!-- single comments -->
                                                             <div class="media mt-30">
                                                                 <div class="media-left">
-                                                                    <a href="#"><img class="media-object" src="{{ rs.user.userprofile.image.url }}" alt=""></a>
+                                                                    <a href="#"><img class="media-object"
+                                                                                     src="{{ rs.user.userprofile.image.url }}"
+                                                                                     alt=""></a>
                                                                 </div>
                                                                 <div class="media-body">
                                                                     <div class="clearfix">
@@ -124,6 +126,30 @@
                                             </div>
                                         </div>
 
+                                        <script>
+                                            $(document).on('change', '#post-form', function (e) {
+                                                e.preventDefault();
+                                                $.ajax({
+                                                    type: 'POST',
+                                                    url: '{% url "ajaxcolor" %}',
+                                                    data: {
+                                                        productid: $('#productid').val(),
+                                                        size: $('#size').val(),
+                                                        csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+                                                        action: 'post'
+                                                    },
+                                                    data_type: 'html',
+                                                    success: function (data) {
+                                                        console.log("success");
+                                                        $('#appendHere').html(data.rendered_table);
+                                                    },
+                                                    error: function (data) {
+                                                        alert("Got an error dude " + data);
+                                                    }
+                                                });
+                                            });
+                                        </script>
+
                                         <!-- hr -->
                                         {% if product.variant == 'Size-Color' %}
                                             <hr>
@@ -136,9 +162,7 @@
                                                         {% csrf_token %}
                                                         <select name="size" id="size">
                                                             {% for rs in sizes %}
-                                                                <option {% if variant.size_id == rs.size_id %}
-                                                                    selected {% endif %}
-                                                                    value="{{ rs.size_id }}">{{ rs.size.name }}</option>
+                                                                <option {% if variant.size_id == rs.size_id %}selected {% endif %} value="{{ rs.size_id }}">{{ rs.size.name }}</option>
                                                             {% endfor %}
                                                         </select>
                                                     </form>
@@ -149,19 +173,12 @@
                                                 <form method="post" action="?q=selectvariant" id="post-color">
                                                     {% csrf_token %}
                                                     <div id="appendHere">
-                                                        <input type="hidden" name="size" id="size"
-                                                               value="{{ size_id }}">
+                                                        <input type="hidden" name="size" id="size" value="{{ size_id }}">
                                                         <ul class="color-option" style="display: flex">
                                                             <p class="color-title f-left">نوع</p>
                                                             {% for rs in colors %}
-                                                                <input type="radio"  {% if variant.id == rs.id %}
-                                                                       checked {% endif %} name="variantid"
-                                                                       id="variantid" value="{{ rs.id }}"
-                                                                       onchange="this.form.submit();"
-                                                                       style="margin-left: 5px">
-                                                                <li  {% if variant.id == rs.id %}
-                                                                    class="active" {% endif %}
-                                                                    style="margin-left: 15px">
+                                                                <input type="radio"  {% if variant.id == rs.id %}checked {% endif %} name="variantid" id="variantid" value="{{ rs.id }}" onchange="this.form.submit();" style="margin-left: 5px">
+                                                                <li  {% if variant.id == rs.id %} class="active" {% endif %}style="margin-left: 15px">
                                                                     <a style="margin-left: 12px">
                                                                         {{ rs.color }}
                                                                     </a>
@@ -176,16 +193,20 @@
                                             </div>
                                             <hr>
                                             <div>
-                                                <p class="color-title" style="display: contents">در صورت درخواست اندازه دلخواه <a href="/ordersize" style="color: #00a9da">کلیک کنید</a></p>
+                                                <p class="color-title" style="display: contents">در صورت درخواست اندازه
+                                                    دلخواه <a href="/ordersize" style="color: #00a9da">کلیک کنید</a></p>
                                             </div>
                                             <hr>
                                         {% endif %}
                                         {% if  product.variant != 'None' %}
                                             <!-- single-product-price -->
-                                            <form action="/order/addtoshopcart/{{ product.id }}" method="post" id="addchart-form">
+                                            <form action="/order/addtoshopcart/{{ product.id }}" method="post"
+                                                  id="addchart-form">
                                                 {% csrf_token %}
-                                                <input type="hidden" name="variantid" id="variantid" value="{{ variant.id }}">
-                                                <h3 class="pro-price"> قیمت: {{ variant.price |intcomma:False }} تومان</h3>
+                                                <input type="hidden" name="variantid" id="variantid"
+                                                       value="{{ variant.id }}">
+                                                <h3 class="pro-price"> قیمت: {{ variant.price |intcomma:False }}
+                                                    تومان</h3>
                                                 <!--  hr -->
                                                 <hr>
                                                 <h3 class="pro-price">{% if variant.quantity > 0 %} موجودی :
@@ -205,29 +226,40 @@
                                                     <div class="sin-plus-minus f-left clearfix">
                                                         <p class="color-title f-left">تعداد</p>
                                                         <div class="text-uppercase" style="display: contents">
-                                                            <input class="input" style="text-align: center" name="quantity" type="number" value="1" min="1" max="{{ variant.quantity }}">
+                                                            <input class="input" style="text-align: center"
+                                                                   name="quantity" type="number" value="1" min="1"
+                                                                   max="{{ variant.quantity }}">
                                                         </div>
                                                     </div>
                                                     <div class="sin-pro-action f-right">
                                                         <ul class="action-button">
                                                             <li>
-                                                                <a href="/order/addtowishlist/{{ product.id }}" title="Wishlist" tabindex="0"><i class="zmdi zmdi-favorite"></i></a>
+                                                                <a href="/order/addtowishlist/{{ product.id }}"
+                                                                   title="Wishlist" tabindex="0"><i
+                                                                        class="zmdi zmdi-favorite"></i></a>
                                                             </li>
                                                         </ul>
                                                     </div>
                                                 </div>
                                                 <div style="margin-top: 60px">
-                                                    <button type="submit" {% if variant.quantity < 1 %}disabled {% endif %} class="submit-btn-1 mt-60 btn-hover-2 f-left" type="submit" style="margin-bottom: 100px">افزودن به سبد خرید</button>
+                                                    <button type="submit"
+                                                            {% if variant.quantity < 1 %}disabled {% endif %}
+                                                            class="submit-btn-1 mt-60 btn-hover-2 f-left" type="submit"
+                                                            style="margin-bottom: 100px">افزودن به سبد خرید
+                                                    </button>
                                                 </div>
                                             </form>
                                         {% else %}
-                                            <form action="/order/addtoshopcart/{{ product.id }}" method="post" id="addchart-form">
+                                            <form action="/order/addtoshopcart/{{ product.id }}" method="post"
+                                                  id="addchart-form">
                                                 {% csrf_token %}
                                                 <hr>
-                                                <h3 class="pro-price"> قیمت: {{ product.price |intcomma:False }}تومان</h3>
+                                                <h3 class="pro-price">
+                                                    قیمت: {{ product.price |intcomma:False }}تومان</h3>
                                                 <!--  hr -->
                                                 <hr>
-                                                <h3 class="pro-price">{% if product.amount > 0 %} موجودی :{{ product.amount }} {% else %} ناموجود {% endif %}</h3>
+                                                <h3 class="pro-price">{% if product.amount > 0 %} موجودی :
+                                                    {{ product.amount }} {% else %} ناموجود {% endif %}</h3>
                                                 <!--  hr -->
                                                 <hr>
                                                 <!-- plus-minus-pro-action -->
@@ -235,19 +267,27 @@
                                                     <div class="sin-plus-minus f-left clearfix">
                                                         <p class="color-title f-left">تعداد</p>
                                                         <div class="text-uppercase" style="display: contents">
-                                                            <input class="input" style="text-align: center" name="quantity" type="number" value="1" min="1" max="{{ product.amount }}">
+                                                            <input class="input" style="text-align: center"
+                                                                   name="quantity" type="number" value="1" min="1"
+                                                                   max="{{ product.amount }}">
                                                         </div>
                                                     </div>
                                                     <div class="sin-pro-action f-right">
                                                         <ul class="action-button">
                                                             <li>
-                                                                <a href="/order/addtowishlist/{{ product.id }}" title="Wishlist" tabindex="0"><i class="zmdi zmdi-favorite"></i></a>
+                                                                <a href="/order/addtowishlist/{{ product.id }}"
+                                                                   title="Wishlist" tabindex="0"><i
+                                                                        class="zmdi zmdi-favorite"></i></a>
                                                             </li>
                                                         </ul>
                                                     </div>
                                                 </div>
-                                                <div  style="margin-top: 60px">
-                                                    <button type="submit" {% if product.amount < 1 %}disabled {% endif %} class="submit-btn-1 mt-60 btn-hover-2 f-left" type="submit" style="margin-bottom: 100px">افزودن به سبد خرید</button>
+                                                <div style="margin-top: 60px">
+                                                    <button type="submit"
+                                                            {% if product.amount < 1 %}disabled {% endif %}
+                                                            class="submit-btn-1 mt-60 btn-hover-2 f-left" type="submit"
+                                                            style="margin-bottom: 100px">افزودن به سبد خرید
+                                                    </button>
                                                 </div>
                                             </form>
                                         {% endif %}

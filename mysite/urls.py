@@ -46,6 +46,7 @@ urlpatterns = [
     path('faq/', views.faq, name='faq'),
     path('blog/', views.blog, name='blog'),
     path('blog/<int:id>', views.blog_detail, name='blog_detail'),
+    path('ajaxcolor/', views.ajaxcolor, name='ajaxcolor'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
