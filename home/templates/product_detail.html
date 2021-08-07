@@ -157,12 +157,14 @@
                                             <div class="product-options">
                                                 <div class="size-option">
                                                     <form method="POST" id="post-form">
-                                                        <input type="hidden" name="productid" id="productid" value="{{ product.id }}">
+                                                        <input type="hidden" name="productid" id="productid"
+                                                               value="{{ product.id }}">
                                                         <p class="color-title f-left">سایز</p>
                                                         {% csrf_token %}
                                                         <select name="size" id="size">
                                                             {% for rs in sizes %}
-                                                                <option {% if variant.size_id == rs.size_id %}selected {% endif %} value="{{ rs.size_id }}">{{ rs.size.name }}</option>
+                                                                <option {% if variant.size_id == rs.size_id %} selected {% endif %}
+                                                                        value="{{ rs.size_id }}">{{ rs.size.name }}</option>
                                                             {% endfor %}
                                                         </select>
                                                     </form>
@@ -173,12 +175,14 @@
                                                 <form method="post" action="?q=selectvariant" id="post-color">
                                                     {% csrf_token %}
                                                     <div id="appendHere">
-                                                        <input type="hidden" name="size" id="size" value="{{ size_id }}">
+                                                        <input type="hidden" name="size" id="size"
+                                                               value="{{ size_id }}">
                                                         <ul class="color-option" style="display: flex">
                                                             <p class="color-title f-left">نوع</p>
                                                             {% for rs in colors %}
-                                                                <input type="radio"  {% if variant.id == rs.id %}checked {% endif %} name="variantid" id="variantid" value="{{ rs.id }}" onchange="this.form.submit();" style="margin-left: 5px">
-                                                                <li  {% if variant.id == rs.id %} class="active" {% endif %}style="margin-left: 15px">
+                                                                <input type="radio" {% if variant.id == rs.id %}checked {% endif %} name="variantid" id="variantid" value="{{ rs.id }}" onchange="this.form.submit();" style="margin-left: 5px">
+                                                                <li  {% if variant.id == rs.id %}
+                                                                    class="active" {% endif %}style="margin-left: 15px">
                                                                     <a style="margin-left: 12px">
                                                                         {{ rs.color }}
                                                                     </a>
