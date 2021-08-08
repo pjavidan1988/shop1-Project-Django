@@ -80,14 +80,18 @@ def shopcart(request):
     shopcart = ShopCart.objects.filter(user_id=current_user.id)
     setting = Setting.objects.get(pk=1)
     total = 0
+    totalvar = 0
     for rs in shopcart:
         total += rs.product.price * rs.quantity
+        totalvar += rs.variant.price * rs.quantity
 
     transport = 0
     for rs in shopcart:
         transport += rs.product.transportation * rs.quantity
 
+
     final_total = total + transport
+    final_total_var = totalvar + transport
 
     amount = 0
     for rs in shopcart:
@@ -97,8 +101,10 @@ def shopcart(request):
     context = {'shopcart': shopcart,
                'category': category,
                'total': total,
+               'totalvar':totalvar,
                'transport': transport,
                'final_total': final_total,
+               'final_total_var':final_total_var,
                'amount': amount,
                'setting': setting,
                }

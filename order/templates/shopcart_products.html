@@ -119,23 +119,33 @@
                                                     <table>
                                                         <tr>
                                                             <td class="td-title-1">جمع سبد</td>
-                                                            <td class="td-title-2">{{ total | intcomma:False }} تومان
+                                                            <td class="td-title-2">{{ totalvar | intcomma:False }} تومان
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td class="td-title-1">حمل و نقل</td>
                                                             <td class="td-title-2">
+                                                            {% if rs.product.variant == 'None' %}
                                                                 {% if total >= 200000 %}
                                                                     رایگان
                                                                 {% else %}
                                                                     {{ transport | intcomma:False }}
                                                                     تومان
                                                                 {% endif %}
+                                                            {% else %}
+                                                                {% if totalvar >= 200000 %}
+                                                                    رایگان
+                                                                {% else %}
+                                                                    {{ transport | intcomma:False }}
+                                                                    تومان
+                                                                {% endif %}
+                                                            {% endif %}
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td class="order-total">مجموع سفارش</td>
                                                             <td class="order-total-price">
+                                                            {% if rs.product.variant == 'None' %}
                                                                 {% if total >= 200000 %}
                                                                     {{ total | intcomma:False }}
                                                                     تومان
@@ -143,6 +153,15 @@
                                                                     {{ final_total | intcomma:False }}
                                                                     تومان
                                                                 {% endif %}
+                                                            {% else %}
+                                                                {% if totalvar >= 200000 %}
+                                                                    {{ totalvar | intcomma:False }}
+                                                                    تومان
+                                                                {% else %}
+                                                                    {{ final_total_var | intcomma:False }}
+                                                                    تومان
+                                                                {% endif %}
+                                                            {% endif %}
                                                             </td>
                                                         </tr>
                                                     </table>

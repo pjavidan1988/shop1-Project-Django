@@ -265,7 +265,8 @@
                                                 {% csrf_token %}
                                                 <hr>
                                                 <h3 class="pro-price">
-                                                    قیمت: {{ product.price |intcomma:False }}تومان</h3>
+                                                    قیمت: {{ product.price |intcomma:False }}
+                                                    تومان</h3>
                                                 <!--  hr -->
                                                 <hr>
                                                 <h3 class="pro-price">{% if product.amount > 0 %} موجودی :
