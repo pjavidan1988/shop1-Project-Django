@@ -163,8 +163,9 @@
                                                         {% csrf_token %}
                                                         <select name="size" id="size">
                                                             {% for rs in sizes %}
-                                                                <option {% if variant.size_id == rs.size_id %} selected {% endif %}
-                                                                        value="{{ rs.size_id }}">{{ rs.size.name }}</option>
+                                                                <option {% if variant.size_id == rs.size_id %}
+                                                                    selected {% endif %}
+                                                                    value="{{ rs.size_id }}">{{ rs.size.name }}</option>
                                                             {% endfor %}
                                                         </select>
                                                     </form>
@@ -180,7 +181,12 @@
                                                         <ul class="color-option" style="display: flex">
                                                             <p class="color-title f-left">نوع</p>
                                                             {% for rs in colors %}
-                                                                <input type="radio" {% if variant.id == rs.id %}checked {% endif %} name="variantid" id="variantid" value="{{ rs.id }}" onchange="this.form.submit();" style="margin-left: 5px">
+                                                                <input type="radio"
+                                                                       {% if variant.id == rs.id %}checked {% endif %}
+                                                                       name="variantid" id="variantid"
+                                                                       value="{{ rs.id }}"
+                                                                       onchange="this.form.submit();"
+                                                                       style="margin-left: 5px">
                                                                 <li  {% if variant.id == rs.id %}
                                                                     class="active" {% endif %}style="margin-left: 15px">
                                                                     <a style="margin-left: 12px">
