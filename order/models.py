@@ -70,6 +70,7 @@ class Order(models.Model):
     def __str__(self):
         return self.first_name
 
+
     class Meta:
         verbose_name = 'سفارش'
         verbose_name_plural = 'سفارشات'
@@ -98,6 +99,8 @@ class OrderProduct(models.Model):
 
     def __str__(self):
         return self.product.title
+
+
 
     class Meta:
         verbose_name = 'سفارش محصولات'

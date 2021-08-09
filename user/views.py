@@ -11,7 +11,7 @@ from django.shortcuts import render
 from django.utils import translation
 
 from home.models import Setting
-from order.models import Order, OrderProduct
+from order.models import Order, OrderProduct, ShopCart
 from product.models import Category, Comment
 from user.forms import SignUpForm, UserUpdateForm, ProfileUpdateForm
 from user.models import UserProfile
@@ -185,12 +185,14 @@ def user_order_product_detail(request, id, oid):
     setting = Setting.objects.get(pk=1)
     current_user = request.user
     order = Order.objects.get(user_id=current_user.id, id=oid)
+    shopcart = ShopCart.objects.filter(user_id=current_user.id)
     orderitems = OrderProduct.objects.filter(id=id, user_id=current_user.id)
     context = {
         'category': category,
         'order': order,
         'orderitems': orderitems,
-        'setting': setting
+        'setting': setting,
+        'shopcart':shopcart
     }
     return render(request, 'user_order_detail.html', context)
 

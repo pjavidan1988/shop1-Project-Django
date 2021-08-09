@@ -60,6 +60,7 @@
                                                                 <th class="product-total">جمع کل</th>
                                                                 <th class="product-status">وضعیت</th>
                                                                 <th class="product-date">تاریخ</th>
+                                                                <th class="product-date">کد پیگیری</th>
                                                                 <th class="product-detail">جزئیات</th>
                                                             </tr>
                                                             </thead>
@@ -72,7 +73,8 @@
                                                                     <td class="product-lastname">{{ rs.last_name }}</td>
                                                                     <td class="product-total">{{ rs.total|intcomma:False }}</td>
                                                                     <td class="product-status">{{ rs.status }}</td>
-                                                                    <td class="product-date">{{ rs.create_at|jformat:"%d / %m / %Y -- ساعت %H:%M" }}</td>
+                                                                    <td class="product-date">{{ rs.create_at|jformat:"%d / %m / %Y" }}</td>
+                                                                    <td class="product-date">{{ rs.code }}</td>
                                                                     <td class="product-detail"><a
                                                                             class="button button-black mt-15"
                                                                             href="/user/orderdetail/{{ rs.id }}"><span>جزئیات</span></a>

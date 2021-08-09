@@ -263,6 +263,8 @@
                                             <form action="/order/addtoshopcart/{{ product.id }}" method="post"
                                                   id="addchart-form">
                                                 {% csrf_token %}
+                                                <input type="hidden" name="variantid" id="variantid"
+                                                       value="{{ variant.id }}">
                                                 <hr>
                                                 <h3 class="pro-price">
                                                     قیمت: {{ product.price |intcomma:False }}
@@ -296,7 +298,7 @@
                                                 <div style="margin-top: 60px">
                                                     <button type="submit"
                                                             {% if product.amount < 1 %}disabled {% endif %}
-                                                            class="submit-btn-1 mt-60 btn-hover-2 f-left" type="submit"
+                                                            class="submit-btn-1 mt-60 btn-hover-2 f-left"
                                                             style="margin-bottom: 100px">افزودن به سبد خرید
                                                     </button>
                                                 </div>

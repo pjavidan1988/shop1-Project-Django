@@ -8,7 +8,7 @@ from django.utils.crypto import get_random_string
 
 from home.models import Setting
 from order.models import ShopCart, ShopCartForm, OrderForm, Order, OrderProduct, wishList, wishListForm
-from product.models import Category, Product
+from product.models import Category, Product, Variants
 from user.models import UserProfile
 
 
@@ -21,11 +21,12 @@ def addtoshopcart(request, id):
     url = request.META.get('HTTP_REFERER')  # get last url
     current_user = request.user  # Access User Session information
     product = Product.objects.get(pk=id)
-
+    variantid = None
 
     if product.variant != 'None':
         variantid = request.POST.get('variantid')  # from variant add to cart
-        checkinvariant = ShopCart.objects.filter(variant_id=variantid, user_id=current_user.id)  # Check product in shopcart
+        checkinvariant = ShopCart.objects.filter(variant_id=variantid,
+                                                 user_id=current_user.id)  # Check product in shopcart
         if checkinvariant:
             control = 1  # The product is in the cart
         else:
@@ -67,8 +68,8 @@ def addtoshopcart(request, id):
             data = ShopCart()  # model ile bağlantı kur
             data.user_id = current_user.id
             data.product_id = id
-            data.quantity = 1
             data.variant_id = None
+            data.quantity = 1
             data.save()  #
         messages.success(request, "محصول با موفقیت به سبد خرید اضافه شد")
         return HttpResponseRedirect(url)
@@ -80,18 +81,18 @@ def shopcart(request):
     shopcart = ShopCart.objects.filter(user_id=current_user.id)
     setting = Setting.objects.get(pk=1)
     total = 0
-    totalvar = 0
+
     for rs in shopcart:
-        total += rs.product.price * rs.quantity
-        totalvar += rs.variant.price * rs.quantity
+        if rs.product.variant == 'None':
+            total += rs.product.price * rs.quantity
+        else:
+            total += rs.variant.price * rs.quantity
 
     transport = 0
     for rs in shopcart:
         transport += rs.product.transportation * rs.quantity
 
-
     final_total = total + transport
-    final_total_var = totalvar + transport
 
     amount = 0
     for rs in shopcart:
@@ -101,10 +102,8 @@ def shopcart(request):
     context = {'shopcart': shopcart,
                'category': category,
                'total': total,
-               'totalvar':totalvar,
                'transport': transport,
                'final_total': final_total,
-               'final_total_var':final_total_var,
                'amount': amount,
                'setting': setting,
                }
@@ -124,17 +123,16 @@ def orderproduct(request):
     shopcart = ShopCart.objects.filter(user_id=current_user.id)
     total = 0
     for rs in shopcart:
-        total += rs.product.price * rs.quantity
+        if rs.product.variant == 'None':
+            total += rs.product.price * rs.quantity
+        else:
+            total += rs.variant.price * rs.quantity
 
     transport = 0
     for rs in shopcart:
         transport += rs.product.transportation * rs.quantity
 
     final_total = total + transport
-
-    amount = 0
-    for rs in shopcart:
-        amount += rs.quantity
 
     if request.method == 'POST':  # if there is a post
         form = OrderForm(request.POST)
@@ -156,23 +154,32 @@ def orderproduct(request):
             data.code = ordercode
             data.save()  #
 
-            shopcart = ShopCart.objects.filter(user_id=current_user.id)
             for rs in shopcart:
                 detail = OrderProduct()
                 detail.order_id = data.id
                 detail.product_id = rs.product_id
                 detail.user_id = current_user.id
                 detail.quantity = rs.quantity
-                detail.price = rs.product.price
+                if rs.product.variant == 'None':
+                    detail.price = rs.product.price
+                else:
+                    detail.price = rs.variant.price
+                detail.variant_id = rs.variant_id
                 detail.amount = rs.amount
                 detail.save()
 
-                product = Product.objects.get(id=rs.product_id)
-                product.amount -= rs.quantity
-                product.save()
-
-            ShopCart.objects.filter(user_id=current_user.id).delete()  # Clear & Delete shopcart
+                # ***Reduce quantity of sold product from Amount of Product
+                if rs.product.variant == 'None':
+                    product = Product.objects.get(id=rs.product_id)
+                    product.amount -= rs.quantity
+                    product.save()
+                else:
+                    variant = Variants.objects.get(id=rs.product_id)
+                    variant.quantity -= rs.quantity
+                    variant.save()
+                # ************ <> *****************
             setting = Setting.objects.get(pk=1)
+            ShopCart.objects.filter(user_id=current_user.id).delete()  # Clear & Delete shopcart
             request.session['cart_items'] = 0
             messages.success(request, "خرید شما با موفقیت انجام شد")
             return render(request, 'Order_Completed.html',
@@ -191,7 +198,6 @@ def orderproduct(request):
                'profile': profile,
                'transport': transport,
                'final_total': final_total,
-               'amount': amount,
                'setting': setting
                }
     return render(request, 'Order_Form.html', context)

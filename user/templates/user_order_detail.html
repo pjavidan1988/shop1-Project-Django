@@ -35,7 +35,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12 col-xs-12">
-                <h6 class="widget-title border-left mb-20">جزئیات سفارش</h6>
+                <h6 class="widget-title border-left mb-20">مشخصات و وضعیت سفارش</h6>
 
                 <!-- Start page content -->
                 <section id="page-content" class="page-wrapper">
@@ -72,7 +72,7 @@
                                                                 </div>
                                                                 <div class="col-sm-12">
                                                                     <label>تاریخ : </label>
-                                                                    <h6 style="display: inline-block">{{ order.create_at|jformat:"%d / %m / %Y - ساعت %H:%M" }}</h6>
+                                                                    <h6 style="display: inline-block">{{ order.create_at|jformat:"%d / %m / %Y" }}</h6>
                                                                 </div>
                                                                 <div class="col-sm-12">
                                                                     <label>تلفن : </label>
@@ -129,13 +129,30 @@
                                                         <!-- tr -->
                                                         {% for rs in orderitems %}
                                                             <tr>
-                                                                <td class="product-thumbnail"><a href="/product/{{ rs.product_id }}/{{ rs.product.slug }}">
+                                                                <td class="product-thumbnail"><a
+                                                                        href="/product/{{ rs.product_id }}/{{ rs.product.slug }}">
                                                                     <img src="{{ rs.product.image.url }}" height="80">
                                                                 </a></td>
-                                                                <td class="product-thumbnail">{{ rs.product.title}}</td>
-                                                                <td class="product-thumbnail">{{ rs.price | intcomma:False }}تومان</td>
-                                                                <td class="product-price">{{ rs.quantity}}</td>
-                                                                <td class="product-quantity">{{ rs.amount | intcomma:False }}تومان</td>
+                                                                <td class="product-thumbnail">{{ rs.product.title }}</td>
+                                                                <td class="product-price">
+                                                                    {% if rs.product.variant == 'None' %}
+                                                                        {{ rs.product.price | intcomma:False }}
+                                                                        تومان
+                                                                    {% else %}
+                                                                        {{ rs.variant.price | intcomma:False }}
+                                                                        تومان
+                                                                    {% endif %}
+                                                                </td>
+                                                                <td class="product-price">{{ rs.quantity }}</td>
+                                                                <td class="product-subtotal">
+                                                                    {% if rs.product.variant == 'None' %}
+                                                                        {{ rs.amount | intcomma:False }}
+                                                                        تومان
+                                                                    {% else %}
+                                                                        {{ rs.varamount | intcomma:False }}
+                                                                        تومان
+                                                                    {% endif %}
+                                                                </td>
                                                             </tr>
                                                         {% endfor %}
                                                         </tbody>
