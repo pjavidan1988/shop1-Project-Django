@@ -133,25 +133,13 @@
                                                                         href="/product/{{ rs.product_id }}/{{ rs.product.slug }}">
                                                                     <img src="{{ rs.product.image.url }}" height="80">
                                                                 </a></td>
-                                                                <td class="product-thumbnail">{{ rs.product.title }}</td>
-                                                                <td class="product-price">
-                                                                    {% if rs.product.variant == 'None' %}
-                                                                        {{ rs.product.price | intcomma:False }}
+                                                                <td class="product-thumbnail">{{ rs.product.title }} -- {{ rs.variant.size }} --  {{ rs.variant.color }}</td>
+                                                                <td class="product-price">{{ rs.price | intcomma:False }}
                                                                         تومان
-                                                                    {% else %}
-                                                                        {{ rs.variant.price | intcomma:False }}
-                                                                        تومان
-                                                                    {% endif %}
                                                                 </td>
                                                                 <td class="product-price">{{ rs.quantity }}</td>
-                                                                <td class="product-subtotal">
-                                                                    {% if rs.product.variant == 'None' %}
-                                                                        {{ rs.amount | intcomma:False }}
+                                                                <td class="product-subtotal">{{ total | intcomma:False }}
                                                                         تومان
-                                                                    {% else %}
-                                                                        {{ rs.varamount | intcomma:False }}
-                                                                        تومان
-                                                                    {% endif %}
                                                                 </td>
                                                             </tr>
                                                         {% endfor %}

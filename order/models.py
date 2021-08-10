@@ -10,7 +10,8 @@ from django_jalali.db import models as jmodels
 class ShopCart(models.Model):
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, verbose_name='کاربر')
     product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True, verbose_name='محصول')
-    variant = models.ForeignKey(Variants, on_delete=models.SET_NULL, blank=True, null=True, verbose_name='نوع')  # relation with varinat
+    variant = models.ForeignKey(Variants, on_delete=models.SET_NULL, blank=True, null=True,
+                                verbose_name='نوع')  # relation with varinat
     quantity = models.IntegerField(verbose_name='تعداد')
 
     def __str__(self):
@@ -70,10 +71,10 @@ class Order(models.Model):
     def __str__(self):
         return self.first_name
 
-
     class Meta:
         verbose_name = 'سفارش'
         verbose_name_plural = 'سفارشات'
+
 
 class OrderForm(ModelForm):
     class Meta:
@@ -90,6 +91,7 @@ class OrderProduct(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE, verbose_name='سفارش')
     user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='کاربر')
     product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name='محصول')
+    variant = models.ForeignKey(Variants, on_delete=models.SET_NULL, blank=True, null=True)  # relation with varinat
     quantity = models.IntegerField(verbose_name='تعداد')
     price = models.IntegerField(verbose_name='قیمت')
     amount = models.IntegerField(verbose_name='مقدار')
@@ -99,8 +101,6 @@ class OrderProduct(models.Model):
 
     def __str__(self):
         return self.product.title
-
-
 
     class Meta:
         verbose_name = 'سفارش محصولات'
@@ -118,7 +118,6 @@ class wishList(models.Model):
     def price(self):
         return (self.product.price)
 
-
     @property
     def amount(self):
         return (self.product.amount)
@@ -126,6 +125,7 @@ class wishList(models.Model):
     class Meta:
         verbose_name = 'لیست علاقه مندی ها'
         verbose_name_plural = 'لیست علاقه مندی ها'
+
 
 class wishListForm(ModelForm):
     class Meta:

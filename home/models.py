@@ -31,6 +31,8 @@ class Setting(models.Model):
     instagram = models.CharField(blank=True, max_length=150, verbose_name='اینستاگرام')
     twitter = models.CharField(blank=True, max_length=150, verbose_name='توئیتر')
     youtube = models.CharField(blank=True, max_length=150, verbose_name='یوتیوب')
+    whatsapp = models.CharField(blank=True, max_length=150, verbose_name='واتس آپ')
+    telegram = models.CharField(blank=True, max_length=150, verbose_name='تلگرام')
     aboutus = RichTextUploadingField(blank=True, verbose_name='درباره ما')
     copyright_text = models.CharField(max_length=150, verbose_name='حق کپی رایت')
     copyright_url = models.CharField(max_length=150, verbose_name='آدرس کپی رایت')

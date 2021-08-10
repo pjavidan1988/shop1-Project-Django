@@ -134,6 +134,10 @@ def orderproduct(request):
 
     final_total = total + transport
 
+    amount = 0
+    for rs in shopcart:
+        amount += rs.quantity
+
     if request.method == 'POST':  # if there is a post
         form = OrderForm(request.POST)
         # return HttpResponse(request.POST.items())
@@ -183,7 +187,7 @@ def orderproduct(request):
             request.session['cart_items'] = 0
             messages.success(request, "خرید شما با موفقیت انجام شد")
             return render(request, 'Order_Completed.html',
-                          {'ordercode': ordercode, 'category': category, 'setting': setting})
+                          {'ordercode': ordercode, 'category': category, 'setting': setting, 'amount':amount})
         else:
             messages.warning(request, form.errors)
             return HttpResponseRedirect("/order/orderproduct")
@@ -198,7 +202,8 @@ def orderproduct(request):
                'profile': profile,
                'transport': transport,
                'final_total': final_total,
-               'setting': setting
+               'setting': setting,
+               'amount':amount
                }
     return render(request, 'Order_Form.html', context)
 
