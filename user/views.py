@@ -156,12 +156,14 @@ def user_orderdetail(request, id):
     setting = Setting.objects.get(pk=1)
     current_user = request.user
     order = Order.objects.get(user_id=current_user.id, id=id)
+    shopcart = ShopCart.objects.filter(user_id=current_user.id)
     orderitems = OrderProduct.objects.filter(order_id=id)
     context = {
         'category': category,
         'order': order,
         'orderitems': orderitems,
-        'setting': setting
+        'setting': setting,
+        'shopcart':shopcart
     }
     return render(request, 'user_order_detail.html', context)
 

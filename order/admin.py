@@ -11,7 +11,7 @@ class ShopCartAdmin(admin.ModelAdmin):
 
 class OrderProductline(admin.TabularInline):
     model = OrderProduct
-    readonly_fields = ('user', 'product', 'price', 'quantity', 'amount')
+    readonly_fields = ('user', 'product', 'price', 'quantity')
     can_delete = False
     extra = 0
 
@@ -23,10 +23,11 @@ class OrderAdmin(admin.ModelAdmin):
         'user', 'first_name', 'last_name', 'country', 'city', 'address', 'phone', 'ip', 'total','code')
     can_delete = False
     inlines = [OrderProductline]
+    search_fields = ['first_name', 'last_name', 'phone', 'city', 'status','code']
 
 
 class OrderProductAdmin(admin.ModelAdmin):
-    list_display = ['user', 'product', 'price', 'quantity', 'amount']
+    list_display = ['user', 'product', 'price', 'quantity']
     list_filter = ['user']
 
 

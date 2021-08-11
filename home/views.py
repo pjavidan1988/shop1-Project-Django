@@ -78,7 +78,7 @@ def oredersize(request):
             data.ip = request.META.get('REMOTE_ADDR')
             data.save()
             # send and save data
-            messages.success(request, "پیام شما با موفقیت ارسال شد")
+            messages.success(request, "درخواست سفارش شما با موفقیت ارسال گردید همکاران ما در اولین فرصت با شما تماس خواهند گرفت")
             return HttpResponseRedirect('/ordersize')
 
     setting = Setting.objects.get(pk=1)
