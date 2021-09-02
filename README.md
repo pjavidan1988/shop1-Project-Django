@@ -1,6 +1,6 @@
 # Ecommerce Website With Django
 
-Demo can be viewed at https://www.youtube.com/watch?v=mFfOSfTY5GU
+Demo can be viewed at https://django-e-commerce-1.herokuapp.com/
 
 
 # Features
